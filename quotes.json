@@ -4,6 +4,7 @@
     "author": "Psalm 118:94",
     "source": "Douay-Rheims",
     "page": "",
+    "imageUrl": "",
     "tags": ["Scripture", "Trust"]
   },
   {
@@ -11,6 +12,7 @@
     "author": "St. Francis de Sales",
     "source": "Letter",
     "page": "",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Saint_Francis_de_Sales.jpg/440px-Saint_Francis_de_Sales.jpg",
     "tags": ["Vocation", "Holiness"]
   },
   {
@@ -18,6 +20,7 @@
     "author": "St. John of the Cross",
     "source": "Sermons",
     "page": "112",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Saint_John_of_the_Cross.jpg/440px-Saint_John_of_the_Cross.jpg",
     "tags": ["Love", "Mysticism"]
   },
   {
@@ -25,6 +28,7 @@
     "author": "St. Teresa of Avila",
     "source": "The Interior Castle",
     "page": "58",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Saint_Teresa_of_Avila.jpg/440px-Saint_Teresa_of_Avila.jpg",
     "tags": ["Prayer", "Friendship"]
   },
   {
@@ -32,6 +36,7 @@
     "author": "St. Augustine",
     "source": "Confessions",
     "page": "42",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Augustine_Lateran.jpg/440px-Augustine_Lateran.jpg",
     "tags": ["Longing", "Grace"]
   },
   {
@@ -39,6 +44,7 @@
     "author": "St. Thérèse of Lisieux",
     "source": "Story of a Soul",
     "page": "90",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Therese_of_Lisieux.jpg/440px-Therese_of_Lisieux.jpg",
     "tags": ["Holiness", "Obedience"]
   },
   {
@@ -46,6 +52,7 @@
     "author": "St. Benedict",
     "source": "Rule of Saint Benedict",
     "page": "15",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Saint_Benedict.jpg/440px-Saint_Benedict.jpg",
     "tags": ["Discipline", "Love"]
   },
   {
@@ -53,13 +60,15 @@
     "author": "Blessed John Henry Newman",
     "source": "Essay on the Development of Christian Doctrine",
     "page": "27",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/John_Henry_Newman_by_Sir_William_Charles_Ross.jpg/440px-John_Henry_Newman_by_Sir_William_Charles_Ross.jpg",
     "tags": ["History", "Faith"]
   },
   {
-    "text": "But as for this, that when John had heard in the prison the works of Christ, he sent two of his disciples Matth. xi. 2; this is the Law sending to the Gospel. For John here was a figure of the Law, imprisoned in ignorance, lying in the dark, and in a hidden place, and he was fettered through Jewish misunderstanding within the bonds of the letter. But of him was it said, as is written in the Blessed Evangelist He was a burning and a shining light that is to say, that, when the whole world was wrapt in the night of ignorance, this Saint was kindled by the fire of the Holy Ghost, to show before men the light of salvation, and at the hour of the thickest darkness of sin, appeared like a bright morning star to herald the rising of that Sun so right gloriously radiant, the Son of righteousness, Christ our Lord. And this is why John said of himself: I am the voice of one crying in the wilderness, Make straight the way of the Lord. John i. 15.",
+    "text": "But as for this, that when John had heard in the prison the works of Christ, he sent two of his disciples Matth. xi. 2; this is the Law sending to the Gospel. For John here was a figu[...]",
     "author": "St. Augustine",
     "source": "20 Sermon on the Saints",
     "page": "Nativity of St. John the Baptist - Matins",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Augustine_Lateran.jpg/440px-Augustine_Lateran.jpg",
     "tags": ["History", "Saints"]
   }
 ]
