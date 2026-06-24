@@ -1,20 +1,24 @@
 :root {
   color-scheme: dark;
-  --bg: #100F0F;
-  --bg-2: #1C1B1A;
-  --surface: #282726;
-  --surface-2: #343331;
-  --border: #403E3C;
+  --bg: #1C1B1F;
+  --bg-deep: #111113;
+  --accent-purple: #4B2E5A;
+  --gold: #D7AA62;
+  --gold-dark: #B9853F;
+  --cream: #F2E9D6;
 
-  --text: #CECDC3;
-  --text-muted: #878580;
-  --text-faint: #575653;
+  --surface: #262329;
+  --surface-2: #302C35;
+  --border: rgba(215, 170, 98, 0.22);
 
-  --accent: #8B7EC8;
-  --accent-soft: rgba(139, 126, 200, 0.16);
-  --logo-ink: #D7C38A;
-  --logo-bg: rgba(215, 195, 138, 0.11);
-  --gold: #D0A215;
+  --text: var(--cream);
+  --text-muted: rgba(242, 233, 214, 0.72);
+  --text-faint: rgba(242, 233, 214, 0.42);
+
+  --accent: var(--gold);
+  --accent-soft: rgba(75, 46, 90, 0.32);
+  --logo-ink: var(--gold);
+  --logo-bg: rgba(17, 17, 19, 0.64);
   --green: #879A39;
   --cyan: #3AA99F;
   --red: #D14D41;
@@ -32,7 +36,9 @@ body {
   margin: 0;
   min-height: 100vh;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: radial-gradient(circle at top, rgba(139, 126, 200, 0.08), transparent 30%), var(--bg);
+  background:
+    radial-gradient(circle at top, rgba(75, 46, 90, 0.36), transparent 32%),
+    linear-gradient(180deg, var(--bg), var(--bg-deep));
   color: var(--text);
 }
 
@@ -59,16 +65,17 @@ select {
 .site-header {
   position: relative;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  gap: clamp(1rem, 3vw, 2rem);
+  display: grid;
+  justify-items: center;
+  gap: clamp(1rem, 3vw, 1.5rem);
+  text-align: center;
   padding: clamp(1.35rem, 4vw, 2.6rem);
-  border: 1px solid rgba(215, 195, 138, 0.2);
+  border: 1px solid rgba(215, 170, 98, 0.28);
   border-radius: 1.6rem;
   background:
-    linear-gradient(135deg, rgba(215, 195, 138, 0.12), transparent 38%),
-    linear-gradient(115deg, rgba(139, 126, 200, 0.13), transparent 56%),
-    rgba(255, 255, 255, 0.025);
+    linear-gradient(135deg, rgba(215, 170, 98, 0.16), transparent 38%),
+    linear-gradient(115deg, rgba(75, 46, 90, 0.52), transparent 56%),
+    rgba(17, 17, 19, 0.76);
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.2);
 }
 
@@ -78,7 +85,7 @@ select {
   inset: auto -12% -45% 52%;
   height: 14rem;
   border-radius: 999px;
-  background: radial-gradient(circle, rgba(215, 195, 138, 0.14), transparent 68%);
+  background: radial-gradient(circle, rgba(215, 170, 98, 0.18), transparent 68%);
   pointer-events: none;
 }
 
@@ -87,19 +94,19 @@ select {
   z-index: 1;
   display: grid;
   place-items: center;
-  width: clamp(5.75rem, 16vw, 8.5rem);
+  width: clamp(8rem, 24vw, 12rem);
   aspect-ratio: 1;
   flex: 0 0 auto;
-  border: 1px solid rgba(215, 195, 138, 0.26);
-  border-radius: 1.35rem;
+  border: 1px solid rgba(215, 170, 98, 0.32);
+  border-radius: 1.6rem;
   background: var(--logo-bg);
   color: var(--logo-ink);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 18px 40px rgba(0, 0, 0, 0.18);
 }
 
 .brand-mark img {
-  width: 78%;
-  height: 78%;
+  width: 84%;
+  height: 84%;
   object-fit: contain;
 }
 
@@ -169,7 +176,7 @@ input[type="search"]:focus,
 select:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 4px rgba(139, 126, 200, 0.14);
+  box-shadow: 0 0 0 4px rgba(215, 170, 98, 0.16);
 }
 
 .filter-row {
@@ -207,7 +214,7 @@ select:focus {
   object-fit: cover;
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: var(--surface);
-  box-shadow: 0 0 0 3px rgba(139, 126, 200, 0.08);
+  box-shadow: 0 0 0 3px rgba(75, 46, 90, 0.22);
 }
 
 .quote-text {
@@ -259,7 +266,7 @@ select:focus {
   padding: 0.45rem 0.75rem;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(139, 126, 200, 0.12);
+  background: rgba(75, 46, 90, 0.42);
   color: var(--text);
   font-size: 0.82rem;
 }
@@ -279,8 +286,7 @@ select:focus {
 
 @media (max-width: 620px) {
   .site-header {
-    align-items: flex-start;
-    flex-direction: column;
+    padding-inline: 1rem;
   }
 }
 
@@ -295,9 +301,9 @@ select:focus {
   font-variant: small-caps;
   font-style: italic;
   letter-spacing: 0.03em;
-  color: #9B6BC7;
-  background-color: rgba(95, 75, 139, 0.12);
-  border: 1px solid rgba(95, 75, 139, 0.28);
+  color: var(--gold);
+  background-color: rgba(75, 46, 90, 0.26);
+  border: 1px solid rgba(215, 170, 98, 0.28);
   border-radius: 6px;
   padding: 0.08em 0.4em;
   white-space: nowrap;
