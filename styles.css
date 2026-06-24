@@ -138,10 +138,29 @@ select:focus {
   border-radius: 1.2rem;
   background: var(--surface-2);
   box-shadow: 0 18px 45px rgba(0, 0, 0, 0.17);
+  display: grid;
+  gap: 1rem;
+}
+
+.quote-image-container {
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+  border-radius: 0.8rem;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.quote-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
 }
 
 .quote-text {
-  margin: 0 0 1.25rem;
+  margin: 0;
   font-family: Georgia, "Times New Roman", serif;
   font-size: 1.05rem;
   line-height: 1.8;
@@ -175,7 +194,7 @@ select:focus {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-top: 1.15rem;
+  margin-top: 0;
 }
 
 .chip {

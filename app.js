@@ -48,6 +48,18 @@ function createQuoteCard(quote) {
   const card = document.createElement('article');
   card.className = 'quote-card';
 
+  // Add image if available
+  if (quote.imageUrl) {
+    const imageContainer = document.createElement('div');
+    imageContainer.className = 'quote-image-container';
+    const img = document.createElement('img');
+    img.src = quote.imageUrl;
+    img.alt = quote.author;
+    img.className = 'quote-image';
+    imageContainer.appendChild(img);
+    card.appendChild(imageContainer);
+  }
+
   const text = document.createElement('p');
   text.className = 'quote-text';
   // Use innerHTML to render the highlighted scripture references
@@ -59,7 +71,8 @@ function createQuoteCard(quote) {
 
   const author = document.createElement('span');
   author.className = 'author';
-  author.textContent = quote.author;
+  // Use innerHTML to render highlighted scripture references in author field
+  author.innerHTML = highlightScriptureRefs(quote.author);
   meta.appendChild(author);
 
   const source = document.createElement('span');
