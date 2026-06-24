@@ -23,7 +23,7 @@ function matchesSelect(value, filterValue) {
   return !filterValue || normalize(value) === normalize(filterValue);
 }
 
-function renderOptions(items, element, label) {
+function renderOptions(items, element) {
   const sorted = [...items].sort((a, b) => a.localeCompare(b));
   sorted.forEach((item) => {
     const option = document.createElement('option');
@@ -48,15 +48,21 @@ function createQuoteCard(quote) {
   const card = document.createElement('article');
   card.className = 'quote-card';
 
-    const quoteMain = document.createElement('div');
+  const quoteMain = document.createElement('div');
   quoteMain.className = 'quote-main';
 
-  // Add image as a small circular avatar if available
-  if (quote.imageUrl) {
+  // Add image as a small circular avatar if available. Values may be
+  // repo-local paths such as "images/augustine.svg" or remote URLs.
+  if (typeof quote.imageUrl === 'string' && quote.imageUrl.trim()) {
     const img = document.createElement('img');
-    img.src = quote.imageUrl;
+    img.src = quote.imageUrl.trim();
     img.alt = quote.author ? `Portrait of ${quote.author}` : 'Quote image';
     img.className = 'quote-avatar';
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.onerror = () => {
+      img.remove();
+    };
     quoteMain.appendChild(img);
   }
 
