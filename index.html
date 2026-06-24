@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Florilegium</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="heading-copy">
+        <p class="eyebrow">Florilegium</p>
+        <h1>Florilegium</h1>
+        <p class="subtitle">Gathered flowers from Scripture, saints, and sacred writers.</p>
+      </div>
+    </header>
+
+    <main>
+      <section class="controls-panel" aria-label="Quote search and filters">
+        <div class="control-group">
+          <label for="search">Search quotes, author, source, tags</label>
+          <input id="search" type="search" placeholder="Search quiet texts…" autocomplete="off" />
+        </div>
+
+        <div class="filter-row">
+          <div class="control-group">
+            <label for="authorFilter">Filter by author</label>
+            <select id="authorFilter">
+              <option value="">All authors</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label for="tagFilter">Filter by tag</label>
+            <select id="tagFilter">
+              <option value="">All tags</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="quotes-grid" id="quotesGrid" aria-live="polite" aria-label="Quote list">
+      </section>
+
+      <div class="empty-state hidden" id="emptyState">
+        <p>Nothing matches your search. Try another word, author, or tag.</p>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
