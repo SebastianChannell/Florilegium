@@ -142,21 +142,27 @@ select:focus {
   gap: 1rem;
 }
 
-.quote-image-container {
-  width: 100%;
-  max-width: 200px;
-  margin: 0 auto;
-  border-radius: 0.8rem;
-  overflow: hidden;
-  border: 1px solid var(--border);
+.quote-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
 }
 
-.quote-image {
-  width: 100%;
-  height: auto;
-  display: block;
+.quote-avatar {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  margin-top: 0.35rem;
+  border-radius: 50%;
   object-fit: cover;
-  aspect-ratio: 1 / 1;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px rgba(139, 126, 200, 0.08);
+}
+
+.quote-text {
+  flex: 1;
+  min-width: 0;
 }
 
 .quote-text {
