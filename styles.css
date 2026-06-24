@@ -12,6 +12,8 @@
 
   --accent: #8B7EC8;
   --accent-soft: rgba(139, 126, 200, 0.16);
+  --logo-ink: #D7C38A;
+  --logo-bg: rgba(215, 195, 138, 0.11);
   --gold: #D0A215;
   --green: #879A39;
   --cyan: #3AA99F;
@@ -55,7 +57,55 @@ select {
 }
 
 .site-header {
-  padding: 2rem 0 1.5rem;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2rem);
+  padding: clamp(1.35rem, 4vw, 2.6rem);
+  border: 1px solid rgba(215, 195, 138, 0.2);
+  border-radius: 1.6rem;
+  background:
+    linear-gradient(135deg, rgba(215, 195, 138, 0.12), transparent 38%),
+    linear-gradient(115deg, rgba(139, 126, 200, 0.13), transparent 56%),
+    rgba(255, 255, 255, 0.025);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.2);
+}
+
+.site-header::after {
+  content: "";
+  position: absolute;
+  inset: auto -12% -45% 52%;
+  height: 14rem;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(215, 195, 138, 0.14), transparent 68%);
+  pointer-events: none;
+}
+
+.brand-mark {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: clamp(5.75rem, 16vw, 8.5rem);
+  aspect-ratio: 1;
+  flex: 0 0 auto;
+  border: 1px solid rgba(215, 195, 138, 0.26);
+  border-radius: 1.35rem;
+  background: var(--logo-bg);
+  color: var(--logo-ink);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 18px 40px rgba(0, 0, 0, 0.18);
+}
+
+.brand-mark img {
+  width: 78%;
+  height: 78%;
+  object-fit: contain;
+}
+
+.heading-copy {
+  position: relative;
+  z-index: 1;
 }
 
 .eyebrow {
@@ -225,6 +275,13 @@ select:focus {
 
 .empty-state.hidden {
   display: none;
+}
+
+@media (max-width: 620px) {
+  .site-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }
 
 @media (min-width: 700px) {
