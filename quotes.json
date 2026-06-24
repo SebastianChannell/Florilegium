@@ -5,70 +5,97 @@
     "source": "Douay-Rheims",
     "page": "",
     "imageUrl": "",
-    "tags": ["Scripture", "Trust"]
+    "tags": [
+      "Scripture",
+      "Trust"
+    ]
   },
   {
     "text": "Be who you are and be that well.",
     "author": "St. Francis de Sales",
     "source": "Letter",
     "page": "",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Saint_Francis_de_Sales.jpg/440px-Saint_Francis_de_Sales.jpg",
-    "tags": ["Vocation", "Holiness"]
+    "imageUrl": "images/francis-de-sales.svg",
+    "tags": [
+      "Vocation",
+      "Holiness"
+    ]
   },
   {
     "text": "In the evening of life we will be judged on love.",
     "author": "St. John of the Cross",
     "source": "Sermons",
     "page": "112",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Saint_John_of_the_Cross.jpg/440px-Saint_John_of_the_Cross.jpg",
-    "tags": ["Love", "Mysticism"]
+    "imageUrl": "images/john-of-the-cross.svg",
+    "tags": [
+      "Love",
+      "Mysticism"
+    ]
   },
   {
     "text": "Prayer is nothing else than an intimate sharing between friends.",
     "author": "St. Teresa of Avila",
     "source": "The Interior Castle",
     "page": "58",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Saint_Teresa_of_Avila.jpg/440px-Saint_Teresa_of_Avila.jpg",
-    "tags": ["Prayer", "Friendship"]
+    "imageUrl": "images/teresa-of-avila.svg",
+    "tags": [
+      "Prayer",
+      "Friendship"
+    ]
   },
   {
     "text": "Our hearts are restless until they rest in Thee.",
     "author": "St. Augustine",
     "source": "Confessions",
     "page": "42",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Augustine_Lateran.jpg/440px-Augustine_Lateran.jpg",
-    "tags": ["Longing", "Grace"]
+    "imageUrl": "images/augustine.svg",
+    "tags": [
+      "Longing",
+      "Grace"
+    ]
   },
   {
     "text": "Holiness consists simply in doing God's will, and being what God wants us to be.",
     "author": "St. Thérèse of Lisieux",
     "source": "Story of a Soul",
     "page": "90",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Therese_of_Lisieux.jpg/440px-Therese_of_Lisieux.jpg",
-    "tags": ["Holiness", "Obedience"]
+    "imageUrl": "images/therese-of-lisieux.svg",
+    "tags": [
+      "Holiness",
+      "Obedience"
+    ]
   },
   {
     "text": "Prefer nothing to the love of Christ, and never suffer anything to interfere with His love.",
     "author": "St. Benedict",
     "source": "Rule of Saint Benedict",
     "page": "15",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Saint_Benedict.jpg/440px-Saint_Benedict.jpg",
-    "tags": ["Discipline", "Love"]
+    "imageUrl": "images/benedict.svg",
+    "tags": [
+      "Discipline",
+      "Love"
+    ]
   },
   {
     "text": "To be deep in history is to cease to be Protestant.",
     "author": "Blessed John Henry Newman",
     "source": "Essay on the Development of Christian Doctrine",
     "page": "27",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/John_Henry_Newman_by_Sir_William_Charles_Ross.jpg/440px-John_Henry_Newman_by_Sir_William_Charles_Ross.jpg",
-    "tags": ["History", "Faith"]
+    "imageUrl": "images/john-henry-newman.svg",
+    "tags": [
+      "History",
+      "Faith"
+    ]
   },
   {
     "text": "But as for this, that when John had heard in the prison the works of Christ, he sent two of his disciples Matth. xi. 2; this is the Law sending to the Gospel. For John here was a figu[...]",
     "author": "St. Augustine",
     "source": "20 Sermon on the Saints",
     "page": "Nativity of St. John the Baptist - Matins",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Augustine_Lateran.jpg/440px-Augustine_Lateran.jpg",
-    "tags": ["History", "Saints"]
+    "imageUrl": "images/augustine.svg",
+    "tags": [
+      "History",
+      "Saints"
+    ]
   }
 ]
