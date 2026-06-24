@@ -9,7 +9,7 @@
 
   --surface: #262329;
   --surface-2: #302C35;
-  --border: rgba(215, 170, 98, 0.22);
+  --border: rgba(75, 46, 90, 0.38);
 
   --text: var(--cream);
   --text-muted: rgba(242, 233, 214, 0.72);
@@ -18,7 +18,7 @@
   --accent: var(--gold);
   --accent-soft: rgba(75, 46, 90, 0.32);
   --logo-ink: var(--gold);
-  --logo-bg: rgba(17, 17, 19, 0.64);
+  --logo-bg: transparent;
   --green: #879A39;
   --cyan: #3AA99F;
   --red: #D14D41;
@@ -36,9 +36,7 @@ body {
   margin: 0;
   min-height: 100vh;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background:
-    radial-gradient(circle at top, rgba(75, 46, 90, 0.36), transparent 32%),
-    linear-gradient(180deg, var(--bg), var(--bg-deep));
+  background: var(--bg-deep);
   color: var(--text);
 }
 
@@ -47,7 +45,7 @@ body::before {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 25%, rgba(0, 0, 0, 0.18));
+  background: none;
 }
 
 button,
@@ -69,24 +67,9 @@ select {
   justify-items: center;
   gap: clamp(1rem, 3vw, 1.5rem);
   text-align: center;
-  padding: clamp(1.35rem, 4vw, 2.6rem);
-  border: 1px solid rgba(215, 170, 98, 0.28);
-  border-radius: 1.6rem;
-  background:
-    linear-gradient(135deg, rgba(215, 170, 98, 0.16), transparent 38%),
-    linear-gradient(115deg, rgba(75, 46, 90, 0.52), transparent 56%),
-    rgba(17, 17, 19, 0.76);
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.2);
-}
-
-.site-header::after {
-  content: "";
-  position: absolute;
-  inset: auto -12% -45% 52%;
-  height: 14rem;
-  border-radius: 999px;
-  background: radial-gradient(circle, rgba(215, 170, 98, 0.18), transparent 68%);
-  pointer-events: none;
+  padding: clamp(1.35rem, 4vw, 2.6rem) clamp(1rem, 4vw, 2rem);
+  border-bottom: 1px solid rgba(75, 46, 90, 0.36);
+  background: transparent;
 }
 
 .brand-mark {
@@ -94,19 +77,16 @@ select {
   z-index: 1;
   display: grid;
   place-items: center;
-  width: clamp(8rem, 24vw, 12rem);
+  width: clamp(8.5rem, 25vw, 12.5rem);
   aspect-ratio: 1;
   flex: 0 0 auto;
-  border: 1px solid rgba(215, 170, 98, 0.32);
-  border-radius: 1.6rem;
   background: var(--logo-bg);
   color: var(--logo-ink);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 18px 40px rgba(0, 0, 0, 0.18);
 }
 
 .brand-mark img {
-  width: 84%;
-  height: 84%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 
@@ -191,9 +171,9 @@ select:focus {
 
 .quote-card {
   padding: 1.5rem;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(75, 46, 90, 0.46);
   border-radius: 1.2rem;
-  background: var(--surface-2);
+  background: var(--surface);
   box-shadow: 0 18px 45px rgba(0, 0, 0, 0.17);
   display: grid;
   gap: 1rem;
