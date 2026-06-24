@@ -33,13 +33,25 @@ function renderOptions(items, element, label) {
   });
 }
 
+// Detect and highlight scripture references
+function highlightScriptureRefs(text) {
+  // Pattern matches: Book Chapter:Verse(s) or Book Chapter.Verse or abbreviated patterns
+  // Examples: "Psalm 118:94", "Matth. xi. 2", "John 3:16", "1 Corinthians 13:4-7"
+  const scripturePattern = /\b([A-Z][a-z]*\.?\s+(?:\d+|[ivxlcdm]+)[.:]\s*(?:\d+(?:[–-]\d+)?|[ivxlcdm]+)?(?:\s*[–-]\s*\d+)?)\b/gi;
+  
+  return text.replace(scripturePattern, (match) => {
+    return `<span class="scripture-ref">${match}</span>`;
+  });
+}
+
 function createQuoteCard(quote) {
   const card = document.createElement('article');
   card.className = 'quote-card';
 
   const text = document.createElement('p');
   text.className = 'quote-text';
-  text.textContent = quote.text;
+  // Use innerHTML to render the highlighted scripture references
+  text.innerHTML = highlightScriptureRefs(quote.text);
   card.appendChild(text);
 
   const meta = document.createElement('div');
