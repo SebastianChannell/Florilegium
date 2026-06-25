@@ -73,7 +73,7 @@ select {
 }
 
 .brand-mark {
-  transform: translateX(-18px);
+  transform: translateX(-12px);
   position: relative;
   z-index: 1;
   display: grid;
