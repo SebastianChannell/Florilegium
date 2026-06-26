@@ -43,6 +43,27 @@ function escapeHtml(value) {
   return temp.innerHTML;
 }
 
+// Detect and highlight scripture references.
+// Pattern matches: Book Chapter:Verse(s) or Book Chapter.Verse or abbreviated patterns
+// Examples: "Psalm 118:94", "Matth. xi. 2", "John 3:16", "1 Corinthians 13:4-7"
+const scripturePattern = /\b([A-Z][a-z]*\.?\s+(?:\d+|[ivxlcdm]+)[.:]\s*(?:\d+(?:[–-]\d+)?|[ivxlcdm]+)?(?:\s*[–-]\s*\d+)?)\b/gi;
+
+function highlightScriptureRefs(text) {
+  return escapeHtml(text).replace(scripturePattern, (match) => {
+    return `<span class="scripture-ref">${match}</span>`;
+  });
+}
+
+function formatQuoteText(text) {
+  const escapedWithAllowedEmphasis = escapeHtml(text)
+    .replace(/&lt;\s*em\s*&gt;/gi, '<em>')
+    .replace(/&lt;\s*\/\s*em\s*&gt;/gi, '</em>');
+
+  return escapedWithAllowedEmphasis.replace(scripturePattern, (match) => {
+    return `<span class="scripture-ref">${match}</span>`;
+  });
+}
+
 function matchesSearch(quote, query) {
   if (!query) {
     return true;
@@ -63,17 +84,6 @@ function renderOptions(items, element) {
     option.value = item;
     option.textContent = item;
     element.appendChild(option);
-  });
-}
-
-// Detect and highlight scripture references
-function highlightScriptureRefs(text) {
-  // Pattern matches: Book Chapter:Verse(s) or Book Chapter.Verse or abbreviated patterns
-  // Examples: "Psalm 118:94", "Matth. xi. 2", "John 3:16", "1 Corinthians 13:4-7"
-  const scripturePattern = /\b([A-Z][a-z]*\.?\s+(?:\d+|[ivxlcdm]+)[.:]\s*(?:\d+(?:[–-]\d+)?|[ivxlcdm]+)?(?:\s*[–-]\s*\d+)?)\b/gi;
-
-  return escapeHtml(text).replace(scripturePattern, (match) => {
-    return `<span class="scripture-ref">${match}</span>`;
   });
 }
 
@@ -101,8 +111,8 @@ function createQuoteCard(quote) {
 
   const text = document.createElement('p');
   text.className = 'quote-text';
-  // Use innerHTML only after escaping the quote text, so quotes.json cannot inject markup.
-  text.innerHTML = highlightScriptureRefs(quote.text);
+  // Escape quote text first, then allow only simple <em> tags for italic emphasis.
+  text.innerHTML = formatQuoteText(quote.text);
   quoteMain.appendChild(text);
 
   card.appendChild(quoteMain);
