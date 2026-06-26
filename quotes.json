@@ -4,54 +4,10 @@
     "author": "Psalm 118:94",
     "source": "Douay-Rheims",
     "page": "",
-    "imageUrl": "",
+    "imageUrl": "images/florilegium-logo.svg",
     "tags": [
       "Scripture",
       "Trust"
-    ]
-  },
-  {
-    "text": "Be who you are and be that well.",
-    "author": "St. Francis de Sales",
-    "source": "Letter",
-    "page": "",
-    "imageUrl": "images/francis-de-sales.svg",
-    "tags": [
-      "Vocation",
-      "Holiness"
-    ]
-  },
-  {
-    "text": "In the evening of life we will be judged on love.",
-    "author": "St. John of the Cross",
-    "source": "Sermons",
-    "page": "112",
-    "imageUrl": "images/john-of-the-cross.svg",
-    "tags": [
-      "Love",
-      "Mysticism"
-    ]
-  },
-  {
-    "text": "Prayer is nothing else than an intimate sharing between friends.",
-    "author": "St. Teresa of Avila",
-    "source": "The Interior Castle",
-    "page": "58",
-    "imageUrl": "images/teresa-of-avila.svg",
-    "tags": [
-      "Prayer",
-      "Friendship"
-    ]
-  },
-  {
-    "text": "Our hearts are restless until they rest in Thee.",
-    "author": "St. Augustine",
-    "source": "Confessions",
-    "page": "42",
-    "imageUrl": "images/augustine.svg",
-    "tags": [
-      "Longing",
-      "Grace"
     ]
   },
   {
@@ -77,18 +33,18 @@
     ]
   },
   {
-    "text": "To be deep in history is to cease to be Protestant.",
-    "author": "Blessed John Henry Newman",
-    "source": "Essay on the Development of Christian Doctrine",
+    "text": "In the present day it is the same in regard to Jesus Christ dwelling amongst us in the Blessed Sacrament. He is unknown to the great majority of men, as Hewas at Bethlehem. Too many professing Christians have no practical knowledge of the Holy Eucharist.\nIf St. John the Baptist were to return to earth, into how many parishes might he not go, and, pointing to the tabernacle, say to the people: <em>\"There hath stood One in the midst of you Whom you know not.\"</em> John i. 26. If you knew Him you would think of Him, you would come to visit Him. In like manner St. John the Evangelist might repeat the same words in the present day that he wrote in the earliest ages of Christianity <em>\"He came unto His own, and His own received Him not.\"</em> John i. 11.",
+    "author": "Fr. F. X. Lasance",
+    "source": "Prisoner of Love",
     "page": "27",
-    "imageUrl": "images/john-henry-newman.svg",
+    "imageUrl": "",
     "tags": [
-      "History",
-      "Faith"
+      "Eucharist",
+      "True Presence"
     ]
   },
   {
-    "text": "But as for this, that when John had heard in the prison the works of Christ, he sent two of his disciples Matth. xi. 2; this is the Law sending to the Gospel. For John here was a figure of the Law, imprisoned in ignorance, lying in the dark, and in a hidden place, and he was fettered through Jewish misunderstanding within the bonds of the letter. But of him was it said, as is written in the Blessed Evangelist He was a burning and a shining light that is to say, that, when the whole world was wrapt in the night of ignorance, this Saint was kindled by the fire of the Holy Ghost, to show before men the light of salvation, and at the hour of the thickest darkness of sin, appeared like a bright morning star to herald the rising of that Sun so right gloriously radiant, the Son of righteousness, Christ our Lord. And this is why John said of himself: I am the voice of one crying in the wilderness, Make straight the way of the Lord. John i. 15.",
+    "text": "But as for this, that when <em>\"John had heard in the prison the works of Christ, he sent two of his disciples\"</em> Matth. xi. 2; this is the Law sending to the Gospel. For John here was a figure of the Law, imprisoned in ignorance, lying in the dark, and in a hidden place, and he was fettered through Jewish misunderstanding within the bonds of the letter. But of him was it said, as is written in the Blessed Evangelist He was a burning and a shining light that is to say, that, when the whole world was wrapt in the night of ignorance, this Saint was kindled by the fire of the Holy Ghost, to show before men the light of salvation, and at the hour of the thickest darkness of sin, appeared like a bright morning star to herald the rising of that Sun so right gloriously radiant, the Son of righteousness, Christ our Lord. And this is why John said of himself: <em> \"I am the voice of one crying in the wilderness, Make straight the way of the Lord.\"</em> John i. 15.",
     "author": "St. Augustine",
     "source": "20 Sermon on the Saints",
     "page": "Nativity of St. John the Baptist - Matins",
@@ -96,6 +52,18 @@
     "tags": [
       "History",
       "Saints"
+    ]
+  },
+  {
+    "text": "Believe me, my dear friends, believe an experience ripened by thirty years in the sacred ministry. I do here affirm that all deceptions, all spiritual deficiencies, all miseries, all falls, all faults, and even the most serious wanderings out of the right path, all proceed from this single source -- a want of constancy in prayer. Live the life of prayer; learn to bring everything, to change everything into prayer -- pains and trials and temptations of all kinds.\n\nPray in the calm, pray in the storm.\nPray on awaking, and pray during the daytime.\nGoing and coming, pray.\nTired out and distracted, pray.\nWhatsoever your repugnance may be, pray.\nPray, that you may learn to pray. \"Teach us, O Lord, how to pray?\"\n\n\"But I cannot pray.\"\n\nThat is heresy. Yes, you can always pray. If you feel a disgust, nay, a horror of prayer, pray on, pray in spite of yourself, against yourself. Beg for the courage in prayer which our agonizing Saviour merited for you by His pangs in Gethsemani and upon Calvary. Pray, for prayer is our salvation.",
+    "author": "Fr. de Ravignan, S.J.",
+    "source": "With God",
+    "page": "11",
+    "imageUrl": "",
+    "tags": [
+      "Prayer",
+      "Perseverance",
+      "Spiritual Life"
     ]
   }
 ]

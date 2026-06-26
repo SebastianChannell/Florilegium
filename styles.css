@@ -282,7 +282,7 @@ select:focus {
   font-variant: small-caps;
   font-style: italic;
   letter-spacing: 0.03em;
-  color: var(--gold);
+  color: #9B6BC7;
   background-color: rgba(75, 46, 90, 0.26);
   border: 1px solid rgba(215, 170, 98, 0.28);
   border-radius: 6px;
