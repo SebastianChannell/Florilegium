@@ -5,6 +5,8 @@ const quotesGrid = document.getElementById('quotesGrid');
 const emptyState = document.getElementById('emptyState');
 
 let quotes = [];
+let resizeTimer;
+let quoteId = 0;
 
 function normalize(value) {
   return String(value ?? '').trim().toLowerCase();
@@ -109,11 +111,28 @@ function createQuoteCard(quote) {
     quoteMain.appendChild(img);
   }
 
+  const quoteContent = document.createElement('div');
+  quoteContent.className = 'quote-content';
+
   const text = document.createElement('p');
-  text.className = 'quote-text';
+  text.className = 'quote-text quote-text--clamped';
+  quoteId += 1;
+  text.id = `quote-${quoteId}`;
   // Escape quote text first, then allow only simple <em> tags for italic emphasis.
   text.innerHTML = formatQuoteText(quote.text);
-  quoteMain.appendChild(text);
+  quoteContent.appendChild(text);
+
+  const toggle = document.createElement('button');
+  toggle.className = 'quote-toggle';
+  toggle.type = 'button';
+  toggle.textContent = '…';
+  toggle.setAttribute('aria-label', 'Show full quote');
+  toggle.setAttribute('aria-expanded', 'false');
+  toggle.setAttribute('aria-controls', text.id);
+  toggle.hidden = true;
+  quoteContent.appendChild(toggle);
+
+  quoteMain.appendChild(quoteContent);
 
   card.appendChild(quoteMain);
   const meta = document.createElement('div');
@@ -157,6 +176,56 @@ function createQuoteCard(quote) {
   return card;
 }
 
+function isQuoteOverflowing(text) {
+  const wasClamped = text.classList.contains('quote-text--clamped');
+  const previousWebkitLineClamp = text.style.webkitLineClamp;
+
+  text.classList.remove('quote-text--clamped');
+  text.style.webkitLineClamp = 'none';
+  const fullHeight = text.scrollHeight;
+
+  text.classList.add('quote-text--clamped');
+  text.style.webkitLineClamp = '4';
+  const clampedHeight = text.getBoundingClientRect().height;
+
+  text.style.webkitLineClamp = previousWebkitLineClamp;
+  text.classList.toggle('quote-text--clamped', wasClamped);
+
+  return fullHeight - clampedHeight > 1;
+}
+
+function setupExpandableQuotes() {
+  quotesGrid.querySelectorAll('.quote-content').forEach((content) => {
+    const text = content.querySelector('.quote-text');
+    const toggle = content.querySelector('.quote-toggle');
+
+    if (!text || !toggle) {
+      return;
+    }
+
+    const isExpanded = content.classList.contains('quote-content--expanded');
+    const hasOverflow = isQuoteOverflowing(text);
+
+    toggle.hidden = !hasOverflow;
+    content.classList.toggle('quote-content--expandable', hasOverflow);
+
+    if (!hasOverflow) {
+      content.classList.remove('quote-content--expanded');
+      text.classList.remove('quote-text--clamped');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.textContent = '…';
+      toggle.setAttribute('aria-label', 'Show full quote');
+      return;
+    }
+
+    content.classList.toggle('quote-content--expanded', isExpanded);
+    text.classList.toggle('quote-text--clamped', !isExpanded);
+    toggle.setAttribute('aria-expanded', String(isExpanded));
+    toggle.textContent = isExpanded ? '–' : '…';
+    toggle.setAttribute('aria-label', isExpanded ? 'Show less quote text' : 'Show full quote');
+  });
+}
+
 function renderQuotes() {
   const query = normalize(searchInput.value);
   const author = authorFilter.value;
@@ -183,6 +252,8 @@ function renderQuotes() {
   filtered.forEach((quote) => {
     quotesGrid.appendChild(createQuoteCard(quote));
   });
+
+  requestAnimationFrame(setupExpandableQuotes);
 }
 
 function initFilters(data) {
@@ -200,11 +271,41 @@ function initFilters(data) {
   renderOptions(tagSet, tagFilter);
 }
 
+function toggleQuoteExpansion(event) {
+  const toggle = event.target.closest('.quote-toggle');
+
+  if (!toggle) {
+    return;
+  }
+
+  const content = toggle.closest('.quote-content');
+  const text = content?.querySelector('.quote-text');
+
+  if (!content || !text) {
+    return;
+  }
+
+  const isExpanded = !content.classList.contains('quote-content--expanded');
+  content.classList.toggle('quote-content--expanded', isExpanded);
+  text.classList.toggle('quote-text--clamped', !isExpanded);
+  toggle.setAttribute('aria-expanded', String(isExpanded));
+  toggle.textContent = isExpanded ? '–' : '…';
+  toggle.setAttribute('aria-label', isExpanded ? 'Show less quote text' : 'Show full quote');
+}
+
+function handleResize() {
+  window.clearTimeout(resizeTimer);
+  resizeTimer = window.setTimeout(setupExpandableQuotes, 150);
+}
+
 function setupEvents() {
   searchInput.addEventListener('input', renderQuotes);
   authorFilter.addEventListener('change', renderQuotes);
   tagFilter.addEventListener('change', renderQuotes);
+  quotesGrid.addEventListener('click', toggleQuoteExpansion);
+  window.addEventListener('resize', handleResize);
 }
+
 
 function loadQuotes() {
   fetch('quotes.json')

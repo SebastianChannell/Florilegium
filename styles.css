@@ -214,7 +214,8 @@ select:focus {
   box-shadow: 0 0 0 3px rgba(75, 46, 90, 0.22);
 }
 
-.quote-text {
+.quote-content {
+  position: relative;
   flex: 1;
   min-width: 0;
 }
@@ -225,6 +226,56 @@ select:focus {
   font-size: 1.05rem;
   line-height: 1.8;
   color: var(--text);
+}
+
+
+.quote-text--clamped {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  overflow: hidden;
+}
+
+.quote-content--expandable:not(.quote-content--expanded)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3.6rem;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(38, 35, 41, 0), var(--surface) 72%);
+}
+
+.quote-toggle {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  min-width: 2.15rem;
+  min-height: 2.15rem;
+  padding: 0.08rem 0.55rem 0.2rem;
+  border: 1px solid rgba(215, 170, 98, 0.34);
+  border-radius: 999px;
+  background: rgba(38, 35, 41, 0.92);
+  color: var(--gold);
+  line-height: 1;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.quote-toggle:hover,
+.quote-toggle:focus-visible {
+  border-color: rgba(215, 170, 98, 0.72);
+  background: var(--surface-2);
+  color: var(--cream);
+}
+
+.quote-toggle:focus-visible {
+  outline: 2px solid rgba(215, 170, 98, 0.34);
+  outline-offset: 2px;
 }
 
 .quote-meta {
