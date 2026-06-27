@@ -245,7 +245,7 @@ select:focus {
   bottom: 0;
   height: 3.6rem;
   pointer-events: none;
-  background: linear-gradient(to bottom, rgba(38, 35, 41, 0), var(--surface) 72%);
+  background: linear-gradient(to bottom, rgba(38, 35, 41, 0), var(--surface) 22%);
 }
 
 .quote-toggle {
@@ -360,7 +360,7 @@ select:focus {
   letter-spacing: 0.03em;
   color: #9B6BC7;
   background-color: rgba(75, 46, 90, 0.26);
-  border: 1px solid #9B6BC7);
+  border: 3px solid #9B6BC7);
   border-radius: 6px;
   padding: 0.08em 0.4em;
   white-space: nowrap;
