@@ -28,6 +28,10 @@
   box-sizing: border-box;
 }
 
+em, i {
+  color: #9B6BC7 
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -57,7 +61,7 @@ select {
 .page-shell {
   width: min(100%, 1120px);
   margin: 0 auto;
-  padding: 1.5rem 1.25rem 3rem;
+  padding: 1.25rem 1.25rem 3rem;
 }
 
 .site-header {
@@ -65,15 +69,24 @@ select {
   overflow: hidden;
   display: grid;
   justify-items: center;
-  gap: clamp(1rem, 3vw, 1.5rem);
+  gap: clamp(0.35rem, 1.4vw, 0.75rem);
   text-align: center;
-  padding: clamp(1.35rem, 4vw, 2.6rem) clamp(1rem, 4vw, 2rem);
+  padding: clamp(0.9rem, 2.5vw, 1.45rem) clamp(0.9rem, 3vw, 1.5rem) clamp(1rem, 2.8vw, 1.6rem);
   border-bottom: 1px solid var(--gold);
   background: transparent;
 }
 
+.brand-row {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: clamp(0.65rem, 2vw, 1rem);
+}
+
 .brand-mark {
-  transform: translateX(-18px);
   position: relative;
   z-index: 1;
   display: grid;
@@ -86,18 +99,21 @@ select {
 }
 
 .brand-mark img {
-  width: 100%;
-  height: 100%;
+  width: 50%;
+  height: 50%;
   object-fit: contain;
 }
 
 .heading-copy {
   position: relative;
   z-index: 1;
+  width: min(100%, 46rem);
+  display: grid;
+  justify-items: center;
 }
 
 .eyebrow {
-  margin: 0 0 0.6rem;
+  margin: 0;
   color: var(--gold);
   letter-spacing: 0.28em;
   text-transform: uppercase;
@@ -112,38 +128,38 @@ h1 {
 }
 
 .subtitle {
-  margin: 1rem 0 0;
+  margin: 0.55rem 0 0;
   max-width: 43rem;
   color: var(--text-muted);
-  line-height: 1.8;
+  line-height: 1.65;
 }
 
 .controls-panel {
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 1.2rem;
-  padding: 1.25rem;
-  margin: 1.75rem 0 2rem;
+  border-radius: 1rem;
+  padding: 0.9rem;
+  margin: 1.15rem 0 1.5rem;
   display: grid;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .control-group {
   display: grid;
-  gap: 0.55rem;
+  gap: 0.4rem;
 }
 
 .control-group label {
-  font-size: 0.92rem;
+  font-size: 0.84rem;
   color: var(--text-muted);
 }
 
 input[type="search"],
 select {
   width: 100%;
-  padding: 0.95rem 1rem;
+  padding: 0.72rem 0.85rem;
   border: 1px solid var(--border);
-  border-radius: 0.95rem;
+  border-radius: 0.78rem;
   background: var(--surface);
   color: var(--text);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -162,7 +178,7 @@ select:focus {
 
 .filter-row {
   display: grid;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .quotes-grid {
@@ -198,7 +214,8 @@ select:focus {
   box-shadow: 0 0 0 3px rgba(75, 46, 90, 0.22);
 }
 
-.quote-text {
+.quote-content {
+  position: relative;
   flex: 1;
   min-width: 0;
 }
@@ -209,6 +226,56 @@ select:focus {
   font-size: 1.05rem;
   line-height: 1.8;
   color: var(--text);
+}
+
+
+.quote-text--clamped {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  overflow: hidden;
+}
+
+.quote-content--expandable:not(.quote-content--expanded)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3.6rem;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(38, 35, 41, 0), var(--surface) 22%);
+}
+
+.quote-toggle {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  min-width: 2.15rem;
+  min-height: 2.15rem;
+  padding: 0.08rem 0.55rem 0.2rem;
+  border: 1px solid rgba(215, 170, 98, 0.34);
+  border-radius: 999px;
+  background: rgba(38, 35, 41, 0.92);
+  color: var(--gold);
+  line-height: 1;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.quote-toggle:hover,
+.quote-toggle:focus-visible {
+  border-color: rgba(215, 170, 98, 0.72);
+  background: var(--surface-2);
+  color: var(--cream);
+}
+
+.quote-toggle:focus-visible {
+  outline: 2px solid rgba(215, 170, 98, 0.34);
+  outline-offset: 2px;
 }
 
 .quote-meta {
@@ -269,6 +336,15 @@ select:focus {
   .site-header {
     padding-inline: 1rem;
   }
+
+  .brand-row {
+    gap: 0.5rem;
+  }
+
+  .eyebrow {
+    letter-spacing: 0.2em;
+    font-size: 0.7rem;
+  }
 }
 
 @media (min-width: 700px) {
@@ -284,7 +360,7 @@ select:focus {
   letter-spacing: 0.03em;
   color: #9B6BC7;
   background-color: rgba(75, 46, 90, 0.26);
-  border: 1px solid rgba(215, 170, 98, 0.28);
+  border: 3px solid #9B6BC7);
   border-radius: 6px;
   padding: 0.08em 0.4em;
   white-space: nowrap;
