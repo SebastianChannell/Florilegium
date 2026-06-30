@@ -3,6 +3,9 @@ const authorFilter = document.getElementById('authorFilter');
 const tagFilter = document.getElementById('tagFilter');
 const quotesGrid = document.getElementById('quotesGrid');
 const emptyState = document.getElementById('emptyState');
+const sideMenu = document.querySelector('.side-menu');
+const menuToggle = document.querySelector('.menu-toggle');
+const menuPanel = document.getElementById('siteMenu');
 
 let quotes = [];
 let resizeTimer;
@@ -298,11 +301,45 @@ function handleResize() {
   resizeTimer = window.setTimeout(setupExpandableQuotes, 150);
 }
 
+function setMenuOpen(isOpen) {
+  if (!sideMenu || !menuToggle || !menuPanel) {
+    return;
+  }
+
+  sideMenu.classList.toggle('is-open', isOpen);
+  menuToggle.setAttribute('aria-expanded', String(isOpen));
+  menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+  menuPanel.setAttribute('aria-hidden', String(!isOpen));
+}
+
+function toggleMenu() {
+  setMenuOpen(!sideMenu?.classList.contains('is-open'));
+}
+
+function handleMenuClick(event) {
+  if (event.target.closest('.menu-toggle')) {
+    toggleMenu();
+    return;
+  }
+
+  if (event.target.closest('.menu-close, .menu-backdrop, .menu-link')) {
+    setMenuOpen(false);
+  }
+}
+
+function handleMenuKeydown(event) {
+  if (event.key === 'Escape') {
+    setMenuOpen(false);
+  }
+}
+
 function setupEvents() {
   searchInput.addEventListener('input', renderQuotes);
   authorFilter.addEventListener('change', renderQuotes);
   tagFilter.addEventListener('change', renderQuotes);
   quotesGrid.addEventListener('click', toggleQuoteExpansion);
+  sideMenu?.addEventListener('click', handleMenuClick);
+  window.addEventListener('keydown', handleMenuKeydown);
   window.addEventListener('resize', handleResize);
 }
 
