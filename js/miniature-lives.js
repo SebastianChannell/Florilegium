@@ -19,8 +19,14 @@ function addDays(date, amount) { const next = new Date(date); next.setDate(next.
 
 const scripturePattern = /\b((?:[1-3]\s*)?[A-Z][A-Za-z.]+(?:\s+[A-Z][A-Za-z.]+)?\.?\s+(?:\d+|[ivxlcdm]+)[.:]\s*(?:\d+(?:[–-]\d+)?|[ivxlcdm]+)(?:\s*[–-]\s*\d+)?)\b/gi;
 
+function normalizeScriptureReferences(value) {
+  return String(value ?? '').replace(/\b((?:[1-3]\s*)?[A-Z][A-Za-z.]+(?:\s+[A-Z][A-Za-z.]+)?\.?)\s+([IVXLCDM]+)\.\s*(\d+)/g, (match, book, chapter, verse) => {
+    return `${book} ${chapter.toLowerCase()}. ${verse}`;
+  });
+}
+
 function formatParagraphText(value) {
-  return escapeHtml(value).replace(scripturePattern, '<span class="scripture-ref scripture_ref">$1</span>');
+  return escapeHtml(normalizeScriptureReferences(value)).replace(scripturePattern, '<span class="scripture-ref scripture_ref">$1</span>');
 }
 
 function isBiblicalQuote(value) {
@@ -52,7 +58,7 @@ function renderEntry() {
     <p class="entry-virtue"><span>Virtue</span>${escapeHtml(entry.virtue || 'Not listed')}</p>
     <section class="entry-section"><h3>Life</h3>${renderParagraphs(entry.life, 'life-paragraph')}</section>
     <section class="entry-section entry-section--devotion"><h3>${escapeHtml(entry.devotionTitle || 'Devotion')}</h3>${renderParagraphs(entry.devotionSections, 'devotion-paragraph')}</section>
-    <p class="entry-source">${escapeHtml(entry.source)} · Vol. ${escapeHtml(entry.volume)}</p>
+    <p class="entry-source">Volume ${escapeHtml(entry.volume)}</p>
   `;
 }
 
