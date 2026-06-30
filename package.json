@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "build:miniature-lives": "node scripts/build-miniature-lives.js",
+    "test:miniature-lives": "node tests/miniature-lives.test.js",
+    "build": "npm run build:miniature-lives"
+  },
+  "devDependencies": {}
+}
