@@ -83,7 +83,7 @@ function setupEvents() {
 
 window.addEventListener('DOMContentLoaded', () => {
   setupEvents();
-  fetch('../data/miniature-lives/entries.json')
+  fetch('../../data/miniature-lives/entries.json')
     .then((response) => { if (!response.ok) throw new Error('Unable to load Miniature Lives.'); return response.json(); })
     .then((entries) => { entriesByDate = new Map(entries.map((entry) => [entry.dateKey, entry])); renderEntry(); })
     .catch((error) => { console.error(error); entryEl.innerHTML = '<p class="missing-copy">Unable to load the Miniature Lives at this time.</p>'; });
