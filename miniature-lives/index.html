@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Miniature Lives of the Saints | Florilegium</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body data-page="miniature-lives">
+  <nav class="side-menu" aria-label="Main navigation">
+    <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="siteMenu"><span class="menu-toggle__bar"></span><span class="menu-toggle__bar"></span><span class="menu-toggle__bar"></span></button>
+    <div class="menu-panel" id="siteMenu" aria-hidden="true">
+      <div class="menu-panel__header"><p class="menu-panel__eyebrow">Navigation</p><button class="menu-close" type="button" aria-label="Close navigation menu">&times;</button></div>
+      <a href="../" class="menu-link">Florilegium home</a>
+      <a href="../#search" class="menu-link">Search quotes</a>
+      <a href="./" class="menu-link">Miniature Lives</a>
+      <a href="https://github.com/galactrix/Florilegium" class="menu-link">Project source</a>
+    </div>
+    <button class="menu-backdrop" type="button" tabindex="-1" aria-label="Close navigation menu"></button>
+  </nav>
+
+  <div class="page-shell page-shell--narrow">
+    <header class="site-header miniature-header">
+      <div class="brand-row"><div class="brand-mark" aria-hidden="true"><img src="../assests/florilegium-logo.svg" alt="" /></div><p class="eyebrow">SACRUM FLORILEGIUM</p></div>
+      <div class="heading-copy"><h1>Miniature Lives of the Saints</h1><p class="subtitle">A daily life, virtue, and devotion from Henry Sebastian Bowden’s collection.</p></div>
+    </header>
+
+    <main class="miniature-page" aria-live="polite">
+      <section class="miniature-controls" aria-label="Choose a calendar day">
+        <button class="day-button" id="prevDay" type="button" aria-label="Previous day">←</button>
+        <button class="day-button day-button--primary" id="todayButton" type="button">Today</button>
+        <button class="day-button" id="nextDay" type="button" aria-label="Next day">→</button>
+        <label class="date-picker">Select date <input id="dateSelector" type="date" /></label>
+      </section>
+
+      <article class="saint-card" id="saintEntry"></article>
+      <p class="source-note">From <em>Miniature Lives of the Saints for Every Day in the Year</em>, edited by Henry Sebastian Bowden. Text converted from public-domain scans; OCR errors may remain.</p>
+    </main>
+  </div>
+  <script src="../js/miniature-lives.js"></script>
+</body>
+</html>
