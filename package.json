@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "build:miniature-lives": "node scripts/build-miniature-lives.js",
+    "test:miniature-lives": "node scripts/test-miniature-lives.js",
+    "build": "npm run build:miniature-lives"
+  }
+}
