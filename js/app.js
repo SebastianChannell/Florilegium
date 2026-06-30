@@ -345,7 +345,7 @@ function setupEvents() {
 
 
 function loadQuotes() {
-  fetch('quotes.json')
+  fetch('data/quotes.json')
     .then((response) => {
       if (!response.ok) {
         throw new Error('Unable to load quotes.');
