@@ -24,6 +24,16 @@ function titleCaseOrdo(value) {
     return `${prefix}${rendered}${suffix}`;
   }).join('');
 }
+function sectionReference(value) {
+  const lines = String(value || '').split('\n').map((line) => line.trim()).filter(Boolean);
+  return lines.find((line) => !/^(Reading|A reading|Continuation|Lesson)/i.test(line) && line.length <= 80) || '';
+}
+function buildPropersSummary(data) {
+  const propers = data.readings?.propers || {};
+  const epistle = sectionReference(propers.epistle);
+  const gospel = sectionReference(propers.gospel);
+  return [epistle && `Epistle: ${epistle}`, gospel && `Gospel: ${gospel}`].filter(Boolean).join('\n');
+}
 function setupMenu() {
   const sideMenu = document.querySelector('.side-menu'); const toggle = document.querySelector('.menu-toggle'); const panel = document.getElementById('siteMenu');
   function setOpen(open){ sideMenu?.classList.toggle('is-open', open); toggle?.setAttribute('aria-expanded', String(open)); panel?.setAttribute('aria-hidden', String(!open)); }
@@ -38,7 +48,7 @@ async function init() {
   setupMenu();
   const data = await getLiturgicalDashboardData();
   const formattedTitle = titleCaseOrdo(data.today.title);
-  setText('latinDate', data.date.latinMartyrologyDate); setText('romanYear', data.date.romanYear); setText('todayTitle', formattedTitle); setText('todayClass', data.today.className); setText('todayColor', data.today.color); setText('readingsTitle', data.readings.title); setText('readingsRefs', data.readings.references.join('\n')); setText('ordoSummary', formattedTitle);
+  setText('latinDate', data.date.latinMartyrologyDate); setText('romanYear', data.date.romanYear); setText('todayTitle', formattedTitle); setText('todayClass', data.today.className); setText('todayColor', data.today.color); setText('readingsRefs', buildPropersSummary(data)); setText('ordoSummary', formattedTitle);
   try { renderQuote(getFeaturedQuote(await loadQuotes('data/quotes.json'))); } catch (error) { console.error(error); }
 }
 window.addEventListener('DOMContentLoaded', init);
