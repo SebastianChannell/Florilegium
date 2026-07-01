@@ -25,7 +25,11 @@ function titleCaseOrdo(value){
   }).join('');
 }
 function entry(title, text){return text ? `<section class="proper-section"><h2>${escapeHtml(title)}</h2><p>${renderText(text)}</p></section>` : '';}
-function sourceLine(data){const pages=data.ordo?.entry?.sourcePages || [];const pageText=pages.length ? ` · PDF page${pages.length > 1 ? 's' : ''} ${pages.join(', ')}` : '';return `<p class="source-note" style="margin:1.65rem 0 0;padding-top:.75rem;color:var(--sf-purple);font-style:italic;text-align:center;line-height:1.55;">Source: ${escapeHtml(data.ordo?.source || 'Romanitas Press Ordo 2026')}${escapeHtml(pageText)}</p>`;}
+function sourceNote(text){return `<p class="source-note" style="margin:1.65rem 0 0;padding-top:.75rem;color:var(--sf-purple);font-style:italic;text-align:center;line-height:1.55;">${escapeHtml(text)}</p>`;}
+function sourceLine(data){const pages=data.ordo?.entry?.sourcePages || [];const pageText=pages.length ? ` · PDF page${pages.length > 1 ? 's' : ''} ${pages.join(', ')}` : '';return sourceNote(`Source: ${data.ordo?.source || 'Romanitas Press Ordo 2026'}${pageText}`);}
+function properSourceLine(data){const source=data.readings?.properSource;const paths=data.readings?.properSourcePaths || [];const pathText=paths.length ? ` · ${paths.join(' · ')}` : '';return sourceNote(`Propers source: ${source?.name || 'Divinum Officium'}${pathText}`);}
+function hasAnyProper(propers){return Object.values(propers || {}).some((value)=>String(value || '').trim());}
+function renderPropers(propers){return `${entry('Introit',propers.introit)}${entry('Collect',propers.collect)}${entry('Epistle / Lesson',propers.epistle)}${entry('Gradual',propers.gradual)}${entry('Alleluia',propers.alleluia)}${entry('Tract',propers.tract)}${entry('Gospel',propers.gospel)}${entry('Offertory',propers.offertory)}${entry('Secret',propers.secret)}${entry('Preface',propers.preface)}${entry('Communion',propers.communion)}${entry('Postcommunion',propers.postcommunion)}${entry('Commemorations',propers.commemorations)}`;}
 
 async function init(){
   setupMenu();
@@ -40,7 +44,9 @@ async function init(){
     return;
   }
 
+  const p=data.readings?.propers || {};
   const mass=data.readings?.mass?.primary || data.readings?.references?.[0] || '';
-  root.innerHTML=`<article class="sf-card detail-card"><p class="sf-label">Mass of the Day</p><h1>${escapeHtml(titleCaseOrdo(data.today.title || data.readings.title))}</h1><p class="sf-muted">${renderText([data.today.className, data.today.color].filter(Boolean).join(' · '))}</p>${entry('Mass',mass)}${sourceLine(data)}</article>`;
+  const hasPropers=hasAnyProper(p);
+  root.innerHTML=`<article class="sf-card detail-card"><p class="sf-label">Mass of the Day</p><h1>${escapeHtml(titleCaseOrdo(data.today.title || data.readings.title))}</h1><p class="sf-muted">${renderText([data.today.className, data.today.color].filter(Boolean).join(' · '))}</p>${hasPropers ? renderPropers(p) : entry('Mass assignment',mass)}${hasPropers ? properSourceLine(data) : sourceLine(data)}</article>`;
 }
 window.addEventListener('DOMContentLoaded',init);
