@@ -35,6 +35,11 @@ function titleCase(value) {
   return String(value || '').replace(/^./, (first) => first.toUpperCase());
 }
 
+function snippet(value, max = 74) {
+  const clean = String(value || '').replace(/\s+/g, ' ').trim();
+  return clean.length > max ? `${clean.slice(0, max - 1).trim()}…` : clean;
+}
+
 function decodeBase64Utf8(value) {
   const binary = atob(String(value || '').trim());
   const bytes = Uint8Array.from(binary, (char) => char.charCodeAt(0));
@@ -79,8 +84,8 @@ function buildBreviaryText(breviary) {
 
 function buildSummary(entry) {
   return [
-    entry.mass.primary && `Mass: ${entry.mass.primary}`,
-    entry.breviary.office && `Office: ${entry.breviary.office}`,
+    entry.mass.primary && `Mass: ${snippet(entry.mass.primary)}`,
+    entry.breviary.office && `Office: ${snippet(entry.breviary.office)}`,
     [entry.rank, titleCase(entry.color)].filter(Boolean).join(' · '),
   ].filter(Boolean);
 }
@@ -97,7 +102,7 @@ function normalizeFromEntry(entry, date) {
     },
     readings: {
       title: 'Mass of the Day',
-      references: [entry.mass.primary].filter(Boolean),
+      references: [snippet(entry.mass.primary, 96)].filter(Boolean),
       mass: entry.mass,
       propers: { ...FALLBACK.readings.propers, introit: entry.mass.primary || '' },
     },
