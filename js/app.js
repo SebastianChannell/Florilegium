@@ -1,3 +1,5 @@
+import { loadQuotes as fetchQuotes } from './quoteProvider.js';
+
 const searchInput = document.getElementById('search');
 const authorFilter = document.getElementById('authorFilter');
 const tagFilter = document.getElementById('tagFilter');
@@ -17,29 +19,6 @@ function normalize(value) {
 
 function getTags(quote) {
   return Array.isArray(quote.tags) ? quote.tags : [];
-}
-
-function sanitizeQuote(quote) {
-  if (!quote || typeof quote !== 'object') {
-    return null;
-  }
-
-  const text = String(quote.text ?? '').trim();
-
-  if (!text) {
-    return null;
-  }
-
-  return {
-    text,
-    author: String(quote.author ?? 'Unknown').trim() || 'Unknown',
-    source: String(quote.source ?? '').trim(),
-    page: String(quote.page ?? '').trim(),
-    imageUrl: String(quote.imageUrl ?? '').trim(),
-    tags: getTags(quote)
-      .map((tag) => String(tag ?? '').trim())
-      .filter(Boolean),
-  };
 }
 
 function escapeHtml(value) {
@@ -345,17 +324,9 @@ function setupEvents() {
 
 
 function loadQuotes() {
-  fetch('quotes.json')
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error('Unable to load quotes.');
-      }
-      return response.json();
-    })
-    .then((data) => {
-      quotes = (Array.isArray(data) ? data : [])
-        .map(sanitizeQuote)
-        .filter(Boolean);
+  fetchQuotes(window.location.pathname.includes('/pages/') ? '../../data/quotes.json' : 'data/quotes.json')
+    .then((loadedQuotes) => {
+      quotes = loadedQuotes;
       initFilters(quotes);
       renderQuotes();
     })
@@ -365,7 +336,10 @@ function loadQuotes() {
     });
 }
 
+
 window.addEventListener('DOMContentLoaded', () => {
-  setupEvents();
-  loadQuotes();
+  if (searchInput && authorFilter && tagFilter && quotesGrid) {
+    setupEvents();
+    loadQuotes();
+  }
 });

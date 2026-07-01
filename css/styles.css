@@ -504,7 +504,7 @@ select:focus {
   color: var(--site-purple);
   background-color: rgba(75, 46, 90, 0.26);
   border: 3px solid var(--site-purple);
-  border-radius: 6px;
+  border-radius: 2px;
   padding: 0.08em 0.4em;
   white-space: nowrap;
 }
@@ -567,3 +567,54 @@ select:focus {
 .scripture_ref {
   font-style: italic;
 }
+
+/* Sacrum Florilegium mobile dashboard */
+:root {
+  --sf-bg: #040304;
+  --sf-box-bg: #090909;
+  --sf-purple: #8451CF;
+  --bg-deep: var(--sf-bg);
+  --bg: var(--sf-bg);
+  --surface: var(--sf-box-bg);
+  --surface-2: #121012;
+  --site-purple: var(--sf-purple);
+  --gold: var(--sf-purple);
+  --accent: var(--sf-purple);
+  --border: rgba(132, 81, 207, 0.45);
+}
+body { background: var(--sf-bg); overflow-x: hidden; }
+.site-header { border-bottom: 0; }
+.page-shell--dashboard { max-width: 430px; padding-inline: 0.95rem; }
+.liturgical-dashboard { display: grid; gap: 0.9rem; margin: 0.65rem auto 2rem; width: 100%; }
+.sf-card { position: relative; min-width: 0; border: 1px solid rgba(132, 81, 207, 0.58); border-radius: 1.35rem; background: var(--sf-box-bg); box-shadow: 0 18px 50px rgba(0,0,0,.55), 0 0 20px rgba(132,81,207,.08); color: var(--cream); }
+.sf-label { margin: 0 0 .28rem; color: var(--sf-purple); font-size: .68rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+.sf-muted { margin: 0; color: var(--text-muted); white-space: pre-line; line-height: 1.45; }
+.sf-card__icon { display: grid; place-items: center; width: 3.1rem; height: 3.1rem; flex: 0 0 3.1rem; border: 1px solid rgba(132,81,207,.42); border-radius: .95rem; background: #111; color: var(--sf-purple); font-size: 1.35rem; box-shadow: inset 0 0 16px rgba(132,81,207,.08); }
+.sf-card__icon--round { border-radius: 50%; width: 2.75rem; height: 2.75rem; flex-basis: 2.75rem; }
+.today-card { display: flex; gap: .95rem; padding: 1.05rem; }
+.today-card__body { min-width: 0; flex: 1; }
+.today-card h2 { margin: 0 0 .38rem; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.38rem, 7vw, 2rem); line-height: 1.04; font-weight: 500; }
+.today-card h2 small { color: var(--text-faint); font-size: .58em; white-space: nowrap; }
+.today-stats { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: .55rem; margin-top: 1rem; padding-top: .9rem; border-top: 1px solid rgba(132,81,207,.28); }
+.today-stats span { display:block; margin-bottom:.25rem; color: var(--sf-purple); font-size:.61rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase; }
+.today-stats strong { display:block; color: var(--cream); font-size:.82rem; line-height:1.18; }
+.mini-card-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: .75rem; }
+.mini-card { display: flex; align-items: center; gap: .72rem; min-height: 9rem; padding: .9rem; text-decoration: none; }
+.mini-card h2 { margin:0 0 .28rem; font-size: 1rem; line-height: 1.2; }
+.ordo-lines { margin: 0; color: var(--text-muted); white-space: pre-line; line-height: 1.35; font-size: .9rem; }
+.chevron { margin-left: auto; color: var(--sf-purple); font-size: 1.7rem; }
+.featured-quote { display: grid; grid-template-columns: 5.15rem 1fr; gap: .85rem; padding: 1.25rem 1rem 1rem; overflow: hidden; }
+.quote-mark { position:absolute; top:.18rem; left:.75rem; color: var(--sf-purple); font-family: Georgia, serif; font-size:3.5rem; line-height:1; opacity:.95; }
+.bookmark { position:absolute; top:.75rem; right:.85rem; color: var(--sf-purple); font-size:1.2rem; }
+.featured-quote__image { grid-column:1; width:5.15rem; height:6.75rem; align-self:center; border-radius:1rem; object-fit:cover; border:1px solid rgba(132,81,207,.42); background:#111; }
+.featured-quote__copy { grid-column:2; min-width:0; padding-top:.65rem; }
+.featured-quote__text { margin:0; display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:5; overflow:hidden; font-family: Georgia, 'Times New Roman', serif; font-size:.98rem; line-height:1.45; }
+.featured-quote__author { margin:.65rem 0 .12rem; color: var(--sf-purple); font-weight:800; }
+.featured-quote__source { margin:0; color: var(--text-muted); font-style:italic; font-size:.84rem; }
+.detail-page { margin-top: 1rem; }
+.detail-card { padding: clamp(1rem, 4vw, 1.5rem); }
+.detail-card h1 { margin: 0 0 .4rem; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.7rem, 8vw, 2.6rem); }
+.proper-section { margin-top: 1.15rem; padding-top: 1rem; border-top: 1px solid rgba(132,81,207,.24); }
+.proper-section h2 { margin: 0 0 .5rem; color: var(--sf-purple); font-size: .88rem; letter-spacing: .14em; text-transform: uppercase; }
+.proper-section p { margin: 0; color: var(--text-muted); line-height: 1.7; }
+@media (max-width: 350px) { .mini-card-grid { grid-template-columns: 1fr; } .featured-quote { grid-template-columns: 1fr; } .featured-quote__image, .featured-quote__copy { grid-column: 1; } }
