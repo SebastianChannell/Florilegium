@@ -1,0 +1,7 @@
+{
+  "year": 2026,
+  "notes": "Date-to-proper mapping for the 1962 Missal propers used by Sacrum Florilegium. Add more days as propers are ingested.",
+  "days": {
+    "2026-07-01": "sancti-07-01"
+  }
+}
