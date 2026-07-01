@@ -25,7 +25,7 @@ function titleCaseOrdo(value){
   }).join('');
 }
 function entry(title, text){return text ? `<section class="proper-section"><h2>${escapeHtml(title)}</h2><p>${renderText(text)}</p></section>` : '';}
-function sourceLine(data){const pages=data.ordo?.entry?.sourcePages || [];const pageText=pages.length ? ` · PDF page${pages.length > 1 ? 's' : ''} ${pages.join(', ')}` : '';return `<p class="source-note">Source: ${escapeHtml(data.ordo?.source || 'Romanitas Press Ordo 2026')}${escapeHtml(pageText)}</p>`;}
+function sourceLine(data){const pages=data.ordo?.entry?.sourcePages || [];const pageText=pages.length ? ` · PDF page${pages.length > 1 ? 's' : ''} ${pages.join(', ')}` : '';return `<p class="source-note" style="margin:1.65rem 0 0;padding-top:.75rem;color:var(--sf-purple);font-style:italic;text-align:center;line-height:1.55;">Source: ${escapeHtml(data.ordo?.source || 'Romanitas Press Ordo 2026')}${escapeHtml(pageText)}</p>`;}
 
 async function init(){
   setupMenu();
