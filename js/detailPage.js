@@ -24,7 +24,18 @@ function titleCaseOrdo(value){
     return `${prefix}${rendered}${suffix}`;
   }).join('');
 }
-function entry(title, text){return text ? `<section class="proper-section"><h2>${escapeHtml(title)}</h2><p>${renderText(text)}</p></section>` : '';}
+function isReferenceLine(line){return /^(?:[1-3]\s*)?[A-Z][A-Za-z. ]+\s+\d+\s*[:.,]\s*\d/.test(line.trim());}
+function isVersicleLine(line){return /^V\.\s+/i.test(line.trim());}
+function isReadingIntroLine(line){return /^(Reading|A reading|Continuation\s*\+?\s+of|Lesson)\b/i.test(line.trim());}
+function accentLine(line){return `<span class="proper-accent" style="color:var(--sf-purple);font-style:italic;">${escapeHtml(line)}</span>`;}
+function renderProperText(value){
+  return String(value || '').split('\n').map((line)=>{
+    const trimmed=line.trim();
+    if(!trimmed)return '';
+    return isReferenceLine(trimmed) || isVersicleLine(trimmed) || isReadingIntroLine(trimmed) ? accentLine(line) : escapeHtml(line);
+  }).join('<br>');
+}
+function entry(title, text, options={}){const renderer=options.plain ? renderText : renderProperText;return text ? `<section class="proper-section"><h2>${escapeHtml(title)}</h2><p>${renderer(text)}</p></section>` : '';}
 function sourceNote(text){return `<p class="source-note" style="margin:1.65rem 0 0;padding-top:.75rem;color:var(--sf-purple);font-style:italic;text-align:center;line-height:1.55;">${escapeHtml(text)}</p>`;}
 function sourceLine(data){const pages=data.ordo?.entry?.sourcePages || [];const pageText=pages.length ? ` · PDF page${pages.length > 1 ? 's' : ''} ${pages.join(', ')}` : '';return sourceNote(`Source: ${data.ordo?.source || 'Romanitas Press Ordo 2026'}${pageText}`);}
 function properSourceLine(data){const source=data.readings?.properSource;const paths=data.readings?.properSourcePaths || [];const pathText=paths.length ? ` · ${paths.join(' · ')}` : '';return sourceNote(`Propers source: ${source?.name || 'Divinum Officium'}${pathText}`);}
@@ -40,7 +51,7 @@ async function init(){
   if(root.dataset.page==='ordo'){
     const mass=data.ordo?.sections?.mass || '';
     const breviary=data.ordo?.sections?.breviary || '';
-    root.innerHTML=`<article class="sf-card detail-card"><p class="sf-label">Ordo</p><h1>${escapeHtml(titleCaseOrdo(data.today.title || '1962 Ordo'))}</h1>${entry('Mass of the Day',mass)}${entry('Breviary',breviary)}${sourceLine(data)}</article>`;
+    root.innerHTML=`<article class="sf-card detail-card"><p class="sf-label">Ordo</p><h1>${escapeHtml(titleCaseOrdo(data.today.title || '1962 Ordo'))}</h1>${entry('Mass of the Day',mass,{plain:true})}${entry('Breviary',breviary,{plain:true})}${sourceLine(data)}</article>`;
     return;
   }
 
