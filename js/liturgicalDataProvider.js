@@ -1,18 +1,26 @@
 import { getLiturgicalDate } from './liturgicalDate.js';
 
 const FALLBACK = {
-  today: { title: 'Commemoration of St. Paul, Apostle–R (III)', className: 'I Classis', color: 'Red', tonus: 'Tonus Solemnis' },
+  today: { title: 'Daily Ordo unavailable', className: 'I Classis', color: 'Red', tonus: 'Tonus Solemnis' },
   readings: {
     title: 'Mass of the Day',
     references: ['Acts 13:26–33', 'John 14:1–6'],
     propers: {
       introit: 'The daily propers could not be loaded. Please try again later.',
-      collect: 'O God, who hast taught the multitude of the Gentiles by the preaching of blessed Paul the Apostle: grant us, we beseech Thee, that we who keep his memory may feel the benefit of his patronage.',
+      collect: 'The daily collect could not be loaded. Please try again later.',
       epistle: 'Acts 13:26–33',
       gradual: '', alleluia: '', gospel: 'John 14:1–6', offertory: '', secret: '', preface: '', communion: '', postcommunion: '', commemorations: '',
     },
   },
-  ordo: { summaryLines: ['Commemoration of St. Paul', 'Apostle', 'III class', 'Red'], fullText: 'Fallback Ordo: Commemoration of St. Paul, Apostle, III class, Red.' },
+  ordo: {
+    summaryLines: ['Mass: unavailable', 'Breviary: unavailable'],
+    fullText: 'Fallback Ordo: external Ordo is temporarily unavailable.',
+    sections: {
+      mass: 'Mass section unavailable.',
+      breviary: 'Breviary section unavailable.',
+    },
+    sourceUrl: 'https://1962ordo.today',
+  },
 };
 
 const memoryCache = new Map();
@@ -40,7 +48,7 @@ function normalize(data, date) {
     date: getLiturgicalDate(date),
     today: { ...FALLBACK.today, ...(data?.today || {}) },
     readings: { ...FALLBACK.readings, ...(data?.readings || {}), propers: { ...FALLBACK.readings.propers, ...(data?.readings?.propers || {}) } },
-    ordo: { ...FALLBACK.ordo, ...(data?.ordo || {}) },
+    ordo: { ...FALLBACK.ordo, ...(data?.ordo || {}), sections: { ...FALLBACK.ordo.sections, ...(data?.ordo?.sections || {}) } },
     isFallback: Boolean(data?.isFallback),
   };
 }
