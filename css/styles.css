@@ -601,7 +601,7 @@ body { background: var(--sf-bg); overflow-x: hidden; }
 .mini-card-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: .75rem; }
 .mini-card { display: flex; align-items: center; gap: .72rem; min-height: 9rem; padding: .9rem; text-decoration: none; }
 .mini-card h2 { margin:0 0 .28rem; font-size: 1rem; line-height: 1.2; }
-.ordo-lines { margin: 0; color: var(--cream); white-space: pre-line; line-height: 1.35; font-size: .9rem; }
+.ordo-lines { margin: 0; color: var(--text-muted); white-space: pre-line; line-height: 1.35; font-size: .9rem; }
 .chevron { margin-left: auto; color: var(--sf-purple); font-size: 1.7rem; }
 .featured-quote { display: grid; grid-template-columns: 5.15rem 1fr; gap: .85rem; padding: 1.25rem 1rem 1rem; overflow: hidden; }
 .quote-mark { position:absolute; top:.18rem; left:.75rem; color: var(--sf-purple); font-family: Georgia, serif; font-size:3.5rem; line-height:1; opacity:.95; }
