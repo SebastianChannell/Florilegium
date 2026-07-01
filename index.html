@@ -8,73 +8,33 @@
 </head>
 <body>
   <nav class="side-menu" aria-label="Main navigation">
-    <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="siteMenu">
-      <span class="menu-toggle__bar"></span>
-      <span class="menu-toggle__bar"></span>
-      <span class="menu-toggle__bar"></span>
-    </button>
-
-    <!-- Add, remove, or rename future menu selections in this list. -->
+    <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="siteMenu"><span class="menu-toggle__bar"></span><span class="menu-toggle__bar"></span><span class="menu-toggle__bar"></span></button>
     <div class="menu-panel" id="siteMenu" aria-hidden="true">
-      <div class="menu-panel__header">
-        <p class="menu-panel__eyebrow">Navigation</p>
-        <button class="menu-close" type="button" aria-label="Close navigation menu">&times;</button>
-      </div>
-      <a href="#search" class="menu-link">Search quotes</a>
-      <a href="#quotesGrid" class="menu-link">Quote collection</a>
+      <div class="menu-panel__header"><p class="menu-panel__eyebrow">Navigation</p><button class="menu-close" type="button" aria-label="Close navigation menu">&times;</button></div>
+      <a href="pages/quotes/" class="menu-link">Quotes</a>
+      <a href="pages/readings/" class="menu-link">Mass propers</a>
+      <a href="pages/ordo/" class="menu-link">Ordo</a>
       <a href="pages/miniature-lives/" class="menu-link">Miniature Lives</a>
       <a href="https://github.com/SebastianChannell/Florilegium" class="menu-link">Project source</a>
     </div>
     <button class="menu-backdrop" type="button" tabindex="-1" aria-label="Close navigation menu"></button>
   </nav>
-
-  <div class="page-shell">
+  <div class="page-shell page-shell--dashboard">
     <header class="site-header">
-      <div class="brand-row">
-        <div class="brand-mark" aria-hidden="true">
-          <img src="assests/florilegium-logo.svg" alt="" />
-        </div>
-        <p class="eyebrow">SACRUM FLORILEGIUM</p>
-      </div>
-      <div class="heading-copy">
-       <h1>Florilegium</h1>
-        <p class="subtitle">Gathered flowers from Scripture, saints, and sacred writers.</p>
-      </div>
+      <div class="brand-row"><div class="brand-mark" aria-hidden="true"><img src="assests/florilegium-logo.svg" alt="" /></div><p class="eyebrow">SACRUM FLORILEGIUM</p></div>
+      <div class="heading-copy"><h1>Florilegium</h1><p class="subtitle">Gathered flowers from Scripture, saints, and sacred writers.</p></div>
     </header>
-
     <main>
-      <section class="controls-panel" aria-label="Quote search and filters">
-        <div class="control-group">
-          <label for="search">Search quotes, author, source, tags</label>
-          <input id="search" type="search" placeholder="Search quiet texts…" autocomplete="off" />
+      <section class="liturgical-dashboard" id="liturgicalDashboard" aria-label="Today's liturgical dashboard">
+        <article class="sf-card today-card" aria-label="Today"><div class="sf-card__icon" aria-hidden="true">▣</div><div class="today-card__body"><p class="sf-label">Today</p><h2><span id="latinDate">Loading…</span> <small id="romanYear"></small></h2><p class="sf-muted" id="todayTitle"></p><div class="today-stats"><div><span>Class</span><strong id="todayClass"></strong></div><div><span>Color</span><strong id="todayColor"></strong></div><div><span>Tonus</span><strong id="todayTonus"></strong></div></div></div></article>
+        <div class="mini-card-grid">
+          <a class="sf-card mini-card" href="pages/readings/"><div class="sf-card__icon sf-card__icon--round" aria-hidden="true">✠</div><div><p class="sf-label">Readings</p><h2 id="readingsTitle">Mass of the Day</h2><p class="sf-muted" id="readingsRefs"></p></div></a>
+          <a class="sf-card mini-card" href="pages/ordo/"><div class="sf-card__icon sf-card__icon--round" aria-hidden="true">☩</div><div><p class="sf-label">Ordo</p><p class="ordo-lines" id="ordoSummary"></p></div><span class="chevron" aria-hidden="true">›</span></a>
         </div>
-
-        <div class="filter-row">
-          <div class="control-group">
-            <label for="authorFilter">Filter by author</label>
-            <select id="authorFilter">
-              <option value="">All authors</option>
-            </select>
-          </div>
-
-          <div class="control-group">
-            <label for="tagFilter">Filter by tag</label>
-            <select id="tagFilter">
-              <option value="">All tags</option>
-            </select>
-          </div>
-        </div>
+        <article class="sf-card featured-quote" id="featuredQuote" aria-label="Featured quote"><div class="quote-mark" aria-hidden="true">“</div><div class="bookmark" aria-hidden="true">♱</div><p class="sf-muted">Loading featured quote…</p></article>
       </section>
-
-      <section class="quotes-grid" id="quotesGrid" aria-live="polite" aria-label="Quote list">
-      </section>
-
-      <div class="empty-state hidden" id="emptyState">
-        <p>Nothing matches your search. Try another word, author, or tag.</p>
-      </div>
     </main>
   </div>
-
-  <script src="js/app.js"></script>
+  <script type="module" src="js/dashboard.js"></script>
 </body>
 </html>
