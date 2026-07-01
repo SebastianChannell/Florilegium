@@ -16,6 +16,11 @@
 }
 
 .page-shell--dashboard .liturgical-dashboard,
-.page-shell--detail .detail-page {
+.page-shell--detail .detail-page,
+.page-shell--detail .miniature-page {
   margin-top: 0.15rem;
+}
+
+.page-shell--content-only {
+  padding-top: 0;
 }
