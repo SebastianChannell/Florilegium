@@ -504,7 +504,7 @@ select:focus {
   color: var(--site-purple);
   background-color: rgba(75, 46, 90, 0.26);
   border: 3px solid var(--site-purple);
-  border-radius: 6px;
+  border-radius: 2px;
   padding: 0.08em 0.4em;
   white-space: nowrap;
 }
