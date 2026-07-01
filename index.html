@@ -5,31 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Florilegium</title>
   <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/dashboard-tuning.css" />
 </head>
 <body>
   <nav class="side-menu" aria-label="Main navigation">
     <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="siteMenu"><span class="menu-toggle__bar"></span><span class="menu-toggle__bar"></span><span class="menu-toggle__bar"></span></button>
     <div class="menu-panel" id="siteMenu" aria-hidden="true">
       <div class="menu-panel__header"><p class="menu-panel__eyebrow">Navigation</p><button class="menu-close" type="button" aria-label="Close navigation menu">&times;</button></div>
-      <a href="pages/quotes/" class="menu-link">Quotes</a>
-      <a href="pages/readings/" class="menu-link">Mass of the Day</a>
-      <a href="pages/ordo/" class="menu-link">Ordo</a>
-      <a href="pages/miniature-lives/" class="menu-link">Miniature Lives</a>
+      <details class="menu-group" open><summary class="menu-summary">Hodie</summary><div class="menu-submenu"><a href="pages/readings/" class="menu-link menu-link--sub">Propers</a><a href="pages/ordo/" class="menu-link menu-link--sub">Ordo</a></div></details>
+      <details class="menu-group" open><summary class="menu-summary">Citationes</summary><div class="menu-submenu"><a href="pages/quotes/#search" class="menu-link menu-link--sub">Search Quote</a><a href="pages/quotes/#quotesGrid" class="menu-link menu-link--sub">All Quotes</a></div></details>
+      <details class="menu-group" open><summary class="menu-summary">Supplementa</summary><div class="menu-submenu"><a href="pages/miniature-lives/" class="menu-link menu-link--sub">Fr. Bowden’s Saints Lives</a></div></details>
       <a href="https://github.com/SebastianChannell/Florilegium" class="menu-link">Project source</a>
     </div>
     <button class="menu-backdrop" type="button" tabindex="-1" aria-label="Close navigation menu"></button>
   </nav>
   <div class="page-shell page-shell--dashboard">
     <header class="site-header">
-      <div class="brand-row"><div class="brand-mark" aria-hidden="true"><img src="assests/florilegium-logo.svg" alt="" /></div><p class="eyebrow">SACRUM FLORILEGIUM</p></div>
+      <div class="brand-row"><a class="brand-mark" href="./" aria-label="Florilegium home"><img src="assests/florilegium-logo.svg" alt="" /></a><p class="eyebrow">SACRUM FLORILEGIUM</p></div>
       <div class="heading-copy"><h1>Florilegium</h1><p class="subtitle">Gathered flowers from Scripture, saints, and sacred writers.</p></div>
     </header>
     <main>
       <section class="liturgical-dashboard" id="liturgicalDashboard" aria-label="Today's liturgical dashboard">
-        <article class="sf-card today-card" aria-label="Today"><div class="today-card__body"><p class="sf-label">Today</p><h2><span id="latinDate">Loading…</span> <small id="romanYear"></small></h2><p class="sf-muted" id="todayTitle"></p><div class="today-stats" style="grid-template-columns:repeat(2,minmax(0,1fr));text-align:center;"><div><span>Class</span><strong id="todayClass"></strong></div><div><span>Color</span><strong id="todayColor"></strong></div></div></div></article>
+        <article class="sf-card today-card" aria-label="Today"><div class="today-card__body"><p class="sf-label">Hodie</p><h2><span id="latinDate">Loading…</span> <small id="romanYear"></small></h2><p class="sf-muted" id="todayTitle"></p><div class="today-stats" style="grid-template-columns:repeat(2,minmax(0,1fr));text-align:center;"><div><span>Class</span><strong id="todayClass"></strong></div><div><span>Color</span><strong id="todayColor"></strong></div></div></div></article>
         <div class="mini-card-grid">
-          <a class="sf-card mini-card" href="pages/readings/"><div><p class="sf-label">Mass</p><h2 id="readingsTitle">Mass of the Day</h2><p class="sf-muted" id="readingsRefs"></p></div></a>
-          <a class="sf-card mini-card" href="pages/ordo/"><div><p class="sf-label">Ordo</p><p class="ordo-lines" id="ordoSummary"></p></div><span class="chevron" aria-hidden="true">›</span></a>
+          <a class="sf-card mini-card" href="pages/readings/" style="align-items:flex-start;"><div style="min-width:0;flex:1;"><p class="sf-label">Propers</p><p class="sf-muted" id="readingsRefs"></p></div><span class="chevron" aria-hidden="true" style="align-self:center;">›</span></a>
+          <a class="sf-card mini-card" href="pages/ordo/" style="align-items:flex-start;"><div style="min-width:0;flex:1;"><p class="sf-label">Ordo</p><p class="sf-muted ordo-lines" id="ordoSummary" style="color:var(--text-muted);"></p></div><span class="chevron" aria-hidden="true" style="align-self:center;">›</span></a>
         </div>
         <article class="sf-card featured-quote" id="featuredQuote" aria-label="Featured quote"><div class="quote-mark" aria-hidden="true">“</div><p class="sf-muted">Loading featured quote…</p></article>
       </section>

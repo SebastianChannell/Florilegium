@@ -1,0 +1,107 @@
+/* Small dashboard and detail-page spacing refinements */
+.page-shell--dashboard .site-header,
+.page-shell--detail .site-header {
+  gap: 0.08rem;
+  padding-bottom: 0.35rem;
+}
+
+.site-header h1 {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(2.25rem, 4.7vw, 3.65rem);
+  font-weight: 500;
+}
+
+.page-shell--dashboard .heading-copy,
+.page-shell--detail .heading-copy {
+  margin-top: -0.25rem;
+}
+
+.page-shell--dashboard .subtitle,
+.page-shell--detail .subtitle {
+  margin-top: 0.35rem;
+}
+
+.page-shell--dashboard .liturgical-dashboard,
+.page-shell--detail .detail-page,
+.page-shell--detail .miniature-page {
+  margin-top: 0.15rem;
+}
+
+.page-shell--content-only {
+  padding-top: 0;
+}
+
+.page-shell--header-only {
+  padding-bottom: 0;
+}
+
+.page-shell--header-only + .page-shell--content-only {
+  padding-top: 0.15rem;
+}
+
+.brand-mark {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.brand-mark:focus-visible {
+  outline: 2px solid rgba(132, 81, 207, 0.5);
+  outline-offset: 4px;
+  border-radius: 1rem;
+}
+
+/* Standard grouped navigation */
+.menu-group {
+  overflow: hidden;
+  border: 1px solid rgba(132, 81, 207, 0.3);
+  border-radius: 0.8rem;
+  background: rgba(132, 81, 207, 0.12);
+}
+
+.menu-summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.85rem 0.9rem;
+  color: var(--gold);
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.menu-summary::-webkit-details-marker {
+  display: none;
+}
+
+.menu-summary::after {
+  content: '›';
+  color: var(--sf-purple);
+  font-size: 1.25rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.menu-group[open] .menu-summary::after {
+  transform: rotate(90deg);
+}
+
+.menu-summary:focus-visible {
+  outline: 2px solid rgba(132, 81, 207, 0.5);
+  outline-offset: 3px;
+}
+
+.menu-submenu {
+  display: grid;
+  gap: 0.45rem;
+  padding: 0 0.55rem 0.65rem;
+}
+
+.menu-link--sub {
+  padding: 0.68rem 0.75rem;
+  background: rgba(9, 9, 9, 0.55);
+  font-size: 0.94rem;
+}
