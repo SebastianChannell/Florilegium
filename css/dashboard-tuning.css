@@ -5,6 +5,11 @@
   padding-bottom: 0.35rem;
 }
 
+.site-header h1 {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 500;
+}
+
 .page-shell--dashboard .heading-copy,
 .page-shell--detail .heading-copy {
   margin-top: -0.25rem;
