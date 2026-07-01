@@ -49,21 +49,24 @@ function setupMenu() {
 }
 function setQuoteExpanded(textEl, toggle, expanded) {
   if (!textEl || !toggle) return;
-  textEl.style.display = expanded ? 'block' : '-webkit-box';
-  textEl.style.webkitBoxOrient = expanded ? '' : 'vertical';
-  textEl.style.webkitLineClamp = expanded ? 'unset' : '5';
+  textEl.style.display = 'block';
+  textEl.style.webkitBoxOrient = 'unset';
+  textEl.style.webkitLineClamp = 'unset';
+  textEl.style.maxHeight = expanded ? 'none' : 'calc(1.45em * 5)';
   textEl.style.overflow = expanded ? 'visible' : 'hidden';
+  textEl.style.paddingRight = expanded ? '0' : '2.25rem';
   toggle.textContent = expanded ? 'less' : '…';
   toggle.setAttribute('aria-expanded', String(expanded));
+  toggle.setAttribute('aria-label', expanded ? 'Collapse quote' : 'Expand quote');
 }
 function renderQuote(quote) {
   const card = document.getElementById('featuredQuote'); if (!card || !quote) return;
   const text = String(quote.text || '');
   const isLong = text.replace(/<\/?em>/g, '').length > 260;
   const quoteMark = '<div class="quote-mark" aria-hidden="true" style="top:.7rem;left:1.2rem;font-size:3.25rem;">“</div>';
-  const image = quote.imageUrl ? `<img class="featured-quote__image" src="${escapeHtml(quote.imageUrl)}" alt="Portrait of ${escapeHtml(quote.author)}" loading="lazy" decoding="async">` : '';
-  const toggle = isLong ? '<button class="featured-quote__toggle" type="button" aria-label="Expand quote" aria-expanded="false" style="justify-self:end;margin:.45rem 0 0;padding:.05rem .55rem .12rem;border:1px solid rgba(132,81,207,.42);border-radius:999px;background:transparent;color:var(--sf-purple);font:inherit;font-weight:800;line-height:1;">…</button>' : '';
-  card.innerHTML = `${quoteMark}${image}<div class="featured-quote__copy"><p class="featured-quote__text">${escapeHtml(text).replace(/&lt;\/?em&gt;/g,'')}</p><p class="featured-quote__author">${escapeHtml(quote.author)}</p>${quote.source ? `<p class="featured-quote__source">${escapeHtml(quote.source)}</p>` : ''}${toggle}</div>`;
+  const image = quote.imageUrl ? `<img class="featured-quote__image" style="align-self:start;margin-top:3.85rem;" src="${escapeHtml(quote.imageUrl)}" alt="Portrait of ${escapeHtml(quote.author)}" loading="lazy" decoding="async">` : '';
+  const toggle = isLong ? '<button class="featured-quote__toggle" type="button" aria-label="Expand quote" aria-expanded="false" style="position:absolute;right:0;bottom:.05rem;padding:.05rem .55rem .12rem;border:1px solid rgba(132,81,207,.42);border-radius:999px;background:rgba(9,9,9,.92);color:var(--sf-purple);font:inherit;font-weight:800;line-height:1;">…</button>' : '';
+  card.innerHTML = `${quoteMark}${image}<div class="featured-quote__copy"><div class="featured-quote__text-wrap" style="position:relative;"><p class="featured-quote__text">${escapeHtml(text).replace(/&lt;\/?em&gt;/g,'')}</p>${toggle}</div><p class="featured-quote__author">${escapeHtml(quote.author)}</p>${quote.source ? `<p class="featured-quote__source">${escapeHtml(quote.source)}</p>` : ''}</div>`;
   if (isLong) {
     const textEl = card.querySelector('.featured-quote__text');
     const toggleEl = card.querySelector('.featured-quote__toggle');
