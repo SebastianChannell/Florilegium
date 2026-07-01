@@ -49,12 +49,15 @@ function setupMenu() {
 }
 function setQuoteExpanded(textEl, toggle, expanded) {
   if (!textEl || !toggle) return;
+  const wrap = toggle.closest('.featured-quote__text-wrap');
   textEl.style.display = 'block';
   textEl.style.webkitBoxOrient = 'unset';
   textEl.style.webkitLineClamp = 'unset';
   textEl.style.maxHeight = expanded ? 'none' : 'calc(1.45em * 5)';
   textEl.style.overflow = expanded ? 'visible' : 'hidden';
   textEl.style.paddingRight = expanded ? '0' : '2.25rem';
+  if (wrap) wrap.style.marginBottom = expanded ? '1.45rem' : '0';
+  toggle.style.bottom = expanded ? '-1.25rem' : '.05rem';
   toggle.textContent = expanded ? 'less' : '…';
   toggle.setAttribute('aria-expanded', String(expanded));
   toggle.setAttribute('aria-label', expanded ? 'Collapse quote' : 'Expand quote');
