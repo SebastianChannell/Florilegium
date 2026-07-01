@@ -26,14 +26,17 @@ function titleCaseOrdo(value){
 }
 function isReferenceLine(line){return /^(?:[1-3]\s*)?[A-Z][A-Za-z. ]+\s+\d+\s*[:.,]\s*\d/.test(line.trim());}
 function isVersicleLine(line){return /^V\.\s+/i.test(line.trim());}
+function isGospelOpeningLine(line){return /^Continuation\s*\+?\s+of\b/i.test(line.trim());}
 function accentLine(line){return `<span class="proper-accent" style="color:var(--sf-purple);font-style:italic;">${escapeHtml(line)}</span>`;}
 function accentVersicle(line){const match=String(line || '').match(/^(\s*)(V\.)(\s*)(.*)$/i);if(!match)return escapeHtml(line);return `${escapeHtml(match[1])}<span class="proper-accent" style="color:var(--sf-purple);font-style:italic;">${escapeHtml(match[2])}</span>${escapeHtml(match[3]+match[4])}`;}
+function accentGospelCross(line){const match=String(line || '').match(/^(.*?)(\+)(.*)$/);if(!match)return escapeHtml(line);return `${escapeHtml(match[1])}<span class="proper-accent" style="color:var(--sf-purple);">${escapeHtml(match[2])}</span>${escapeHtml(match[3])}`;}
 function renderProperText(value){
   return String(value || '').split('\n').map((line)=>{
     const trimmed=line.trim();
     if(!trimmed)return '';
     if(isReferenceLine(trimmed))return accentLine(line);
     if(isVersicleLine(trimmed))return accentVersicle(line);
+    if(isGospelOpeningLine(trimmed))return accentGospelCross(line);
     return escapeHtml(line);
   }).join('<br>');
 }
