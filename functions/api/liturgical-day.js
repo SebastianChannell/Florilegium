@@ -19,8 +19,18 @@ const FALLBACK = {
       commemorations: '',
     },
   },
-  ordo: { summaryLines: ['Commemoration of St. Paul', 'Apostle', 'III class', 'Red'], fullText: 'External Ordo is temporarily unavailable. Fallback: Commemoration of St. Paul, Apostle, III class, Red.' },
+  ordo: {
+    summaryLines: ['Mass: Commemoration of St. Paul', 'Breviary: III class', 'Red'],
+    fullText: 'External Ordo is temporarily unavailable. Fallback: Commemoration of St. Paul, Apostle, III class, Red.',
+    sections: {
+      mass: 'Commemoration of St. Paul, Apostle, III class, Red.',
+      breviary: 'Commemoration of St. Paul, Apostle, III class, Red.',
+    },
+    sourceUrl: 'https://1962ordo.today',
+  },
 };
+
+const ORDO_BASE_URL = 'https://1962ordo.today';
 
 const PROPER_KEYS = [
   ['introit', ['Introit']],
@@ -50,7 +60,12 @@ async function fetchText(url) {
 }
 
 function decodeEntities(text) {
-  return text
+  return String(text || '')
+    .replace(/\\u003c/gi, '<')
+    .replace(/\\u003e/gi, '>')
+    .replace(/\\u0026/gi, '&')
+    .replace(/\\n/g, '\n')
+    .replace(/\\r/g, '')
     .replace(/&#(x?[0-9a-f]+);/gi, (_, value) => String.fromCodePoint(parseInt(value.replace(/^x/i, ''), value.toLowerCase().startsWith('x') ? 16 : 10)))
     .replace(/&quot;/g, '"')
     .replace(/&apos;/g, "'")
@@ -58,11 +73,13 @@ function decodeEntities(text) {
     .replace(/&ldquo;|&rdquo;/g, '"');
 }
 
-function strip(html) {
-  return decodeEntities(html
-    .replace(/<script[\s\S]*?<\/script>/gi, '')
+function strip(html, options = {}) {
+  const keepScripts = Boolean(options.keepScripts);
+  return decodeEntities(String(html || '')
     .replace(/<style[\s\S]*?<\/style>/gi, '')
-    .replace(/<(h[1-6]|p|div|section|article|li|br|tr)[^>]*>/gi, '\n')
+    .replace(/<script[^>]*>/gi, keepScripts ? '\n' : ' ')
+    .replace(/<\/script>/gi, keepScripts ? '\n' : ' ')
+    .replace(/<(h[1-6]|p|div|section|article|li|br|tr|td|th)[^>]*>/gi, '\n')
     .replace(/<[^>]+>/g, ' ')
     .replace(/&nbsp;/g, ' ')
     .replace(/&amp;/g, '&')
@@ -84,37 +101,104 @@ function normalizeClass(value) {
   return value.replace(/class/i, 'Classis').replace(/\bI\s+Classis\b/i, 'I Classis');
 }
 
+function escapeRegExp(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function hasSectionHeading(label, text) {
+  return new RegExp(String.raw`(?:^|\n)\s*${escapeRegExp(label)}\s*:?\s*(?:\n|$)`, 'i').test(text);
+}
+
+function scoreOrdoCandidate(html) {
+  const clean = strip(html, { keepScripts: true });
+  let score = 0;
+  if (hasSectionHeading('Mass', clean)) score += 2;
+  if (hasSectionHeading('Breviary', clean)) score += 3;
+  if (/\b(?:[IVX]+)\s+class\b/i.test(clean)) score += 1;
+  if (/\b(?:Red|White|Green|Violet|Black|Rose)\b/i.test(clean)) score += 1;
+  return score;
+}
+
+function unique(values) {
+  return [...new Set(values.filter(Boolean))];
+}
+
+function ordoCandidateUrls(date) {
+  return unique([
+    ORDO_BASE_URL,
+    `${ORDO_BASE_URL}/day/${date}`,
+    `${ORDO_BASE_URL}/${date}`,
+    `${ORDO_BASE_URL}/?date=${date}`,
+    `${ORDO_BASE_URL}/today`,
+  ]);
+}
+
+async function fetchOrdoSource(date) {
+  const attempts = await Promise.allSettled(ordoCandidateUrls(date).map(async (url) => ({ url, html: await fetchText(url) })));
+  const fulfilled = attempts
+    .filter((attempt) => attempt.status === 'fulfilled')
+    .map((attempt) => ({ ...attempt.value, score: scoreOrdoCandidate(attempt.value.html) }))
+    .sort((a, b) => b.score - a.score);
+  const best = fulfilled.find((entry) => entry.score > 0) || fulfilled[0];
+  if (!best) throw new Error('1962 Ordo source unavailable');
+  return best;
+}
+
 function cleanOrdoText(text) {
-  const clean = strip(text);
-  const start = clean.search(/(?:^|\n)\s*Mass:\s*/i);
+  const clean = strip(text, { keepScripts: true });
+  const start = clean.search(/(?:^|\n)\s*(?:Mass|Breviary)\s*:?\s*(?:\n|$)/i);
   let core = start >= 0 ? clean.slice(start).trim() : clean;
-  const end = core.search(/(?:^|\n)\s*(?:Today\s*-\s*1962\s*Ordo|How to bookmark this application|Android|iOS|Windows)\b/i);
+  const end = core.search(/(?:^|\n)\s*(?:Today\s*-\s*1962\s*Ordo|How to bookmark this application|Android|iOS|Windows|FAQ|Blessings)\b/i);
   if (end > 0) core = core.slice(0, end).trim();
-  return core;
+  return core.replace(/\n{3,}/g, '\n\n').trim();
 }
 
 function sectionAfter(label, text, nextLabels = []) {
-  const next = nextLabels.length ? String.raw`(?=\n\s*(?:${nextLabels.join('|')}):|$)` : '$';
-  return new RegExp(String.raw`(?:^|\n)\s*${label}:\s*([\s\S]*?)${next}`, 'i').exec(text)?.[1]?.trim() || '';
+  const next = nextLabels.length
+    ? String.raw`(?=\n\s*(?:${nextLabels.map(escapeRegExp).join('|')})\s*:?\s*(?:\n|$)|$)`
+    : '$';
+  const pattern = String.raw`(?:^|\n)\s*${escapeRegExp(label)}\s*:?\s*(?:\n)?([\s\S]*?)${next}`;
+  return new RegExp(pattern, 'i').exec(text)?.[1]?.trim() || '';
 }
 
-function parseOrdo(text) {
+function firstMeaningfulLine(text) {
+  return String(text || '')
+    .split(/\n+/)
+    .map((line) => line.replace(/^[•*\-–—\s]+/, '').replace(/\s+/g, ' ').trim())
+    .find((line) => /[A-Za-z]/.test(line) && !/^(Mass|Breviary)$/i.test(line)) || '';
+}
+
+function shorten(value, max = 40) {
+  const clean = String(value || '').replace(/\s+/g, ' ').trim();
+  return clean.length > max ? `${clean.slice(0, max - 1).trim()}…` : clean;
+}
+
+function parseOrdo(text, sourceUrl = ORDO_BASE_URL) {
   const core = cleanOrdoText(text);
   const mass = sectionAfter('Mass', core, ['Breviary']);
   const breviary = sectionAfter('Breviary', core).replace(/Today\s*-\s*1962\s*Ordo[\s\S]*/i, '').trim();
   const fullText = [mass && `Mass:\n${mass}`, breviary && `Breviary:\n${breviary}`].filter(Boolean).join('\n\n') || core || FALLBACK.ordo.fullText;
   const color = /\b(Red|White|Green|Violet|Black|Rose)\b/i.exec(fullText)?.[1] || FALLBACK.today.color;
   const className = normalizeClass(/\b([IVX]+)\s+class\b/i.exec(fullText)?.[0]);
-  const massTitle = mass.split(/[.;\n]/).find((line) => /[A-Za-z]/.test(line))?.trim();
-  const title = massTitle || fullText.split(/\n|\s{2,}|\|/).find((line) => /[A-Za-z]/.test(line))?.slice(0, 120) || FALLBACK.today.title;
-  const summaryTitle = title.replace(/–.*/, '').replace(/\s+/g, ' ').trim();
+  const massHeadline = firstMeaningfulLine(mass || fullText);
+  const breviaryHeadline = firstMeaningfulLine(breviary);
+  const title = massHeadline || fullText.split(/\n|\s{2,}|\|/).find((line) => /[A-Za-z]/.test(line))?.slice(0, 120) || FALLBACK.today.title;
   return {
     title,
     className,
     color,
     tonus: /solemn/i.test(fullText) ? 'Tonus Solemnis' : FALLBACK.today.tonus,
-    summaryLines: [summaryTitle.slice(0, 34), className.replace('Classis', 'class'), color].filter(Boolean),
+    summaryLines: [
+      massHeadline && `Mass: ${shorten(massHeadline, 34)}`,
+      breviaryHeadline && `Breviary: ${shorten(breviaryHeadline, 30)}`,
+      [className.replace('Classis', 'class'), color].filter(Boolean).join(' · '),
+    ].filter(Boolean),
     fullText,
+    sections: {
+      mass: mass || '',
+      breviary: breviary || '',
+    },
+    sourceUrl,
   };
 }
 
@@ -158,21 +242,21 @@ export async function onRequestGet({ request, waitUntil }) {
 
   let data = { ...FALLBACK, isFallback: true };
   try {
-    // These public sites do not expose a stable JSON API. Parsing is intentionally conservative and falls back if markup changes.
-    const [ordoHtml, missalHtml, divinumHtml] = await Promise.allSettled([
-      fetchText(`https://1962ordo.today/day/${date}`),
+    // 1962ordo.today is the Ordo source. MissaleMeum/Divinum Officium remain only for the Mass propers text.
+    const [ordoResult, missalHtml, divinumHtml] = await Promise.allSettled([
+      fetchOrdoSource(date),
       fetchText(`https://www.missalemeum.com/en/${date}`),
       fetchText(`https://www.divinumofficium.com/cgi-bin/missa/missa.pl?date=${date}&version=Rubrics%201960&lang2=English`),
     ]);
-    const ordoText = ordoHtml.status === 'fulfilled' ? ordoHtml.value : '';
+    const ordoSource = ordoResult.status === 'fulfilled' ? ordoResult.value : { html: '', url: ORDO_BASE_URL };
     const missalSource = missalHtml.status === 'fulfilled' ? missalHtml.value : divinumHtml.status === 'fulfilled' ? divinumHtml.value : '';
-    const parsed = parseOrdo(ordoText || missalSource);
+    const parsed = parseOrdo(ordoSource.html || missalSource, ordoSource.url || ORDO_BASE_URL);
     const mass = normalizeMassText(missalSource);
     data = {
       today: { title: parsed.title, className: parsed.className, color: parsed.color, tonus: parsed.tonus },
       readings: { title: 'Mass of the Day', references: mass.references, propers: mass.propers },
-      ordo: { summaryLines: parsed.summaryLines, fullText: parsed.fullText },
-      isFallback: false,
+      ordo: { summaryLines: parsed.summaryLines, fullText: parsed.fullText, sections: parsed.sections, sourceUrl: parsed.sourceUrl },
+      isFallback: !ordoSource.html,
     };
   } catch (error) {
     data.error = String(error.message || error);
