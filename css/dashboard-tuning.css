@@ -25,6 +25,14 @@
   padding-top: 0;
 }
 
+.page-shell--header-only {
+  padding-bottom: 0;
+}
+
+.page-shell--header-only + .page-shell--content-only {
+  padding-top: 0.15rem;
+}
+
 /* Standard grouped navigation */
 .menu-group {
   overflow: hidden;
