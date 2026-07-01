@@ -7,7 +7,7 @@ function entry(title, text){return text ? `<section class="proper-section"><h2>$
 function ordoEntry(title, text){return text ? `<section class="proper-section ordo-section"><h2>${escapeHtml(title)}</h2><p>${renderText(text)}</p></section>` : '';}
 function hasUnavailableCopy(value){return /section unavailable|temporarily unavailable|external ordo is temporarily unavailable/i.test(String(value || ''));}
 function usableSection(value){const text=String(value || '').trim();return text && !hasUnavailableCopy(text) ? text : '';}
-function embeddedOrdo(sourceUrl){return `<section class="proper-section ordo-embed-section"><h2>1962 Ordo</h2><p class="sf-muted">The Mass and Breviary sections could not be parsed into separate text blocks, so the live Ordo is embedded below.</p><iframe class="ordo-embed" src="${escapeHtml(sourceUrl || 'https://1962ordo.today')}" title="1962 Ordo Mass and Breviary" loading="lazy"></iframe></section>`;}
+function embeddedOrdo(sourceUrl){return `<section class="proper-section ordo-embed-section"><h2>1962 Ordo</h2><p class="sf-muted">The Mass and Breviary sections could not be parsed into separate text blocks, so the live Ordo is embedded below.</p><iframe class="ordo-embed" src="${escapeHtml(sourceUrl || 'https://1962ordo.today')}" title="1962 Ordo Mass and Breviary" loading="lazy" style="width:100%;min-height:72vh;margin-top:1rem;border:1px solid rgba(132,81,207,.42);border-radius:1rem;background:#090909;"></iframe></section>`;}
 
 async function init(){
   setupMenu();
