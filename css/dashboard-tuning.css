@@ -1,0 +1,12 @@
+/* Small dashboard spacing refinements */
+.page-shell--dashboard .site-header {
+  padding-bottom: 0.35rem;
+}
+
+.page-shell--dashboard .subtitle {
+  margin-top: 0.35rem;
+}
+
+.page-shell--dashboard .liturgical-dashboard {
+  margin-top: 0.15rem;
+}
