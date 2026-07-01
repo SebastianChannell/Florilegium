@@ -11,7 +11,7 @@ function setupMenu() {
 }
 function renderQuote(quote) {
   const card = document.getElementById('featuredQuote'); if (!card || !quote) return;
-  card.innerHTML = `<div class="quote-mark" aria-hidden="true">“</div><div class="bookmark" aria-hidden="true">♱</div>${quote.imageUrl ? `<img class="featured-quote__image" src="${escapeHtml(quote.imageUrl)}" alt="Portrait of ${escapeHtml(quote.author)}" loading="lazy" decoding="async">` : ''}<div class="featured-quote__copy"><p class="featured-quote__text">${escapeHtml(quote.text).replace(/&lt;\/?em&gt;/g,'')}</p><p class="featured-quote__author">${escapeHtml(quote.author)}</p>${quote.source ? `<p class="featured-quote__source">${escapeHtml(quote.source)}</p>` : ''}</div>`;
+  card.innerHTML = `<div class="quote-mark" aria-hidden="true">“</div>${quote.imageUrl ? `<img class="featured-quote__image" src="${escapeHtml(quote.imageUrl)}" alt="Portrait of ${escapeHtml(quote.author)}" loading="lazy" decoding="async">` : ''}<div class="featured-quote__copy"><p class="featured-quote__text">${escapeHtml(quote.text).replace(/&lt;\/?em&gt;/g,'')}</p><p class="featured-quote__author">${escapeHtml(quote.author)}</p>${quote.source ? `<p class="featured-quote__source">${escapeHtml(quote.source)}</p>` : ''}</div>`;
 }
 async function init() {
   setupMenu();

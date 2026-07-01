@@ -19,9 +19,17 @@ export async function loadQuotes(basePath = 'data/quotes.json') {
   return (Array.isArray(data) ? data : []).map(sanitizeQuote).filter(Boolean);
 }
 
+function seededDailyIndex(date, length) {
+  const key = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  let seed = 2166136261;
+  for (const char of key) {
+    seed ^= char.charCodeAt(0);
+    seed = Math.imul(seed, 16777619);
+  }
+  return Math.abs(seed) % length;
+}
+
 export function getFeaturedQuote(quotes, date = new Date()) {
   if (!quotes.length) return null;
-  const start = new Date(date.getFullYear(), 0, 0);
-  const day = Math.floor((date - start) / 86400000);
-  return quotes[day % quotes.length];
+  return quotes[seededDailyIndex(date, quotes.length)];
 }
