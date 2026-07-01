@@ -12,10 +12,9 @@
     <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="siteMenu"><span class="menu-toggle__bar"></span><span class="menu-toggle__bar"></span><span class="menu-toggle__bar"></span></button>
     <div class="menu-panel" id="siteMenu" aria-hidden="true">
       <div class="menu-panel__header"><p class="menu-panel__eyebrow">Navigation</p><button class="menu-close" type="button" aria-label="Close navigation menu">&times;</button></div>
-      <a href="pages/quotes/" class="menu-link">Quotes</a>
-      <a href="pages/readings/" class="menu-link">Mass of the Day</a>
-      <a href="pages/ordo/" class="menu-link">Ordo</a>
-      <a href="pages/miniature-lives/" class="menu-link">Miniature Lives</a>
+      <details class="menu-group" open><summary class="menu-summary">Hodie</summary><div class="menu-submenu"><a href="pages/readings/" class="menu-link menu-link--sub">Propers</a><a href="pages/ordo/" class="menu-link menu-link--sub">Ordo</a></div></details>
+      <details class="menu-group" open><summary class="menu-summary">Citationes</summary><div class="menu-submenu"><a href="pages/quotes/#search" class="menu-link menu-link--sub">Search Quote</a><a href="pages/quotes/#quotesGrid" class="menu-link menu-link--sub">All Quotes</a></div></details>
+      <details class="menu-group" open><summary class="menu-summary">Supplementa</summary><div class="menu-submenu"><a href="pages/miniature-lives/" class="menu-link menu-link--sub">Fr. Bowden’s Saints Lives</a></div></details>
       <a href="https://github.com/SebastianChannell/Florilegium" class="menu-link">Project source</a>
     </div>
     <button class="menu-backdrop" type="button" tabindex="-1" aria-label="Close navigation menu"></button>
