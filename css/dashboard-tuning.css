@@ -7,7 +7,8 @@
 
 .site-header h1 {
   font-family: Georgia, 'Times New Roman', serif;
-  font-weight: 500;
+  font-size: clamp(2.25rem, 4.7vw, 3.65rem);
+  font-weight: 800;
 }
 
 .page-shell--dashboard .heading-copy,
