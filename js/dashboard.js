@@ -37,7 +37,8 @@ function renderQuote(quote) {
 async function init() {
   setupMenu();
   const data = await getLiturgicalDashboardData();
-  setText('latinDate', data.date.latinMartyrologyDate); setText('romanYear', data.date.romanYear); setText('todayTitle', data.today.title); setText('todayClass', data.today.className); setText('todayColor', data.today.color); setText('todayTonus', data.today.tonus); setText('readingsTitle', data.readings.title); setText('readingsRefs', data.readings.references.join('\n')); setText('ordoSummary', titleCaseOrdo(data.today.title));
+  const formattedTitle = titleCaseOrdo(data.today.title);
+  setText('latinDate', data.date.latinMartyrologyDate); setText('romanYear', data.date.romanYear); setText('todayTitle', formattedTitle); setText('todayClass', data.today.className); setText('todayColor', data.today.color); setText('readingsTitle', data.readings.title); setText('readingsRefs', data.readings.references.join('\n')); setText('ordoSummary', formattedTitle);
   try { renderQuote(getFeaturedQuote(await loadQuotes('data/quotes.json'))); } catch (error) { console.error(error); }
 }
 window.addEventListener('DOMContentLoaded', init);
