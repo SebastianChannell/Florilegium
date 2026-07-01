@@ -49,8 +49,14 @@ const PROPER_KEYS = [
 ];
 const HEADING_PATTERN = PROPER_KEYS.flatMap(([, names]) => names).sort((a, b) => b.length - a.length).join('|');
 
-function json(data, status = 200) {
-  return new Response(JSON.stringify(data), { status, headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'public, max-age=3600' } });
+function json(data, status = 200, cacheable = true) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: {
+      'content-type': 'application/json; charset=utf-8',
+      'cache-control': cacheable ? 'public, max-age=3600' : 'no-store',
+    },
+  });
 }
 
 async function fetchText(url) {
@@ -240,7 +246,7 @@ export async function onRequestGet({ request, waitUntil }) {
   const url = new URL(request.url);
   const date = url.searchParams.get('date') || new Date().toISOString().slice(0, 10);
   const cache = caches.default;
-  const cacheKey = new Request(`${url.origin}/api/liturgical-day?date=${date}&rubrics=1960`);
+  const cacheKey = new Request(`${url.origin}/api/liturgical-day?v=2&date=${date}&rubrics=1960`);
   const hit = await cache.match(cacheKey);
   if (hit) return hit;
 
@@ -266,7 +272,7 @@ export async function onRequestGet({ request, waitUntil }) {
     data.error = String(error.message || error);
   }
 
-  const response = json(data);
-  waitUntil(cache.put(cacheKey, response.clone()));
+  const response = json(data, 200, !data.isFallback);
+  if (!data.isFallback) waitUntil(cache.put(cacheKey, response.clone()));
   return response;
 }
