@@ -5,6 +5,9 @@ function escapeHtml(value){const span=document.createElement('span');span.textCo
 function renderText(value){return escapeHtml(value).replace(/\n/g,'<br>');}
 function entry(title, text){return text ? `<section class="proper-section"><h2>${escapeHtml(title)}</h2><p>${renderText(text)}</p></section>` : '';}
 function ordoEntry(title, text){return text ? `<section class="proper-section ordo-section"><h2>${escapeHtml(title)}</h2><p>${renderText(text)}</p></section>` : '';}
+function hasUnavailableCopy(value){return /section unavailable|temporarily unavailable|external ordo is temporarily unavailable/i.test(String(value || ''));}
+function usableSection(value){const text=String(value || '').trim();return text && !hasUnavailableCopy(text) ? text : '';}
+function embeddedOrdo(sourceUrl){return `<section class="proper-section ordo-embed-section"><h2>1962 Ordo</h2><p class="sf-muted">The Mass and Breviary sections could not be parsed into separate text blocks, so the live Ordo is embedded below.</p><iframe class="ordo-embed" src="${escapeHtml(sourceUrl || 'https://1962ordo.today')}" title="1962 Ordo Mass and Breviary" loading="lazy"></iframe></section>`;}
 
 async function init(){
   setupMenu();
@@ -13,10 +16,11 @@ async function init(){
   if(!root)return;
   if(root.dataset.page==='ordo'){
     const sections=data.ordo?.sections || {};
-    const mass=sections.mass || '';
-    const breviary=sections.breviary || '';
-    const fallback=!mass&&!breviary ? data.ordo.fullText : '';
-    root.innerHTML=`<article class="sf-card detail-card"><p class="sf-label">Ordo</p><h1>${escapeHtml(data.today.title)}</h1><p class="ordo-lines">${renderText((data.ordo.summaryLines || []).join('\n'))}</p>${ordoEntry('Mass',mass)}${ordoEntry('Breviary',breviary)}${entry('Full Ordo',fallback)}${data.ordo.sourceUrl ? `<p class="source-note">Source: <a href="${escapeHtml(data.ordo.sourceUrl)}" rel="noopener noreferrer">1962 Ordo</a></p>` : ''}</article>`;
+    const mass=usableSection(sections.mass);
+    const breviary=usableSection(sections.breviary);
+    const sourceUrl=data.ordo?.sourceUrl || 'https://1962ordo.today';
+    const fallback=!mass&&!breviary ? embeddedOrdo(sourceUrl) : '';
+    root.innerHTML=`<article class="sf-card detail-card"><p class="sf-label">Ordo</p><h1>${escapeHtml(data.today.title || '1962 Ordo')}</h1><p class="ordo-lines">${renderText((data.ordo.summaryLines || []).filter((line)=>!hasUnavailableCopy(line)).join('\n'))}</p>${ordoEntry('Mass',mass)}${ordoEntry('Breviary',breviary)}${fallback}<p class="source-note">Source: <a href="${escapeHtml(sourceUrl)}" rel="noopener noreferrer">1962 Ordo</a></p></article>`;
     return;
   }
   const p=data.readings.propers;
