@@ -42,7 +42,9 @@ The Romanitas Ordo answers: **what Mass is said today?**
 
 The Missal propers answer: **what are the texts of that Mass?**
 
-The bridge is `proper-map-2026.json`:
+The bridge is `proper-map-2026.json`. It supports two forms.
+
+A simple local proper ID:
 
 ```json
 {
@@ -52,31 +54,43 @@ The bridge is `proper-map-2026.json`:
 }
 ```
 
-That points a date to a reusable proper in `propers-en.json`:
+Or a mapped Divinum Officium source path:
 
 ```json
 {
-  "propers": {
-    "sancti-07-01": {
-      "title": "The Most Precious Blood of Our Lord Jesus Christ",
-      "sections": {
-        "epistle": {},
-        "gospel": {}
-      }
+  "days": {
+    "2026-07-05": {
+      "properId": "tempora-pent06-0",
+      "title": "Sixth Sunday after Pentecost",
+      "sourcePath": "Tempora/Pent06-0.txt"
     }
   }
 }
 ```
 
-## Current seed
+The provider first looks in `propers-en.json`. If the proper is not yet materialized there, it can fetch the mapped Divinum Officium source file and parse it dynamically. This lets the site become useful immediately while the local static library grows.
 
-The branch currently includes a first working seed for:
+## Current state
+
+The branch includes a manually materialized seed for:
 
 - `2026-07-01` → The Most Precious Blood of Our Lord Jesus Christ
 
-This proves the full path from:
+The branch also includes July 2026 mappings for many days whose propers can be pulled from either `Tempora/` or full/partial `Sancti/` files. The strongest current coverage is:
 
-`Ordo date → proper ID → Introit/Collect/Epistle/Gospel/etc. → readings page`
+- July Sundays and ferias using the preceding Sunday Mass where the Ordo calls for it.
+- July 1, July 3, July 20, July 22, July 23, and July 28 with fuller proper data.
+- Several other fixed days have partial proper files because Divinum Officium expects a Common to supply the rest.
+
+## Common Mass caveat
+
+Many saints’ days in Divinum Officium only provide the proper collect or a few special parts, because the rest of the Mass comes from a Common. Example: a saint may use `Mass In medio` or `Mass Os iusti` with only a proper collect.
+
+The next needed improvement is a **Common resolver**:
+
+- Detect common-mass notes from the Romanitas Ordo entry, such as `Mass Os iusti`, `Mass In medio`, or `Mass Statuit`.
+- Map those to the correct Divinum Officium `Commune/` source file.
+- Merge Common sections with the proper `Sancti/` sections, letting the proper collect override the Common collect.
 
 ## Adding more propers
 
@@ -84,10 +98,10 @@ Add one item at a time to `tools/missal-propers-source-list.json`:
 
 ```json
 {
-  "properId": "sancti-07-01",
-  "title": "The Most Precious Blood of Our Lord Jesus Christ",
-  "path": "Sancti/07-01.txt",
-  "mapDates": ["2026-07-01"]
+  "properId": "tempora-pent06-0",
+  "title": "Sixth Sunday after Pentecost",
+  "path": "Tempora/Pent06-0.txt",
+  "mapDates": ["2026-07-05", "2026-07-06", "2026-07-09"]
 }
 ```
 
