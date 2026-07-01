@@ -1,17 +1,21 @@
-/* Small dashboard spacing refinements */
-.page-shell--dashboard .site-header {
+/* Small dashboard and detail-page spacing refinements */
+.page-shell--dashboard .site-header,
+.page-shell--detail .site-header {
   gap: 0.08rem;
   padding-bottom: 0.35rem;
 }
 
-.page-shell--dashboard .heading-copy {
+.page-shell--dashboard .heading-copy,
+.page-shell--detail .heading-copy {
   margin-top: -0.25rem;
 }
 
-.page-shell--dashboard .subtitle {
+.page-shell--dashboard .subtitle,
+.page-shell--detail .subtitle {
   margin-top: 0.35rem;
 }
 
-.page-shell--dashboard .liturgical-dashboard {
+.page-shell--dashboard .liturgical-dashboard,
+.page-shell--detail .detail-page {
   margin-top: 0.15rem;
 }
