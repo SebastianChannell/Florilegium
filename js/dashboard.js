@@ -24,6 +24,13 @@ function titleCaseOrdo(value) {
     return `${prefix}${rendered}${suffix}`;
   }).join('');
 }
+function feastNameFromOrdo(value) {
+  return titleCaseOrdo(value)
+    .replace(/^Feria\s+(?:I|II|III|IV|V|VI|VII|VIII|IX|X)\.?\s+/i, '')
+    .replace(/\s*,?\s+(?:I|II|III|IV|V|VI|VII|VIII|IX|X)\s+cl\.?$/i, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
 function sectionReference(value) {
   const lines = String(value || '').split('\n').map((line) => line.trim()).filter(Boolean);
   return lines.find((line) => !/^(Reading|A reading|Continuation|Lesson)/i.test(line) && line.length <= 80) || '';
@@ -47,8 +54,8 @@ function renderQuote(quote) {
 async function init() {
   setupMenu();
   const data = await getLiturgicalDashboardData();
-  const formattedTitle = titleCaseOrdo(data.today.title);
-  setText('latinDate', data.date.latinMartyrologyDate); setText('romanYear', data.date.romanYear); setText('todayTitle', formattedTitle); setText('todayClass', data.today.className); setText('todayColor', data.today.color); setText('readingsRefs', buildPropersSummary(data)); setText('ordoSummary', formattedTitle);
+  const feastTitle = feastNameFromOrdo(data.today.title);
+  setText('latinDate', data.date.latinMartyrologyDate); setText('romanYear', data.date.romanYear); setText('todayTitle', feastTitle); setText('todayClass', data.today.className); setText('todayColor', data.today.color); setText('readingsRefs', buildPropersSummary(data)); setText('ordoSummary', feastTitle);
   try { renderQuote(getFeaturedQuote(await loadQuotes('data/quotes.json'))); } catch (error) { console.error(error); }
 }
 window.addEventListener('DOMContentLoaded', init);
