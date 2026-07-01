@@ -1,11 +1,20 @@
 {
   "language": "English",
   "items": [
-    {
-      "properId": "sancti-07-01",
-      "title": "The Most Precious Blood of Our Lord Jesus Christ",
-      "path": "Sancti/07-01.txt",
-      "mapDates": ["2026-07-01"]
-    }
+    { "properId": "sancti-07-01", "title": "The Most Precious Blood of Our Lord Jesus Christ", "path": "Sancti/07-01.txt", "mapDates": ["2026-07-01"] },
+    { "properId": "sancti-07-02", "title": "The Visitation of the Blessed Virgin Mary", "path": "Sancti/07-02.txt", "mapDates": ["2026-07-02"] },
+    { "properId": "sancti-06-28", "title": "St. Irenaeus, Bishop and Martyr", "path": "Sancti/06-28.txt", "mapDates": ["2026-07-03"] },
+    { "properId": "tempora-pent06-0", "title": "Sixth Sunday after Pentecost", "path": "Tempora/Pent06-0.txt", "mapDates": ["2026-07-05", "2026-07-06", "2026-07-09"] },
+    { "properId": "sancti-07-10", "title": "Seven Holy Brothers, Martyrs, and Saints Rufina and Secunda", "path": "Sancti/07-10.txt", "mapDates": ["2026-07-10"] },
+    { "properId": "tempora-pent07-0", "title": "Seventh Sunday after Pentecost", "path": "Tempora/Pent07-0.txt", "mapDates": ["2026-07-12", "2026-07-13", "2026-07-16", "2026-07-17"] },
+    { "properId": "tempora-pent08-0", "title": "Eighth Sunday after Pentecost", "path": "Tempora/Pent08-0.txt", "mapDates": ["2026-07-19", "2026-07-24"] },
+    { "properId": "sancti-07-20", "title": "St. Jerome Emiliani, Confessor", "path": "Sancti/07-20.txt", "mapDates": ["2026-07-20"] },
+    { "properId": "sancti-07-22", "title": "St. Mary Magdalene, Penitent", "path": "Sancti/07-22.txt", "mapDates": ["2026-07-22"] },
+    { "properId": "sancti-07-23", "title": "St. Apollinaris, Bishop and Martyr", "path": "Sancti/07-23.txt", "mapDates": ["2026-07-23"] },
+    { "properId": "sancti-07-25", "title": "St. James the Apostle", "path": "Sancti/07-25.txt", "mapDates": ["2026-07-25"] },
+    { "properId": "tempora-pent09-0", "title": "Ninth Sunday after Pentecost", "path": "Tempora/Pent09-0.txt", "mapDates": ["2026-07-26", "2026-07-27", "2026-07-30"] },
+    { "properId": "sancti-07-28", "title": "Saints Nazarius and Celsus, Martyrs; St. Victor I, Pope and Martyr; and St. Innocent I, Pope and Confessor", "path": "Sancti/07-28.txt", "mapDates": ["2026-07-28"] },
+    { "properId": "sancti-07-29", "title": "St. Martha, Virgin", "path": "Sancti/07-29.txt", "mapDates": ["2026-07-29"] },
+    { "properId": "sancti-07-31", "title": "St. Ignatius of Loyola, Confessor", "path": "Sancti/07-31.txt", "mapDates": ["2026-07-31"] }
   ]
 }
