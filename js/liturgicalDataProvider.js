@@ -1,9 +1,12 @@
 import { getLiturgicalDate } from './liturgicalDate.js';
+import { getPropersForDate } from './missalPropersProvider.js';
 
 const ORDO_YEAR = 2026;
 const ORDO_DATA_DIR = '/data/ordo/2026';
 const FIELD_NAMES = ['title', 'rank', 'color', 'holyDayOrSunday', 'massPrimary', 'breviaryOffice', 'vespers', 'compline', 'sourcePages'];
 const monthCache = new Map();
+
+const EMPTY_PROPERS = { introit: '', collect: '', epistle: '', gradual: '', alleluia: '', tract: '', gospel: '', offertory: '', secret: '', preface: '', communion: '', postcommunion: '', commemorations: '' };
 
 const FALLBACK = {
   date: null,
@@ -12,7 +15,8 @@ const FALLBACK = {
     title: 'Mass of the Day',
     references: [],
     mass: { primary: '', options: [] },
-    propers: { introit: '', collect: '', epistle: '', gradual: '', alleluia: '', tract: '', gospel: '', offertory: '', secret: '', preface: '', communion: '', postcommunion: '', commemorations: '' },
+    propers: EMPTY_PROPERS,
+    properSource: null,
   },
   ordo: {
     summaryLines: ['The local Romanitas Ordo data could not be loaded.'],
@@ -90,8 +94,11 @@ function buildSummary(entry) {
   ].filter(Boolean);
 }
 
-function normalizeFromEntry(entry, date) {
+function normalizeFromEntry(entry, date, properData = null) {
   const breviaryText = buildBreviaryText(entry.breviary);
+  const properSections = { ...EMPTY_PROPERS, ...(properData?.propers || {}) };
+  const readingRefs = properData?.references?.length ? properData.references : [snippet(entry.mass.primary, 96)].filter(Boolean);
+
   return {
     date: getLiturgicalDate(date),
     today: {
@@ -102,9 +109,13 @@ function normalizeFromEntry(entry, date) {
     },
     readings: {
       title: 'Mass of the Day',
-      references: [snippet(entry.mass.primary, 96)].filter(Boolean),
+      references: readingRefs,
       mass: entry.mass,
-      propers: { ...FALLBACK.readings.propers, introit: entry.mass.primary || '' },
+      propers: properSections,
+      properId: properData?.properId || '',
+      properTitle: properData?.title || '',
+      properSource: properData?.source || null,
+      properSourcePaths: properData?.sourcePaths || [],
     },
     ordo: {
       summaryLines: buildSummary(entry),
@@ -127,7 +138,8 @@ export async function getLiturgicalDashboardData(date = new Date()) {
     const month = await loadMonth(key.slice(0, 7));
     const entry = expandEntry(key, month?.d?.[key.slice(8, 10)]);
     if (!entry) throw new Error(`No Ordo entry for ${key}`);
-    return normalizeFromEntry(entry, date);
+    const properData = await getPropersForDate(key);
+    return normalizeFromEntry(entry, date, properData);
   } catch (error) {
     console.warn('Using fallback Ordo data.', error);
     return { ...FALLBACK, date: getLiturgicalDate(date) };
