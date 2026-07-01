@@ -6,38 +6,28 @@ const FALLBACK = {
     propers: {
       introit: 'External propers are temporarily unavailable.',
       collect: 'O God, who hast taught the multitude of the Gentiles by the preaching of blessed Paul the Apostle: grant us, we beseech Thee, that we who keep his memory may feel the benefit of his patronage.',
-      epistle: 'Acts 13:26–33',
-      gradual: '',
-      alleluia: '',
-      tract: '',
-      gospel: 'John 14:1–6',
-      offertory: '',
-      secret: '',
-      preface: '',
-      communion: '',
-      postcommunion: '',
-      commemorations: '',
+      epistle: 'Acts 13:26–33', gradual: '', alleluia: '', tract: '', gospel: 'John 14:1–6', offertory: '', secret: '', preface: '', communion: '', postcommunion: '', commemorations: '',
     },
   },
-  ordo: { summaryLines: ['Commemoration of St. Paul', 'Apostle', 'III class', 'Red'], fullText: 'External Ordo is temporarily unavailable. Fallback: Commemoration of St. Paul, Apostle, III class, Red.' },
+  ordo: {
+    feastName: 'Commemoration of St. Paul, Apostle',
+    className: 'III class',
+    color: 'Red',
+    summaryLines: ['Commemoration of St. Paul, Apostle', 'III class', 'Red'],
+    mass: 'Mass of the day; Gloria; common preface.',
+    breviary: { sections: [] },
+    fullText: 'External Ordo is temporarily unavailable. Fallback: Commemoration of St. Paul, Apostle, III class, Red.',
+  },
 };
 
 const PROPER_KEYS = [
-  ['introit', ['Introit']],
-  ['collect', ['Collect']],
-  ['epistle', ['Epistle', 'Lesson', 'Reading']],
-  ['gradual', ['Gradual']],
-  ['alleluia', ['Alleluia']],
-  ['tract', ['Tract']],
-  ['gospel', ['Gospel']],
-  ['offertory', ['Offertory']],
-  ['secret', ['Secret']],
-  ['preface', ['Preface']],
-  ['communion', ['Communion']],
-  ['postcommunion', ['Postcommunion', 'Post Communion']],
-  ['commemorations', ['Commemoration', 'Commemorations']],
+  ['introit', ['Introit']], ['collect', ['Collect']], ['epistle', ['Epistle', 'Lesson', 'Reading']],
+  ['gradual', ['Gradual']], ['alleluia', ['Alleluia']], ['tract', ['Tract']], ['gospel', ['Gospel']],
+  ['offertory', ['Offertory']], ['secret', ['Secret']], ['preface', ['Preface']], ['communion', ['Communion']],
+  ['postcommunion', ['Postcommunion', 'Post Communion']], ['commemorations', ['Commemoration', 'Commemorations']],
 ];
 const HEADING_PATTERN = PROPER_KEYS.flatMap(([, names]) => names).sort((a, b) => b.length - a.length).join('|');
+const BREVIARY_HEADINGS = ['Matins', 'Lauds', 'Prime', 'Hours', 'Vespers', 'I Vespers', 'II Vespers', 'Compline'];
 
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), { status, headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'public, max-age=3600' } });
@@ -71,22 +61,56 @@ function findRefs(text) {
 }
 
 function normalizeClass(value) {
-  if (!value) return FALLBACK.today.className;
-  return value.replace(/class/i, 'Classis').replace(/\bI\s+Classis\b/i, 'I Classis');
+  if (!value) return FALLBACK.ordo.className;
+  return value.replace(/classis/i, 'class').replace(/\s+/g, ' ').trim();
 }
 
-function parseOrdo(text) {
-  const clean = strip(text);
-  const color = /\b(Red|White|Green|Violet|Black|Rose)\b/i.exec(clean)?.[1] || FALLBACK.today.color;
-  const className = normalizeClass(/\b([IVX]+)\s+class\b/i.exec(clean)?.[0]);
-  const title = clean.split(/\n|\s{2,}|\|/).find((line) => /[A-Za-z]/.test(line))?.slice(0, 120) || FALLBACK.today.title;
-  const summaryTitle = title.replace(/–.*/, '').replace(/\s+/g, ' ').trim();
+function parseFeastClassColor(clean) {
+  const color = /\b(Red|White|Green|Violet|Black|Rose)\b/i.exec(clean)?.[1] || FALLBACK.ordo.color;
+  const className = normalizeClass(/\b[IVX]+\s+(?:class|classis)\b/i.exec(clean)?.[0]);
+  const lines = clean.split('\n').map((line) => line.trim()).filter(Boolean);
+  const feastName = lines.find((line) => !/^(Mass|Breviary|Matins|Lauds|Prime|Hours|Vespers|Compline|Ordo)\b/i.test(line) && /[A-Za-z]/.test(line))?.replace(/\s*[–-]\s*(?:[IVX]+\s+(?:class|classis)|Red|White|Green|Violet|Black|Rose).*$/i, '') || FALLBACK.ordo.feastName;
+  return { feastName, className, color };
+}
+
+function firstMatchSection(text, startHeading, endHeadings) {
+  const endPattern = endHeadings.join('|');
+  const regex = new RegExp(`${startHeading}\\s*:?\\s*([\\s\\S]*?)(?=\\n\\s*(?:${endPattern})\\s*:|$)`, 'i');
+  return regex.exec(text)?.[1]?.trim() || '';
+}
+
+function parseBreviarySections(breviaryText) {
+  const sections = [];
+  const headings = BREVIARY_HEADINGS.map((heading) => heading.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  const headingPattern = headings.join('|');
+  const regex = new RegExp(`(?:^|\\n)\\s*(${headingPattern})\\s*:?\\s*`, 'gi');
+  const matches = [...breviaryText.matchAll(regex)];
+  matches.forEach((match, index) => {
+    const label = match[1].trim();
+    const start = match.index + match[0].length;
+    const end = matches[index + 1]?.index ?? breviaryText.length;
+    const text = breviaryText.slice(start, end).trim();
+    if (text) sections.push({ label, text });
+  });
+  return sections;
+}
+
+function parseOrdo(html) {
+  const clean = strip(html);
+  const base = parseFeastClassColor(clean);
+  const mass = firstMatchSection(clean, 'Mass', ['Breviary', 'Matins', 'Lauds', 'Prime', 'Hours', 'I Vespers', 'II Vespers', 'Vespers', 'Compline', 'Print', 'Reminder']) || FALLBACK.ordo.mass;
+  const breviarySource = firstMatchSection(clean, 'Breviary', ['Print', 'Reminder', 'Notes', 'Sources']) || clean;
+  let sections = parseBreviarySections(breviarySource);
+
+  // The Ordo page can format breviary details as separate heading blocks without a
+  // parent “Breviary” wrapper. If so, parse directly from the full text.
+  if (!sections.length) sections = parseBreviarySections(clean);
+
   return {
-    title,
-    className,
-    color,
-    tonus: /solemn/i.test(clean) ? 'Tonus Solemnis' : FALLBACK.today.tonus,
-    summaryLines: [summaryTitle.slice(0, 34), className.replace('Classis', 'class'), color].filter(Boolean),
+    ...base,
+    summaryLines: [base.feastName, base.className, base.color].filter(Boolean),
+    mass,
+    breviary: { sections },
     fullText: clean || FALLBACK.ordo.fullText,
   };
 }
@@ -95,9 +119,6 @@ function extractSections(text) {
   const propers = { ...FALLBACK.readings.propers };
   const clean = strip(text);
   if (!clean) return propers;
-
-  // Missal sites commonly render propers as labelled sections. This parser keeps
-  // complete section text between labels instead of truncating readings/propers.
   const regex = new RegExp(`(?:^|\\n)\\s*(${HEADING_PATTERN})\\s*(?:\\n|:)`, 'gi');
   const matches = [...clean.matchAll(regex)];
   matches.forEach((match, index) => {
@@ -109,7 +130,6 @@ function extractSections(text) {
     const value = clean.slice(start, end).trim();
     if (value) propers[key] = value;
   });
-
   if (!matches.length) propers.introit = clean;
   return propers;
 }
@@ -119,6 +139,23 @@ function normalizeMassText(html) {
   const propers = extractSections(html);
   const references = findRefs(clean);
   return { propers, references: references.length ? references : FALLBACK.readings.references };
+}
+
+function isToday(date) {
+  const now = new Date();
+  const local = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+  return date === local;
+}
+
+async function fetch1962Ordo(date) {
+  const urls = isToday(date)
+    ? ['https://1962ordo.today/', `https://1962ordo.today/day/${date}`]
+    : [`https://1962ordo.today/day/${date}`, 'https://1962ordo.today/'];
+  const errors = [];
+  for (const url of urls) {
+    try { return await fetchText(url); } catch (error) { errors.push(String(error.message || error)); }
+  }
+  throw new Error(errors.join('; '));
 }
 
 export async function onRequestGet({ request, waitUntil }) {
@@ -131,20 +168,19 @@ export async function onRequestGet({ request, waitUntil }) {
 
   let data = { ...FALLBACK, isFallback: true };
   try {
-    // These public sites do not expose a stable JSON API. Parsing is intentionally conservative and falls back if markup changes.
     const [ordoHtml, missalHtml, divinumHtml] = await Promise.allSettled([
-      fetchText(`https://1962ordo.today/day/${date}`),
+      fetch1962Ordo(date),
       fetchText(`https://www.missalemeum.com/en/${date}`),
       fetchText(`https://www.divinumofficium.com/cgi-bin/missa/missa.pl?date=${date}&version=Rubrics%201960&lang2=English`),
     ]);
-    const ordoText = ordoHtml.status === 'fulfilled' ? ordoHtml.value : '';
+    const ordoSource = ordoHtml.status === 'fulfilled' ? ordoHtml.value : '';
     const missalSource = missalHtml.status === 'fulfilled' ? missalHtml.value : divinumHtml.status === 'fulfilled' ? divinumHtml.value : '';
-    const parsed = parseOrdo(ordoText || missalSource);
+    const parsedOrdo = parseOrdo(ordoSource || missalSource);
     const mass = normalizeMassText(missalSource);
     data = {
-      today: { title: parsed.title, className: parsed.className, color: parsed.color, tonus: parsed.tonus },
+      today: { title: parsedOrdo.feastName, className: parsedOrdo.className, color: parsedOrdo.color, tonus: FALLBACK.today.tonus },
       readings: { title: 'Mass of the Day', references: mass.references, propers: mass.propers },
-      ordo: { summaryLines: parsed.summaryLines, fullText: parsed.fullText },
+      ordo: parsedOrdo,
       isFallback: false,
     };
   } catch (error) {

@@ -12,11 +12,24 @@ const FALLBACK = {
       gradual: '', alleluia: '', gospel: 'John 14:1–6', offertory: '', secret: '', preface: '', communion: '', postcommunion: '', commemorations: '',
     },
   },
-  ordo: { summaryLines: ['Commemoration of St. Paul', 'Apostle', 'III class', 'Red'], fullText: 'Fallback Ordo: Commemoration of St. Paul, Apostle, III class, Red.' },
+  ordo: {
+    feastName: 'Commemoration of St. Paul, Apostle',
+    className: 'III class',
+    color: 'Red',
+    summaryLines: ['Commemoration of St. Paul, Apostle', 'III class', 'Red'],
+    mass: 'Mass of the day; Gloria; common preface.',
+    breviary: { sections: [] },
+    fullText: 'Fallback Ordo: Commemoration of St. Paul, Apostle, III class, Red.',
+  },
 };
 
 const memoryCache = new Map();
-function ymd(date) { return date.toISOString().slice(0, 10); }
+function ymd(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
 function cacheKey(date) { return `liturgical-1960-${ymd(date)}`; }
 function readCache(key) {
   const stored = typeof localStorage === 'undefined' ? null : JSON.parse(localStorage.getItem(key) || 'null');
