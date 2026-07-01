@@ -1,6 +1,11 @@
 /* Small dashboard spacing refinements */
 .page-shell--dashboard .site-header {
+  gap: 0.08rem;
   padding-bottom: 0.35rem;
+}
+
+.page-shell--dashboard .heading-copy {
+  margin-top: -0.25rem;
 }
 
 .page-shell--dashboard .subtitle {
