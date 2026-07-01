@@ -1,73 +1,130 @@
 import { getLiturgicalDate } from './liturgicalDate.js';
 
+const ORDO_YEAR = 2026;
+const ORDO_DATA_DIR = '/data/ordo/2026';
+const FIELD_NAMES = ['title', 'rank', 'color', 'holyDayOrSunday', 'massPrimary', 'breviaryOffice', 'vespers', 'compline', 'sourcePages'];
+const monthCache = new Map();
+
 const FALLBACK = {
+  date: null,
   today: { title: 'Daily Ordo unavailable', className: '', color: '', tonus: '' },
   readings: {
     title: 'Mass of the Day',
     references: [],
-    propers: {
-      introit: 'The daily propers could not be loaded. Please try again later.',
-      collect: 'The daily collect could not be loaded. Please try again later.',
-      epistle: '',
-      gradual: '', alleluia: '', gospel: '', offertory: '', secret: '', preface: '', communion: '', postcommunion: '', commemorations: '',
-    },
+    mass: { primary: '', options: [] },
+    propers: { introit: '', collect: '', epistle: '', gradual: '', alleluia: '', tract: '', gospel: '', offertory: '', secret: '', preface: '', communion: '', postcommunion: '', commemorations: '' },
   },
   ordo: {
-    summaryLines: ['Open the Ordo page for Mass and Breviary.'],
+    summaryLines: ['The local Romanitas Ordo data could not be loaded.'],
     fullText: '',
     sections: { mass: '', breviary: '' },
-    sourceUrl: 'https://1962ordo.today',
+    entry: null,
+    source: 'Romanitas Press Ordo 2026',
   },
+  isFallback: true,
 };
 
-const memoryCache = new Map();
-function ymd(date) { return date.toISOString().slice(0, 10); }
-function cacheKey(date) { return `liturgical-1960-v2-${ymd(date)}`; }
-function isUsefulOrdo(data) {
-  const mass = data?.ordo?.sections?.mass || '';
-  const breviary = data?.ordo?.sections?.breviary || '';
-  return Boolean(mass.trim() || breviary.trim() || !data?.isFallback);
-}
-function readCache(key) {
-  let stored = null;
-  try { stored = typeof localStorage === 'undefined' ? null : JSON.parse(localStorage.getItem(key) || 'null'); } catch {}
-  const cached = memoryCache.get(key) || stored;
-  if (!cached || cached.expires <= Date.now() || cached.data?.isFallback || !isUsefulOrdo(cached.data)) return null;
-  return cached.data;
-}
-function writeCache(key, data) {
-  if (data?.isFallback || !isUsefulOrdo(data)) return;
-  const expires = new Date(); expires.setUTCHours(23, 59, 59, 999);
-  const payload = { expires: expires.getTime(), data };
-  memoryCache.set(key, payload);
-  try { if (typeof localStorage !== 'undefined') localStorage.setItem(key, JSON.stringify(payload)); } catch {}
-}
-async function fetchProxy(date) {
-  const response = await fetch(`/api/liturgical-day?date=${ymd(date)}&rubrics=1960`, { cache: 'no-store' });
-  if (!response.ok) throw new Error('Liturgical proxy unavailable');
-  return response.json();
+function ymdLocal(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
 }
 
-function normalize(data, date) {
+function titleCase(value) {
+  return String(value || '').replace(/^./, (first) => first.toUpperCase());
+}
+
+function decodeBase64Utf8(value) {
+  const binary = atob(String(value || '').trim());
+  const bytes = Uint8Array.from(binary, (char) => char.charCodeAt(0));
+  return new TextDecoder().decode(bytes);
+}
+
+async function loadMonth(monthKey) {
+  if (monthCache.has(monthKey)) return monthCache.get(monthKey);
+  const response = await fetch(`${ORDO_DATA_DIR}/${monthKey}.b64`, { cache: 'force-cache' });
+  if (!response.ok) throw new Error(`Missing Ordo data for ${monthKey}`);
+  const payload = JSON.parse(decodeBase64Utf8(await response.text()));
+  monthCache.set(monthKey, payload);
+  return payload;
+}
+
+function expandEntry(dateKey, row) {
+  if (!Array.isArray(row)) return null;
+  const record = Object.fromEntries(FIELD_NAMES.map((key, index) => [key, row[index] ?? '']));
+  return {
+    date: dateKey,
+    title: record.title,
+    rank: record.rank,
+    color: record.color,
+    holyDayOrSunday: Boolean(record.holyDayOrSunday),
+    sourcePages: Array.isArray(record.sourcePages) ? record.sourcePages : [],
+    mass: { primary: record.massPrimary || '', options: [] },
+    breviary: {
+      office: record.breviaryOffice || '',
+      vespers: record.vespers || '',
+      compline: record.compline || '',
+    },
+  };
+}
+
+function buildBreviaryText(breviary) {
+  return [
+    breviary.office && `Office: ${breviary.office}`,
+    breviary.vespers && `Vespers: ${breviary.vespers}`,
+    breviary.compline && `Compline: ${breviary.compline}`,
+  ].filter(Boolean).join('\n\n');
+}
+
+function buildSummary(entry) {
+  return [
+    entry.mass.primary && `Mass: ${entry.mass.primary}`,
+    entry.breviary.office && `Office: ${entry.breviary.office}`,
+    [entry.rank, titleCase(entry.color)].filter(Boolean).join(' · '),
+  ].filter(Boolean);
+}
+
+function normalizeFromEntry(entry, date) {
+  const breviaryText = buildBreviaryText(entry.breviary);
   return {
     date: getLiturgicalDate(date),
-    today: { ...FALLBACK.today, ...(data?.today || {}) },
-    readings: { ...FALLBACK.readings, ...(data?.readings || {}), propers: { ...FALLBACK.readings.propers, ...(data?.readings?.propers || {}) } },
-    ordo: { ...FALLBACK.ordo, ...(data?.ordo || {}), sections: { ...FALLBACK.ordo.sections, ...(data?.ordo?.sections || {}) } },
-    isFallback: Boolean(data?.isFallback),
+    today: {
+      title: entry.title || '1962 Ordo',
+      className: entry.rank || '',
+      color: titleCase(entry.color),
+      tonus: '—',
+    },
+    readings: {
+      title: 'Mass of the Day',
+      references: [entry.mass.primary].filter(Boolean),
+      mass: entry.mass,
+      propers: { ...FALLBACK.readings.propers, introit: entry.mass.primary || '' },
+    },
+    ordo: {
+      summaryLines: buildSummary(entry),
+      fullText: [entry.mass.primary && `Mass:\n${entry.mass.primary}`, breviaryText && `Breviary:\n${breviaryText}`].filter(Boolean).join('\n\n'),
+      sections: { mass: entry.mass.primary || '', breviary: breviaryText },
+      entry,
+      source: 'Romanitas Press Ordo 2026',
+    },
+    isFallback: false,
   };
 }
 
 export async function getLiturgicalDashboardData(date = new Date()) {
-  const key = cacheKey(date);
-  const cached = readCache(key);
-  if (cached) return normalize(cached, date);
+  const key = ymdLocal(date);
+  if (Number(key.slice(0, 4)) !== ORDO_YEAR) {
+    return { ...FALLBACK, date: getLiturgicalDate(date), ordo: { ...FALLBACK.ordo, summaryLines: [`No local Ordo data is available for ${key.slice(0, 4)}.`] } };
+  }
+
   try {
-    const data = await fetchProxy(date);
-    writeCache(key, data);
-    return normalize(data, date);
+    const month = await loadMonth(key.slice(0, 7));
+    const entry = expandEntry(key, month?.d?.[key.slice(8, 10)]);
+    if (!entry) throw new Error(`No Ordo entry for ${key}`);
+    return normalizeFromEntry(entry, date);
   } catch (error) {
-    console.warn('Using fallback liturgical data.', error);
-    return normalize({ ...FALLBACK, isFallback: true }, date);
+    console.warn('Using fallback Ordo data.', error);
+    return { ...FALLBACK, date: getLiturgicalDate(date) };
   }
 }
