@@ -63,7 +63,8 @@ async function init(){
   if(root.dataset.page==='ordo'){
     const mass=data.ordo?.sections?.mass || '';
     const breviary=data.ordo?.sections?.breviary || '';
-    root.innerHTML=`<article class="sf-card detail-card"><p class="sf-label">Ordo</p><h1>${escapeHtml(titleCaseOrdo(data.today.title || '1962 Ordo'))}</h1>${entry('Mass of the Day',mass,{plain:true})}${entry('Breviary',breviary,{plain:true})}${sourceLine(data)}</article>`;
+    const ordoTitle=feastNameFromOrdo(data.today.title || '1962 Ordo');
+    root.innerHTML=`<article class="sf-card detail-card"><p class="sf-label">Ordo</p><h1>${escapeHtml(ordoTitle)}</h1>${entry('Mass of the Day',mass,{plain:true})}${entry('Breviary',breviary,{plain:true})}${sourceLine(data)}</article>`;
     return;
   }
 
