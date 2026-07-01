@@ -37,7 +37,7 @@ function isGospelOpeningLine(line){return /^Continuation\s*\+?\s+of\b/i.test(lin
 function accentLine(line){return `<span class="proper-accent" style="color:var(--sf-purple);font-style:italic;">${escapeHtml(line)}</span>`;}
 function accentVersicle(line){const match=String(line || '').match(/^(\s*)(V\.)(\s*)(.*)$/i);if(!match)return escapeHtml(line);return `${escapeHtml(match[1])}<span class="proper-accent" style="color:var(--sf-purple);font-style:italic;">${escapeHtml(match[2])}</span>${escapeHtml(match[3]+match[4])}`;}
 function accentGospelCross(line){const match=String(line || '').match(/^(.*?)(\+)(.*)$/);if(!match)return escapeHtml(line);return `${escapeHtml(match[1])}<span class="proper-accent" style="color:var(--sf-purple);">${escapeHtml(match[2])}</span>${escapeHtml(match[3])}`;}
-function highlightOrdoLabels(line){return escapeHtml(line).replace(/\b(Office|Matins|Lauds|Prime|Terce|Sext|None|Vespers|Compline):/g,'<span class="ordo-label-highlight" style="display:inline-block;padding:.02rem .28rem;border-radius:.35rem;background:rgba(132,81,207,.16);color:var(--sf-purple);font-weight:800;">$1:</span>');}
+function highlightOrdoLabels(line){return escapeHtml(line).replace(/\b(Office|Matins|Lauds|Prime|Terce|Sext|None|Vespers|Compline):/g,'<span class="ordo-label-highlight" style="color:var(--sf-purple);font-style:italic;">$1:</span>');}
 function renderOrdoText(value){return String(value || '').split('\n').map((line)=>line.trim() ? highlightOrdoLabels(line) : '').join('<br>');}
 function renderProperText(value){
   return String(value || '').split('\n').map((line)=>{
