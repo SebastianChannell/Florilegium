@@ -24,6 +24,13 @@ function titleCaseOrdo(value){
     return `${prefix}${rendered}${suffix}`;
   }).join('');
 }
+function feastNameFromOrdo(value){
+  return titleCaseOrdo(value)
+    .replace(/^Feria\s+(?:I|II|III|IV|V|VI|VII|VIII|IX|X)\.?\s+/i,'')
+    .replace(/\s*,?\s+(?:I|II|III|IV|V|VI|VII|VIII|IX|X)\s+cl\.?$/i,'')
+    .replace(/\s+/g,' ')
+    .trim();
+}
 function isReferenceLine(line){return /^(?:[1-3]\s*)?[A-Z][A-Za-z. ]+\s+\d+\s*[:.,]\s*\d/.test(line.trim());}
 function isVersicleLine(line){return /^V\.\s+/i.test(line.trim());}
 function isGospelOpeningLine(line){return /^Continuation\s*\+?\s+of\b/i.test(line.trim());}
@@ -63,6 +70,7 @@ async function init(){
   const p=data.readings?.propers || {};
   const mass=data.readings?.mass?.primary || data.readings?.references?.[0] || '';
   const hasPropers=hasAnyProper(p);
-  root.innerHTML=`<article class="sf-card detail-card"><p class="sf-label">Mass of the Day</p><h1>${escapeHtml(titleCaseOrdo(data.today.title || data.readings.title))}</h1><p class="sf-muted">${renderText([data.today.className, data.today.color].filter(Boolean).join(' · '))}</p>${hasPropers ? renderPropers(p) : entry('Mass assignment',mass)}${hasPropers ? properSourceLine(data) : sourceLine(data)}</article>`;
+  const propersTitle=feastNameFromOrdo(data.today.title || data.readings.title);
+  root.innerHTML=`<article class="sf-card detail-card"><p class="sf-label">Mass of the Day</p><h1>${escapeHtml(propersTitle)}</h1><p class="sf-muted">${renderText([data.today.className, data.today.color].filter(Boolean).join(' · '))}</p>${hasPropers ? renderPropers(p) : entry('Mass assignment',mass)}${hasPropers ? properSourceLine(data) : sourceLine(data)}</article>`;
 }
 window.addEventListener('DOMContentLoaded',init);
