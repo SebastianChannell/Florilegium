@@ -33,6 +33,17 @@
   padding-top: 0.15rem;
 }
 
+.brand-mark {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.brand-mark:focus-visible {
+  outline: 2px solid rgba(132, 81, 207, 0.5);
+  outline-offset: 4px;
+  border-radius: 1rem;
+}
+
 /* Standard grouped navigation */
 .menu-group {
   overflow: hidden;
