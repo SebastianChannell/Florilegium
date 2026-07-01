@@ -32,7 +32,7 @@ function buildPropersSummary(data) {
   const propers = data.readings?.propers || {};
   const epistle = sectionReference(propers.epistle);
   const gospel = sectionReference(propers.gospel);
-  return [epistle && `Epistle: ${epistle}`, gospel && `Gospel: ${gospel}`].filter(Boolean).join('\n');
+  return [epistle, gospel].filter(Boolean).join('\n');
 }
 function setupMenu() {
   const sideMenu = document.querySelector('.side-menu'); const toggle = document.querySelector('.menu-toggle'); const panel = document.getElementById('siteMenu');
