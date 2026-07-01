@@ -105,8 +105,12 @@ function escapeRegExp(value) {
   return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+function sectionLabelPattern(label) {
+  return String.raw`${escapeRegExp(label)}\b\s*(?::|\n|$)`;
+}
+
 function hasSectionHeading(label, text) {
-  return new RegExp(String.raw`(?:^|\n)\s*${escapeRegExp(label)}\b\s*:?`, 'i').test(text);
+  return new RegExp(String.raw`(?:^|\n)\s*${sectionLabelPattern(label)}`, 'i').test(text);
 }
 
 function scoreOrdoCandidate(html) {
@@ -146,7 +150,7 @@ async function fetchOrdoSource(date) {
 
 function cleanOrdoText(text) {
   const clean = strip(text, { keepScripts: true });
-  const start = clean.search(/(?:^|\n)\s*(?:Mass|Breviary)\b\s*:?/i);
+  const start = clean.search(new RegExp(String.raw`(?:^|\n)\s*(?:Mass|Breviary)\b\s*(?::|\n|$)`, 'i'));
   let core = start >= 0 ? clean.slice(start).trim() : clean;
   const end = core.search(/(?:^|\n)\s*(?:Today\s*-\s*1962\s*Ordo|How to bookmark this application|Android|iOS|Windows|FAQ|Blessings)\b/i);
   if (end > 0) core = core.slice(0, end).trim();
@@ -155,9 +159,9 @@ function cleanOrdoText(text) {
 
 function sectionAfter(label, text, nextLabels = []) {
   const next = nextLabels.length
-    ? String.raw`(?=\n\s*(?:${nextLabels.map(escapeRegExp).join('|')})\b\s*:?|$)`
+    ? String.raw`(?=\n\s*(?:${nextLabels.map(sectionLabelPattern).join('|')})|$)`
     : '$';
-  const pattern = String.raw`(?:^|\n)\s*${escapeRegExp(label)}\b\s*:?\s*([\s\S]*?)${next}`;
+  const pattern = String.raw`(?:^|\n)\s*${sectionLabelPattern(label)}\s*([\s\S]*?)${next}`;
   return new RegExp(pattern, 'i').exec(text)?.[1]?.trim() || '';
 }
 
