@@ -47,9 +47,33 @@ function setupMenu() {
   sideMenu?.addEventListener('click', (event) => { if (event.target.closest('.menu-toggle')) setOpen(!sideMenu.classList.contains('is-open')); if (event.target.closest('.menu-close, .menu-backdrop, .menu-link')) setOpen(false); });
   window.addEventListener('keydown', (event) => { if (event.key === 'Escape') setOpen(false); });
 }
+function setQuoteExpanded(textEl, toggle, expanded) {
+  if (!textEl || !toggle) return;
+  textEl.style.display = expanded ? 'block' : '-webkit-box';
+  textEl.style.webkitBoxOrient = expanded ? '' : 'vertical';
+  textEl.style.webkitLineClamp = expanded ? 'unset' : '5';
+  textEl.style.overflow = expanded ? 'visible' : 'hidden';
+  toggle.textContent = expanded ? 'less' : '…';
+  toggle.setAttribute('aria-expanded', String(expanded));
+}
 function renderQuote(quote) {
   const card = document.getElementById('featuredQuote'); if (!card || !quote) return;
-  card.innerHTML = `<div class="quote-mark" aria-hidden="true">“</div>${quote.imageUrl ? `<img class="featured-quote__image" src="${escapeHtml(quote.imageUrl)}" alt="Portrait of ${escapeHtml(quote.author)}" loading="lazy" decoding="async">` : ''}<div class="featured-quote__copy"><p class="featured-quote__text">${escapeHtml(quote.text).replace(/&lt;\/?em&gt;/g,'')}</p><p class="featured-quote__author">${escapeHtml(quote.author)}</p>${quote.source ? `<p class="featured-quote__source">${escapeHtml(quote.source)}</p>` : ''}</div>`;
+  const text = String(quote.text || '');
+  const isLong = text.replace(/<\/?em>/g, '').length > 260;
+  const quoteMark = '<div class="quote-mark" aria-hidden="true" style="top:.7rem;left:1.2rem;font-size:3.25rem;">“</div>';
+  const image = quote.imageUrl ? `<img class="featured-quote__image" src="${escapeHtml(quote.imageUrl)}" alt="Portrait of ${escapeHtml(quote.author)}" loading="lazy" decoding="async">` : '';
+  const toggle = isLong ? '<button class="featured-quote__toggle" type="button" aria-label="Expand quote" aria-expanded="false" style="justify-self:end;margin:.45rem 0 0;padding:.05rem .55rem .12rem;border:1px solid rgba(132,81,207,.42);border-radius:999px;background:transparent;color:var(--sf-purple);font:inherit;font-weight:800;line-height:1;">…</button>' : '';
+  card.innerHTML = `${quoteMark}${image}<div class="featured-quote__copy"><p class="featured-quote__text">${escapeHtml(text).replace(/&lt;\/?em&gt;/g,'')}</p><p class="featured-quote__author">${escapeHtml(quote.author)}</p>${quote.source ? `<p class="featured-quote__source">${escapeHtml(quote.source)}</p>` : ''}${toggle}</div>`;
+  if (isLong) {
+    const textEl = card.querySelector('.featured-quote__text');
+    const toggleEl = card.querySelector('.featured-quote__toggle');
+    setQuoteExpanded(textEl, toggleEl, false);
+    toggleEl?.addEventListener('click', (event) => {
+      event.preventDefault();
+      const expanded = toggleEl.getAttribute('aria-expanded') !== 'true';
+      setQuoteExpanded(textEl, toggleEl, expanded);
+    });
+  }
 }
 async function init() {
   setupMenu();
