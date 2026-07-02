@@ -1,121 +1,28 @@
 {
   "year": 2026,
-  "notes": "Date-to-proper mapping for the 1962 Missal propers used by Sacrum Florilegium. String values load local propers. Object values can load a Divinum Officium sourcePath dynamically when a proper has not yet been materialized into propers-en.json.",
   "days": {
-    "2026-07-01": {
-      "properId": "sancti-07-01",
-      "title": "The Most Precious Blood of Our Lord Jesus Christ",
-      "sourcePath": "Sancti/07-01.txt"
-    },
-    "2026-07-02": {
-      "properId": "sancti-07-02",
-      "title": "The Visitation of the Blessed Virgin Mary",
-      "sourcePath": "Sancti/07-02.txt"
-    },
-    "2026-07-03": {
-      "properId": "sancti-06-28",
-      "title": "St. Irenaeus, Bishop and Martyr",
-      "sourcePath": "Sancti/06-28.txt"
-    },
-    "2026-07-05": {
-      "properId": "tempora-pent06-0",
-      "title": "Sixth Sunday after Pentecost",
-      "sourcePath": "Tempora/Pent06-0.txt"
-    },
-    "2026-07-06": {
-      "properId": "tempora-pent06-0",
-      "title": "Sixth Sunday after Pentecost",
-      "sourcePath": "Tempora/Pent06-0.txt"
-    },
-    "2026-07-09": {
-      "properId": "tempora-pent06-0",
-      "title": "Sixth Sunday after Pentecost",
-      "sourcePath": "Tempora/Pent06-0.txt"
-    },
-    "2026-07-10": {
-      "properId": "sancti-07-10",
-      "title": "Seven Holy Brothers, Martyrs, and Saints Rufina and Secunda",
-      "sourcePath": "Sancti/07-10.txt"
-    },
-    "2026-07-12": {
-      "properId": "tempora-pent07-0",
-      "title": "Seventh Sunday after Pentecost",
-      "sourcePath": "Tempora/Pent07-0.txt"
-    },
-    "2026-07-13": {
-      "properId": "tempora-pent07-0",
-      "title": "Seventh Sunday after Pentecost",
-      "sourcePath": "Tempora/Pent07-0.txt"
-    },
-    "2026-07-16": {
-      "properId": "tempora-pent07-0",
-      "title": "Seventh Sunday after Pentecost",
-      "sourcePath": "Tempora/Pent07-0.txt"
-    },
-    "2026-07-17": {
-      "properId": "tempora-pent07-0",
-      "title": "Seventh Sunday after Pentecost",
-      "sourcePath": "Tempora/Pent07-0.txt"
-    },
-    "2026-07-19": {
-      "properId": "tempora-pent08-0",
-      "title": "Eighth Sunday after Pentecost",
-      "sourcePath": "Tempora/Pent08-0.txt"
-    },
-    "2026-07-20": {
-      "properId": "sancti-07-20",
-      "title": "St. Jerome Emiliani, Confessor",
-      "sourcePath": "Sancti/07-20.txt"
-    },
-    "2026-07-22": {
-      "properId": "sancti-07-22",
-      "title": "St. Mary Magdalene, Penitent",
-      "sourcePath": "Sancti/07-22.txt"
-    },
-    "2026-07-23": {
-      "properId": "sancti-07-23",
-      "title": "St. Apollinaris, Bishop and Martyr",
-      "sourcePath": "Sancti/07-23.txt"
-    },
-    "2026-07-24": {
-      "properId": "tempora-pent08-0",
-      "title": "Eighth Sunday after Pentecost",
-      "sourcePath": "Tempora/Pent08-0.txt"
-    },
-    "2026-07-25": {
-      "properId": "sancti-07-25",
-      "title": "St. James the Apostle",
-      "sourcePath": "Sancti/07-25.txt"
-    },
-    "2026-07-26": {
-      "properId": "tempora-pent09-0",
-      "title": "Ninth Sunday after Pentecost",
-      "sourcePath": "Tempora/Pent09-0.txt"
-    },
-    "2026-07-27": {
-      "properId": "tempora-pent09-0",
-      "title": "Ninth Sunday after Pentecost",
-      "sourcePath": "Tempora/Pent09-0.txt"
-    },
-    "2026-07-28": {
-      "properId": "sancti-07-28",
-      "title": "Saints Nazarius and Celsus, Martyrs; St. Victor I, Pope and Martyr; and St. Innocent I, Pope and Confessor",
-      "sourcePath": "Sancti/07-28.txt"
-    },
-    "2026-07-29": {
-      "properId": "sancti-07-29",
-      "title": "St. Martha, Virgin",
-      "sourcePath": "Sancti/07-29.txt"
-    },
-    "2026-07-30": {
-      "properId": "tempora-pent09-0",
-      "title": "Ninth Sunday after Pentecost",
-      "sourcePath": "Tempora/Pent09-0.txt"
-    },
-    "2026-07-31": {
-      "properId": "sancti-07-31",
-      "title": "St. Ignatius of Loyola, Confessor",
-      "sourcePath": "Sancti/07-31.txt"
-    }
+    "2026-07-01": "sancti-07-01",
+    "2026-07-02": "sancti-07-02",
+    "2026-07-03": "sancti-06-28",
+    "2026-07-05": "tempora-pent06-0",
+    "2026-07-06": "tempora-pent06-0",
+    "2026-07-09": "tempora-pent06-0",
+    "2026-07-10": "sancti-07-10",
+    "2026-07-12": "tempora-pent07-0",
+    "2026-07-13": "tempora-pent07-0",
+    "2026-07-16": "tempora-pent07-0",
+    "2026-07-17": "tempora-pent07-0",
+    "2026-07-19": "tempora-pent08-0",
+    "2026-07-24": "tempora-pent08-0",
+    "2026-07-20": "sancti-07-20",
+    "2026-07-22": "sancti-07-22",
+    "2026-07-23": "sancti-07-23",
+    "2026-07-25": "sancti-07-25",
+    "2026-07-26": "tempora-pent09-0",
+    "2026-07-27": "tempora-pent09-0",
+    "2026-07-30": "tempora-pent09-0",
+    "2026-07-28": "sancti-07-28",
+    "2026-07-29": "sancti-07-29",
+    "2026-07-31": "sancti-07-31"
   }
 }
