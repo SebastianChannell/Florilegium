@@ -2,7 +2,19 @@
   "language": "English",
   "items": [
     { "properId": "sancti-07-01", "title": "The Most Precious Blood of Our Lord Jesus Christ", "path": "Sancti/07-01.txt", "mapDates": ["2026-07-01"] },
-    { "properId": "sancti-07-02", "title": "The Visitation of the Blessed Virgin Mary", "path": "Sancti/07-02.txt", "mapDates": ["2026-07-02"] },
+    {
+      "properId": "sancti-07-02",
+      "title": "The Visitation of the Blessed Virgin Mary",
+      "path": "Sancti/07-02.txt",
+      "mapDates": ["2026-07-02"],
+      "manualSections": {
+        "gospel": {
+          "introduction": "Continuation + of the Holy Gospel according to Luke",
+          "references": ["Luke 1:39-47"],
+          "text": "At that time, Mary arose in those days and went into the hill-country with haste, into a city of Judah. And entered into the house of Zacharias, and saluted Elizabeth. And it came to pass, that when Elizabeth heard the salutation of Mary, the babe leaped in her womb; and Elizabeth was filled with the Holy Ghost. And she cried out with a loud voice, and said: Blessed art thou among women, and blessed is the fruit of thy womb. And whence is this to me, that the Mother of my Lord should come to me? For behold, as soon as the voice of thy salutation sounded in mine ears, the babe in my womb leaped for joy. And blessed art thou that hast believed, because those things shall be accomplished that were spoken to thee by the Lord. And Mary said: My soul doth magnify the Lord."
+        }
+      }
+    },
     { "properId": "sancti-06-28", "title": "St. Irenaeus, Bishop and Martyr", "path": "Sancti/06-28.txt", "mapDates": ["2026-07-03"] },
     { "properId": "tempora-pent06-0", "title": "Sixth Sunday after Pentecost", "path": "Tempora/Pent06-0.txt", "mapDates": ["2026-07-05", "2026-07-06", "2026-07-09"] },
     { "properId": "sancti-07-10", "title": "Seven Holy Brothers, Martyrs, and Saints Rufina and Secunda", "path": "Sancti/07-10.txt", "mapDates": ["2026-07-10"] },
