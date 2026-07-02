@@ -1,130 +1,1520 @@
 {
   "version": "1962",
   "language": "English",
+  "generatedBy": "tools/build-missal-propers.mjs",
   "source": {
     "name": "Divinum Officium",
     "repository": "https://github.com/DivinumOfficium/divinum-officium",
     "license": "MIT",
-    "notice": "Divinum Officium data files are MIT licensed. Include the permission notice when distributing substantial portions."
+    "notice": "Generated from a local Divinum Officium checkout. Divinum Officium data files are MIT licensed. Include the permission notice when distributing substantial portions."
   },
   "propers": {
     "sancti-07-01": {
       "title": "The Most Precious Blood of Our Lord Jesus Christ",
+      "generatedFromDate": "2026-07-01",
       "sourcePaths": [
-        "web/www/missa/English/Sancti/07-01.txt",
-        "web/www/missa/English/Tempora/Quad5-0.txt"
+        "rendered by local Divinum Officium CGI: web/cgi-bin/missa/missa.pl?Propers=1"
       ],
-      "rank": "Duplex I classis",
-      "rule": [
-        "Gloria",
-        "Credo",
-        "Prefatio=Quad5"
-      ],
+      "version": "Rubrics 1960 - 1960",
+      "dioecesis": "Generale",
       "sections": {
         "introit": {
-          "references": ["Apoc 5:9-10", "Ps 88:2"],
+          "references": [
+            "Apoc 5:9-10",
+            "Ps 88:2"
+          ],
           "text": [
             "You have redeemed us, O Lord, with Your Blood, out of every tribe and tongue and people and nation, and have made us for our God a kingdom.",
             "The favors of the Lord I will sing forever; through all generations my mouth shall proclaim Your faithfulness.",
             "Glory be to the Father, and to the Son, and to the Holy Ghost.",
+            "R. As it was in the beginning, is now, and ever shall be, world without end. Amen.",
             "You have redeemed us, O Lord, with Your Blood, out of every tribe and tongue and people and nation, and have made us for our God a kingdom."
           ]
         },
         "collect": {
-          "text": "Almighty, eternal God, Who made Your only-begotten Son the Redeemer of the world, and willed to be reconciled by His Blood, grant us, we beseech You, so to worship in this sacred rite the price of our salvation, and to be so protected by its power against the evils of the present life on earth, that we may enjoy its everlasting fruit in heaven."
+          "text": [
+            "Almighty, eternal God, Who made Your only-begotten Son the Redeemer of the world, and willed to be reconciled by His Blood, grant us, we beseech You, so to worship in this sacred rite the price of our salvation, and to be so protected by its power against the evils of the present life on earth, that we may enjoy its everlasting fruit in heaven.",
+            "Through the same Jesus Christ, thy Son, Our Lord, Who liveth and reigneth with thee in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
         },
         "epistle": {
           "introduction": "Reading from the letter of St. Paul to the Hebrews",
-          "references": ["Heb 9:11-15"],
-          "text": "Brethren: When Christ appeared as high priest of the good things to come, He entered once for all through the greater and more perfect tabernacle, not made by hands - that is, not of this creation, - nor again by virtue of blood of goats and calves, but by virtue of His own blood, into the Holies, having obtained eternal redemption. For if the blood of goats and bulls and the sprinkled ashes of a heifer sanctify the unclean unto the cleansing of the flesh, how much more will the Blood of Christ, Who through the Holy Spirit offered Himself unblemished unto God, cleanse your conscience from dead works to serve the living God? And this is why He is mediator of a new covenant, that whereas a death has taken place for redemption from the transgressions committed under the former covenant, they who have been called may receive eternal inheritance according to the promise, in Christ Jesus our Lord."
+          "references": [
+            "Heb 9:11-15"
+          ],
+          "text": [
+            "Brethren: When Christ appeared as high priest of the good things to come, He entered once for all through the greater and more perfect tabernacle, not made by hands - that is, not of this creation, - nor again by virtue of blood of goats and calves, but by virtue of His own blood, into the Holies, having obtained eternal redemption. For if the blood of goats and bulls and the sprinkled ashes of a heifer sanctify the unclean unto the cleansing of the flesh, how much more will the Blood of Christ, Who through the Holy Spirit offered Himself unblemished unto God, cleanse your conscience from dead works to serve the living God? And this is why He is mediator of a new covenant, that whereas a death has taken place for redemption from the transgressions committed under the former covenant, they who have been called may receive eternal inheritance according to the promise, in Christ Jesus our Lord.",
+            "R. Thanks be to God."
+          ]
         },
         "gradual": {
-          "references": ["1 John 5:6-8", "1 John 5:9"],
+          "references": [
+            "1 John 5:6-8",
+            "1 John 5:9"
+          ],
           "text": [
             "This is He Who came in water and in blood, Jesus Christ; not in the water only, but in the water and in the blood.",
-            "V. There are three that bear witness in heaven: the Father, the Word, and the Holy Spirit; and these three are one. And there are three that bear witness on earth: the Spirit, the water, and the blood; and these three are one. Alleluia, alleluia.",
-            "V. If we receive the testimony of men, the testimony of God is greater. Alleluia."
+            "There are three that bear witness in heaven: the Father, the Word, and the Holy Spirit; and these three are one. And there are three that bear witness on earth: the Spirit, the water, and the blood; and these three are one. Alleluia, alleluia.",
+            "If we receive the testimony of men, the testimony of God is greater. Alleluia."
           ]
         },
         "gospel": {
-          "introduction": "Continuation + of the Holy Gospel according to John",
-          "references": ["John 19:30-35"],
-          "text": "At that time, when Jesus had taken the wine, He said, It is consummated! And bowing His head, He gave up His spirit. The Jews therefore, since it was the Preparation Day, in order that the bodies might not remain upon the cross on the Sabbath, for that Sabbath was a solemn day, besought Pilate that their legs might be broken, and that they might be taken away. The soldiers therefore came and broke the legs of the first, and of the other, who had been crucified with Him. But when they came to Jesus, and saw that He was already dead, they did not break His legs; but one of the soldiers opened His side with a lance, and immediately there came out Blood and water. And he who saw it has borne witness, and his witness is true."
+          "introduction": "Continuation ✠ of the Holy Gospel according to John",
+          "references": [
+            "John 19:30-35"
+          ],
+          "text": [
+            "R. Glory be to Thee, O Lord.",
+            "At that time, when Jesus had taken the wine, He said, It is consummated! And bowing His head, He gave up His spirit. The Jews therefore, since it was the Preparation Day, in order that the bodies might not remain upon the cross on the Sabbath, for that Sabbath was a solemn day, besought Pilate that their legs might be broken, and that they might be taken away. The soldiers therefore came and broke the legs of the first, and of the other, who had been crucified with Him. But when they came to Jesus, and saw that He was already dead, they did not break His legs; but one of the soldiers opened His side with a lance, and immediately there came out Blood and water. And he who saw it has borne witness, and his witness is true.",
+            "S. By the words of the Gospel may our sins be blotted out."
+          ]
         },
         "offertory": {
-          "references": ["1 Cor 10:16"],
-          "text": "The Cup of blessing that we bless, is it not the sharing of the Blood of Christ? And the Bread that we break, is it not the partaking of the Body of the Lord? (Alleluia.)"
+          "references": [
+            "1 Cor. 10:16"
+          ],
+          "text": "The Cup of blessing that we bless, is it not the sharing of the Blood of Christ? And the Bread that we break, is it not the partaking of the Body of the Lord?"
         },
         "secret": {
-          "text": "Through this divine rite, we beseech You, may we draw near to Jesus, the mediator of the new covenant, and renew upon Your altar, O Lord of hosts, the sprinkling of blood more eloquent than that of Abel."
+          "text": [
+            "Through this divine rite, we beseech You, may we draw near to Jesus, the mediator of the new covenant, and renew upon Your altar, O Lord of hosts, the sprinkling of blood more eloquent than that of Abel.",
+            "Through the same Jesus Christ, thy Son, Our Lord, Who liveth and reigneth with thee in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        },
+        "preface": {
+          "text": [
+            "Holy Cross",
+            "It is truly meet and just, right and for our salvation, that we should at all times, and in all places, give thanks unto Thee, O holy Lord, Father almighty, everlasting God; Who didst establish the salvation of mankind on the tree of the Cross; that whence death came, thence also life might arise again, and that he, who overcame by the tree, by the tree also might be overcome: Through Christ our Lord. Through whom the Angels praise Thy Majesty, the Dominations worship it, the Powers stand in awe. The Heavens and the heavenly hosts together with the blessed Seraphim in triumphant chorus unite to celebrate it. Together with these we entreat Thee that Thou mayest bid our voices also to be admitted while we say with lowly praise:",
+            "We pray in union with and honor the memory, especially of the glorious ever Virgin Mary, mother of our God and Lord Jesus Christ: as also of the blessed Joseph, her Spouse,"
+          ]
         },
         "communion": {
-          "references": ["Heb 9:28"],
-          "text": "Christ was offered once to take away the sins of many; the second time with no part in sin He will appear unto the salvation of those who await Him. (Alleluia.)"
+          "references": [
+            "Heb 9:28"
+          ],
+          "text": "Christ was offered once to take away the sins of many; the second time with no part in sin He will appear unto the salvation of those who await Him."
         },
         "postcommunion": {
-          "text": "Admitted to the sacred banquet, O Lord, we have drawn water in joy from the Saviour’s fountain; may His Blood, we beseech You, become for us a fountain of water springing up unto life everlasting."
+          "text": [
+            "Admitted to the sacred banquet, O Lord, we have drawn water in joy from the Saviour’s fountain; may His Blood, we beseech You, become for us a fountain of water springing up unto life everlasting.",
+            "Who livest and reignest with God the Father, in the unity of the Holy Spirit, God, world without end.",
+            "R. Amen"
+          ]
         }
       }
     },
     "sancti-07-02": {
       "title": "The Visitation of the Blessed Virgin Mary",
+      "generatedFromDate": "2026-07-02",
       "sourcePaths": [
-        "web/www/missa/English/Sancti/07-02.txt",
-        "web/www/horas/English/Commune/C11.txt",
-        "web/www/horas/English/Sancti/07-02.txt",
-        "web/www/missa/English/Sancti/07-02cc.txt"
+        "rendered by local Divinum Officium CGI: web/cgi-bin/missa/missa.pl?Propers=1"
       ],
-      "rank": "Duplex II classis",
-      "rule": [
-        "Gloria",
-        "CredoDA",
-        "Prefatio=Maria=Visitation"
-      ],
+      "version": "Rubrics 1960 - 1960",
+      "dioecesis": "Generale",
       "sections": {
         "introit": {
-          "references": ["Sedulius", "Ps 44:2"],
+          "references": [
+            "Sedulius",
+            "Ps 44:2"
+          ],
           "text": [
             "Hail, holy Mother, who in childbirth brought forth the King Who rules heaven and earth world without end.",
             "My heart overflows with a goodly theme; as I sing my ode to the King.",
             "Glory be to the Father, and to the Son, and to the Holy Ghost.",
+            "R. As it was in the beginning, is now, and ever shall be, world without end. Amen.",
             "Hail, holy Mother, who in childbirth brought forth the King Who rules heaven and earth world without end."
           ]
         },
         "collect": {
-          "text": "Bestow upon Your servants, we beseech You, O Lord, the gift of heavenly grace, that as the child-bearing of the Blessed Virgin marked the beginning of our salvation, so may the solemn feast of her Visitation bring us an increase of peace."
+          "text": [
+            "Bestow upon Your servants, we beseech You, O Lord, the gift of heavenly grace, that as the child-bearing of the Blessed Virgin marked the beginning of our salvation, so may the solemn feast of her Visitation bring us an increase of peace.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen.",
+            "Commemoration Ss. Processus et Martinian, Martyrs",
+            "O God, Who surround and protect us with the glorious profession of faith of Your Martyrs Processus and Martinian, grant us to profit by imitating them and to rejoice in their intercession.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
         },
         "epistle": {
           "introduction": "Lesson from the book of Canticles",
-          "references": ["Song 2:8-14"],
-          "text": "Hark! here He comes springing across the mountains, leaping across the hills. My lover is like a gazelle or a young stag. Here He stands behind our wall, gazing through the windows, peering through the lattices. My lover speaks: He says to me, Arise, make haste, My beloved, My dove, My beautiful one, and come! For see, the winter is past, the rains are over and gone. The flowers appear in our land, the time of pruning has come, and the voice of the turtle is heard in our land. The fig tree puts forth its figs, and the vines, in bloom, give forth fragrance. Arise, My beloved, My beautiful one, and come! O My dove in the clefts of the rock, in the secret recesses of the cliff, let Me see you, let Me hear your voice, for your voice is sweet and you are lovely."
+          "references": [
+            "Song 2:8-14"
+          ],
+          "text": [
+            "Hark! here He comes springing across the mountains, leaping across the hills. My lover is like a gazelle or a young stag. Here He stands behind our wall, gazing through the windows, peering through the lattices. My lover speaks: He says to me, Arise, make haste, My beloved, My dove, My beautiful one, and come! For see, the winter is past, the rains are over and gone. The flowers appear in our land, the time of pruning has come, and the voice of the turtle is heard in our land. The fig tree puts forth its figs, and the vines, in bloom, give forth fragrance. Arise, My beloved, My beautiful one, and come! O My dove in the clefts of the rock, in the secret recesses of the cliff, let Me see you, let Me hear your voice, for your voice is sweet and you are lovely.",
+            "R. Thanks be to God."
+          ]
         },
         "gradual": {
           "text": [
             "Blessed and venerable are you, O Virgin Mary, who, without spot were found the Mother of the Saviour.",
-            "V. O Virgin, Mother of God, He Whom the whole world does not contain, shut Himself within your womb, becoming Man. Alleluia, alleluia.",
-            "V. Happy are you, O holy Virgin Mary, and most worthy of all praise; for out of you has risen the sun of justice, Christ our God. Alleluia."
+            "O Virgin, Mother of God, He Whom the whole world does not contain, shut Himself within your womb, becoming Man. Alleluia, alleluia.",
+            "Happy are you, O holy Virgin Mary, and most worthy of all praise; for out of you has risen the sun of justice, Christ our God. Alleluia."
           ]
         },
         "gospel": {
-          "introduction": "Continuation + of the Holy Gospel according to Luke",
-          "references": ["Luke 1:39-47"],
-          "text": "At that time, Mary arose in those days and went into the hill-country with haste, into a city of Judah. And entered into the house of Zacharias, and saluted Elizabeth. And it came to pass, that when Elizabeth heard the salutation of Mary, the babe leaped in her womb; and Elizabeth was filled with the Holy Ghost. And she cried out with a loud voice, and said: Blessed art thou among women, and blessed is the fruit of thy womb. And whence is this to me, that the Mother of my Lord should come to me? For behold, as soon as the voice of thy salutation sounded in mine ears, the babe in my womb leaped for joy. And blessed art thou that hast believed, because those things shall be accomplished that were spoken to thee by the Lord. And Mary said: My soul doth magnify the Lord."
+          "introduction": "Continuation ✠ of the Holy Gospel according to Luke",
+          "references": [
+            "Luke 1:39-47"
+          ],
+          "text": [
+            "R. Glory be to Thee, O Lord.",
+            "At that time, Mary arose and went with haste into the hill country, to a town of Juda. And she entered the house of Zachary and saluted Elizabeth. And it came to pass, when Elizabeth heard the greeting of Mary, that the babe in her womb leapt. And Elizabeth was filled with the Holy Spirit, and cried out with a loud voice, saying, Blessed are you among women and blessed is the fruit of your womb! And how have I deserved that the Mother of my Lord should come to me? For behold, the moment that the sound of your greeting came to my ears, the babe in my womb leapt for joy. And blessed is she who has believed, because the things promised her by the Lord shall be accomplished. And Mary said, My soul magnifies the Lord, and my spirit rejoices in God my Saviour.",
+            "S. By the words of the Gospel may our sins be blotted out."
+          ]
         },
         "offertory": {
-          "references": ["Lk 1:28; 1:42"],
-          "text": "Hail, Mary, full of grace, the Lord is with you. Blessed are you among women and blessed is the fruit of your womb. (Alleluja.)"
+          "text": "Blessed art thou, O Virgin Mary, who didst bear the Creator of all things, thou didst bring forth who made thee, and remainest a virgin forever."
         },
         "secret": {
-          "text": "May the humanity of Your only-begotten Son keep us, O Lord, for He, Who was born of a virgin did not lessen but consecrated the purity of His Mother; so, on the festival of her Visitation may Jesus Christ, our Lord, free us from our sins and make our sacrifice acceptable unto You."
+          "text": [
+            "May the humanity of Your only-begotten Son keep us, O Lord, for He, Who was born of a virgin did not lessen but consecrated the purity of His Mother; so, on the festival of her Visitation may Jesus Christ, our Lord, free us from our sins and make our sacrifice acceptable unto You.",
+            "Who livest and reignest with God the Father, in the unity of the Holy Spirit, God, world without end.",
+            "R. Amen",
+            "Commemoration Ss. Processus et Martinian, Martyrs",
+            "Accept our prayers and gifts, O Lord, and, that they may be made worthy in Your sight, may Your saints help us by their prayers.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        },
+        "preface": {
+          "text": [
+            "Blessed Virgin",
+            "It is truly meet and just, right and for our salvation, that we should at all times, and in all places, give thanks unto Thee, O holy Lord, Father almighty, everlasting God: and that we should praise and bless, and proclaim Thee, in the Visitation of the Blessed Mary, ever-Virgin: Who also conceived Thine only-begotten Son by the overshadowing of the Holy Ghost, and the glory of her virginity still abiding, gave forth to the world the everlasting Light, Jesus Christ our Lord. Through whom the Angels praise Thy Majesty, the Dominations worship it, and the Powers stand in awe. The Heavens and the heavenly hosts together with the blessed Seraphim in triumphant chorus unite to celebrate it. Together with these we entreat Thee that Thou mayest bid our voices also to be admitted while we say with lowly praise:",
+            "We pray in union with and honor the memory, especially of the glorious ever Virgin Mary, mother of our God and Lord Jesus Christ: as also of the blessed Joseph, her Spouse,"
+          ]
         },
         "communion": {
-          "text": "Blessed is the womb of the Virgin Mary, which bore the Son of the eternal Father. (Alleluja.)"
+          "text": "Blessed is the womb of the Virgin Mary, which bore the Son of the eternal Father."
         },
         "postcommunion": {
-          "text": "O Lord, in celebration of this yearly feast, we have partaken of the sacrament: grant, we beseech You, that it may give us help for life on earth and for life everlasting."
+          "text": [
+            "O Lord, in celebration of this yearly feast, we have partaken of the sacrament: grant, we beseech You, that it may give us help for life on earth and for life everlasting.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen.",
+            "Commemoration Ss. Processus et Martinian, Martyrs",
+            "Filled with the offering of Your sacred Body and Your precious Blood, we beseech You, O Lord, our God, that what we have done in holy devotion may become an assurance of our redemption.",
+            "Through the same Jesus Christ, thy Son, Our Lord, Who liveth and reigneth with thee in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        }
+      }
+    },
+    "sancti-06-28": {
+      "title": "St. Irenaeus, Bishop and Martyr",
+      "generatedFromDate": "2026-07-03",
+      "sourcePaths": [
+        "rendered by local Divinum Officium CGI: web/cgi-bin/missa/missa.pl?Propers=1"
+      ],
+      "version": "Rubrics 1960 - 1960",
+      "dioecesis": "Generale",
+      "sections": {
+        "introit": {
+          "references": [
+            "Mal 2:6",
+            "Ps 77:1"
+          ],
+          "text": [
+            "The law of truth was in his mouth, and iniquity was not found in his lips: he walked with Me in peace, and in equity, and turned many away from iniquity.",
+            "Hearken, My people, to My teaching; incline your ears to the words of My mouth.",
+            "Glory be to the Father, and to the Son, and to the Holy Ghost.",
+            "R. As it was in the beginning, is now, and ever shall be, world without end. Amen.",
+            "The law of truth was in his mouth, and iniquity was not found in his lips: he walked with Me in peace, and in equity, and turned many away from iniquity."
+          ]
         },
-        "commemorations": "Commemoration: Ss. Processus et Martinian, Martyrs\nOratio\nO God, Who surround and protect us with the glorious profession of faith of Your Martyrs Processus and Martinian, grant us to profit by imitating them and to rejoice in their intercession.\n\nSecreta\nAccept our prayers and gifts, O Lord, and, that they may be made worthy in Your sight, may Your saints help us by their prayers.\n\nPostcommunio\nFilled with the offering of Your sacred Body and Your precious Blood, we beseech You, O Lord, our God, that what we have done in holy devotion may become an assurance of our redemption."
+        "collect": {
+          "text": [
+            "O God, Who enabled blessed Irenaeus, Your Martyr and Bishop, to overcome heresy with true doctrine and to establish peace happily in the Church, grant, we beseech You, that Your people may be steadfast in holy religion, and give us Your peace in our times.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        },
+        "epistle": {
+          "introduction": "Lesson from the second letter of St. Paul the Apostle to Timothy",
+          "references": [
+            "2 Tim. 3:14-17; 4:1-5"
+          ],
+          "text": [
+            "Beloved: Continue in the things that you have learned and that have been entrusted to you, knowing of whom you have learned them. For from your infancy you have known the Sacred Writings, which are able to instruct you unto salvation by the faith which is in Christ Jesus. All Scripture is inspired by God and useful for teaching, for reproving, for correcting, for instructing in justice; that the man of God may be perfect, equipped for every good work. I charge you, in the sight of God and Christ Jesus, Who will judge the living and the dead by His coming and by His kingdom, preach the word, be urgent in season, out of season; reprove, entreat, rebuke with all patience and teaching. For there will come a time when they will not endure the sound doctrine; but having itching ears, will heap up to themselves teachers according to their own lusts, and they will turn away their hearing from the truth and turn aside rather to fables. But be watchful in all things, bear with tribulation patiently, work as a preacher of the Gospel, fulfill your ministry.",
+            "R. Thanks be to God."
+          ]
+        },
+        "gradual": {
+          "references": [
+            "Ps 121:8",
+            "Ps 36:37",
+            "Eccli 6:35"
+          ],
+          "text": [
+            "Because of my relatives and friends I will say, Peace be within you!",
+            "Keep innocence, and behold equity; for there is a future for the man of peace. Alleluia, alleluia.",
+            "Frequent the company of the elders; whoever is wise, stay close to him. Be eager to hear every godly discourse. Alleluia."
+          ]
+        },
+        "gospel": {
+          "introduction": "Continuation ✠ of the Holy Gospel according to Matthew",
+          "references": [
+            "Matt 10:28-33"
+          ],
+          "text": [
+            "R. Glory be to Thee, O Lord.",
+            "At that time, Jesus said to His disciples, Do not be afraid of those who kill the body but cannot kill the soul. But rather be afraid of Him Who is able to destroy both soul and body in hell. Are not two sparrows sold for a farthing? And yet not one of them will fall to the ground without your Father’s leave. But as for you, the very hairs of your head are all numbered. Therefore do not be afraid; you are of more value than many sparrows. Therefore, everyone who acknowledges Me before men, I also will acknowledge him before My Father in heaven. But whoever disowns Me before men, I in turn will disown him before My Father in heaven.",
+            "S. By the words of the Gospel may our sins be blotted out."
+          ]
+        },
+        "offertory": {
+          "references": [
+            "Eccli 24:44"
+          ],
+          "text": "I send my teachings forth to all shining like the dawn, and I will make them known afar off."
+        },
+        "secret": {
+          "text": [
+            "O God, Who do not allow the nations that believe in You to be troubled by any distress, graciously accept the prayers and sacrificial gifts Your people dedicate to You, so that the peace bestowed by Your love may make Christian lands safe from every foe.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        },
+        "preface": {
+          "text": [
+            "Common",
+            "It is truly meet and just, and profitable unto salvation, that we should at all times, and in all places, give thanks to Thee, O Holy Lord, Father Almighty, eternal God, through Christ, our Lord. Through whom the Angels praise Thy Majesty, the Dominions adore it, the Powers are in awe. Which the heavens and the hosts of heaven together with the blessed Seraphim joyfully do magnify. And do Thou command that it be permitted us to join with them in confessing Thee, while we say with lowly praise:",
+            "We pray in union with and honor the memory, especially of the glorious ever Virgin Mary, mother of our God and Lord Jesus Christ: as also of the blessed Joseph, her Spouse,"
+          ]
+        },
+        "communion": {
+          "references": [
+            "Ecclus 24:47"
+          ],
+          "text": "See that I have not labored for myself only, but for all who seek out the truth."
+        },
+        "postcommunion": {
+          "text": [
+            "O God, author and lover of peace, to know You is to live, and to serve You is to rule; protect from all assaults those who humbly implore You, that, trusting in Your protection, by the intercession of St. Irenaeus, Your Martyr and Bishop, we may not fear the power of any foe.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        }
+      }
+    },
+    "tempora-pent06-0": {
+      "title": "Sixth Sunday after Pentecost",
+      "generatedFromDate": "2026-07-05",
+      "sourcePaths": [
+        "rendered by local Divinum Officium CGI: web/cgi-bin/missa/missa.pl?Propers=1"
+      ],
+      "version": "Rubrics 1960 - 1960",
+      "dioecesis": "Generale",
+      "sections": {
+        "introit": {
+          "references": [
+            "Ps. 27:8-9",
+            "Ps 27:1"
+          ],
+          "text": [
+            "The Lord is the strength of His people, the saving refuge of His anointed. Save Your people, O Lord, and bless Your inheritance; and rule them forever!",
+            "To You, O Lord, I call; O my God, be not deaf to me, lest, if You heed me not, I become one of those going down into the pit.",
+            "Glory be to the Father, and to the Son, and to the Holy Ghost.",
+            "R. As it was in the beginning, is now, and ever shall be, world without end. Amen.",
+            "The Lord is the strength of His people, the saving refuge of His anointed. Save Your people, O Lord, and bless Your inheritance; and rule them forever!"
+          ]
+        },
+        "collect": {
+          "text": [
+            "O God of the heavenly powers, creator of all good things, implant in our hearts the love of Your Name, and bestow upon us an increase of godliness, fostering what is good, and, by Your loving care, guarding what You have fostered.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        },
+        "epistle": {
+          "introduction": "Lesson from the letter of St. Paul the Apostle to the Romans",
+          "references": [
+            "Rom 6:3-11"
+          ],
+          "text": [
+            "Brethren: All we who have been baptized into Christ Jesus have been baptized into His death. For we were buried with Him by means of Baptism into death, in order that, just as Christ has arisen from the dead through the glory of the Father, so we also may walk in newness of life. For if we have been united with Him in the likeness of His death, we shall be so in the likeness of His resurrection also. For we know that our old self has been crucified with Him, in order that the body of sin may be destroyed, that we may no longer be slaves to sin; for he who is dead is acquitted of sin. But if we have died with Christ, we believe that we shall also live together with Christ; for we know that Christ, having risen from the dead, dies now no more, death shall no longer have dominion over Him. For the death that He died, He died to sin once for all, but the life that He lives, He lives unto God. Thus do you consider yourselves also as dead to sin, but alive to God in Christ Jesus our Lord.",
+            "R. Thanks be to God."
+          ]
+        },
+        "gradual": {
+          "references": [
+            "Ps. 89:13, 1",
+            "Ps. 30:2-3"
+          ],
+          "text": [
+            "Return, O Lord! How long? Have pity on Your servants!",
+            "O Lord, You have been our refuge through all generations. Alleluia, alleluia.",
+            "In You, O Lord, I take refuge; let me never be put to shame. In Your justice rescue me and release me, incline Your ear to me, make haste to deliver me! Alleluia."
+          ]
+        },
+        "gospel": {
+          "introduction": "Continuation ✠ of the Holy Gospel according to Mark",
+          "references": [
+            "Mark 8:1-9"
+          ],
+          "text": [
+            "R. Glory be to Thee, O Lord.",
+            "At that time, when there was a great crowd with Jesus, and they had nothing to eat, He called His disciples together and said to them, I have compassion on the crowd, for behold, they have now been with Me three days, and have nothing to eat; and if I send them away to their homes fasting, they will faint on the way, for some of them have come from a distance. And His disciples answered Him, How will anyone be able to satisfy these with bread, here in a desert? And He asked them, How many loaves have you? And they said, Seven. And He bade the crowd recline on the ground. Then taking the seven loaves, He gave thanks, broke them and gave them to His disciples to distribute; and they set them before the crowd. And they had a few little fishes; and He blessed them, and ordered them to be distributed. And they ate and were satisfied; and they took up what was left of the fragments, seven baskets. Now those who had eaten were about four thousand. And He dismissed them.",
+            "S. By the words of the Gospel may our sins be blotted out."
+          ]
+        },
+        "offertory": {
+          "references": [
+            "Ps. 16:5-7"
+          ],
+          "text": "Make my steps steadfast in Your paths, that my feet may not falter. Incline Your ear to me; hear my word. Show Your wondrous kindness, O Lord, O Saviour of those who trust in You."
+        },
+        "secret": {
+          "text": [
+            "Mercifully hear our humble prayers, O Lord, and graciously accept these offerings of Your people, and grant that no prayer may be without effect, no petition in vain, so that what we ask in faith, we may really obtain.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        },
+        "preface": {
+          "text": [
+            "Holy Trinity",
+            "It is truly meet and just, right and for our salvation, that we should at all times, and in all places, give thanks unto Thee, O holy Lord, Father almighty, everlasting God; Who, together with Thine only-begotten Son, and the Holy Ghost, art one God, one Lord: not in the oneness of a single Person, but in the Trinity of one substance. For what we believe by Thy revelation of Thy glory, the same do we believe of Thy Son, the same of the Holy Ghost, without difference or separation. So that in confessing the true and everlasting Godhead, distinction in persons, unity in essence, and equality in majesty may be adored. Which the Angels and Archangels, the Cherubim also and Seraphim do praise: who cease not daily to cry out, with one voice saying:",
+            "We pray in union with and honor the memory, especially of the glorious ever Virgin Mary, mother of our God and Lord Jesus Christ: as also of the blessed Joseph, her Spouse,"
+          ]
+        },
+        "communion": {
+          "references": [
+            "Ps. 26:6"
+          ],
+          "text": "I will go round, and offer in His tent, sacrifices with shouts of gladness; I will sing and chant praise to the Lord."
+        },
+        "postcommunion": {
+          "text": [
+            "We have been filled with Your gifts, O Lord; grant, we beseech You, that we may be cleansed and strengthened by their effect.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        }
+      }
+    },
+    "sancti-07-10": {
+      "title": "Seven Holy Brothers, Martyrs, and Saints Rufina and Secunda",
+      "generatedFromDate": "2026-07-10",
+      "sourcePaths": [
+        "rendered by local Divinum Officium CGI: web/cgi-bin/missa/missa.pl?Propers=1"
+      ],
+      "version": "Rubrics 1960 - 1960",
+      "dioecesis": "Generale",
+      "sections": {
+        "introit": {
+          "references": [
+            "Ps 112:1, 9",
+            "Ps 112:2"
+          ],
+          "text": [
+            "Praise the Lord, you children, praise the name of the Lord. He establishes in her home the barren wife as the joyful mother of children.",
+            "Blessed be the name of the Lord both now and forever.",
+            "Glory be to the Father, and to the Son, and to the Holy Ghost.",
+            "R. As it was in the beginning, is now, and ever shall be, world without end. Amen.",
+            "Praise the Lord, you children, praise the name of the Lord. He establishes in her home the barren wife as the joyful mother of children."
+          ]
+        },
+        "collect": {
+          "text": [
+            "Grant, we beseech You, almighty God, that we who know how courageously Your holy Martyrs have confessed the faith, may experience their goodness as they intercede for us with You.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        },
+        "epistle": {
+          "introduction": "Lesson from the book of Proverbs",
+          "references": [
+            "Prov 31:10-31"
+          ],
+          "text": [
+            "When one finds a worthy wife, her value is far beyond pearls. Her husband, entrusting his heart to her, has an unfailing prize. She brings him good, and not evil, all the days of her life. She obtains wool and flax and makes cloth with skillful hands. Like merchant ships, she secures her provisions from afar. She rises while it is still night, and distributes food to her household. She picks out a field to purchase; out of her earnings she plants a vineyard. She is girt about with strength, and sturdy are her arms. She enjoys the success of her dealings; at night her lamp is undimmed. She puts her hands to the distaff, and her fingers ply the spindle. She reaches out her hands to the poor, and extends her arms to the needy. She fears not the snow for her household; all her charges are doubly clothed. She makes her own coverlets; fine linen and purple are her clothing. Her husband is prominent at the city gates as he sits with the elders of the land. She makes garments and sells them, and stocks the merchants with belts. She is clothed with strength and dignity, and she laughs at the days to come. She opens her mouth in wisdom, and on her tongue is kindly counsel. She watches the conduct of her household, and eats not her food in idleness. Her children rise up and praise her; her husband, too, extols her: Many are the women of proven worth, but you have excelled them all. Charm is deceptive and beauty fleeting; the woman who fears the Lord is to be praised. Give her a reward of her labors, and let her works praise her at the city gates.",
+            "R. Thanks be to God."
+          ]
+        },
+        "gradual": {
+          "references": [
+            "Ps 123:7-8"
+          ],
+          "text": [
+            "We were rescued like a bird from the fowlers’ snare.",
+            "Broken was the snare, and we were freed. Our help is in the name of the Lord, Who made heaven and earth. Alleluia, alleluia.",
+            "This is the true brotherhood, which overcame the wickedness of the world; it followed Christ, attaining the noble kingdom of heaven."
+          ]
+        },
+        "gospel": {
+          "introduction": "Continuation ✠ of the Holy Gospel according to Matthew",
+          "references": [
+            "Matt 12:46-50"
+          ],
+          "text": [
+            "R. Glory be to Thee, O Lord.",
+            "At that time, as Jesus was still speaking to the crowds, His mother and His brethren were standing outside, seeking to speak to Him. And someone said to Him, Behold, Your mother and your brethren are standing outside, seeking You. But He answered and said to him who told Him, Who is My mother and who are My brethren? And stretching forth His hand toward His disciples, He said, Behold My mother and My brethren! For whoever does the will of My Father in heaven, he is My brother and sister and mother.",
+            "S. By the words of the Gospel may our sins be blotted out."
+          ]
+        },
+        "offertory": {
+          "references": [
+            "Ps 123:7"
+          ],
+          "text": "Our soul hath been delivered as a sparrow out of the snare of the fowlers. The snare is broken, and we are delivered."
+        },
+        "secret": {
+          "text": [
+            "Look with favor, we beseech You, O Lord, upon the offerings here before You, that, through the intercession of Your Saints, they may be beneficial for our devotion and salvation.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        },
+        "preface": {
+          "text": [
+            "Common",
+            "It is truly meet and just, and profitable unto salvation, that we should at all times, and in all places, give thanks to Thee, O Holy Lord, Father Almighty, eternal God, through Christ, our Lord. Through whom the Angels praise Thy Majesty, the Dominions adore it, the Powers are in awe. Which the heavens and the hosts of heaven together with the blessed Seraphim joyfully do magnify. And do Thou command that it be permitted us to join with them in confessing Thee, while we say with lowly praise:",
+            "We pray in union with and honor the memory, especially of the glorious ever Virgin Mary, mother of our God and Lord Jesus Christ: as also of the blessed Joseph, her Spouse,"
+          ]
+        },
+        "communion": {
+          "references": [
+            "Matt 12:50"
+          ],
+          "text": "Whoever does the will of My Father in heaven, he is My brother and sister and mother, says the Lord."
+        },
+        "postcommunion": {
+          "text": [
+            "Grant, we beseech You, almighty God, that, by the intercession of Your Saints, we may obtain the effect of that salvation pledged to us through this sacred rite.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        }
+      }
+    },
+    "tempora-pent07-0": {
+      "title": "Seventh Sunday after Pentecost",
+      "generatedFromDate": "2026-07-12",
+      "sourcePaths": [
+        "rendered by local Divinum Officium CGI: web/cgi-bin/missa/missa.pl?Propers=1"
+      ],
+      "version": "Rubrics 1960 - 1960",
+      "dioecesis": "Generale",
+      "sections": {
+        "introit": {
+          "references": [
+            "Ps 46:2",
+            "Ps 46:3"
+          ],
+          "text": [
+            "All you peoples clap your hands, shout to God with cries of gladness.",
+            "For the Lord, the Most High, the awesome, is the great King over all the earth.",
+            "Glory be to the Father, and to the Son, and to the Holy Ghost.",
+            "R. As it was in the beginning, is now, and ever shall be, world without end. Amen.",
+            "All you peoples clap your hands, shout to God with cries of gladness."
+          ]
+        },
+        "collect": {
+          "text": [
+            "O God, Whose providence never fails to set things in order, we humbly beseech You to remove from us whatever is harmful and grant whatever is for our benefit.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        },
+        "epistle": {
+          "introduction": "Lesson from the letter of St. Paul the Apostle to the Romans",
+          "references": [
+            "Rom 6:19-23"
+          ],
+          "text": [
+            "Brethren: I speak in a human way because of the weakness of your flesh; for as you yielded your members as slaves of uncleanness and iniquity unto iniquity, so now yield your members as slaves of justice unto sanctification. For when you were slaves of sin, you were free as regards justice. But what fruit had you then from those things of which you are now ashamed? For the end of these things is death. But now set free from sin and become slaves to God, you have your fruit unto sanctification, and as your end, life everlasting. For the wages of sin is death, but the gift of God is life everlasting in Christ Jesus our Lord.",
+            "R. Thanks be to God."
+          ]
+        },
+        "gradual": {
+          "references": [
+            "Ps 33:12, 6",
+            "Ps 46:2"
+          ],
+          "text": [
+            "Come, children, hear me; I will teach you the fear of the Lord.",
+            "Look to Him that you may be radiant with joy, and your faces may not blush with shame. Alleluia, alleluia.",
+            "All you peoples, clap your hands, shout to God with cries of gladness. Alleluia."
+          ]
+        },
+        "gospel": {
+          "introduction": "Continuation ✠ of the Holy Gospel according to Matthew",
+          "references": [
+            "Matt 7:15-21"
+          ],
+          "text": [
+            "R. Glory be to Thee, O Lord.",
+            "At that time, Jesus said to His disciples: Beware of false prophets, who come to you in sheep’s clothing, but inwardly are ravenous wolves. By their fruits you will know them. Do men gather grapes from thorns, or figs from thistles? Even so, every good tree bears good fruit, but the bad tree bears bad fruit. A good tree cannot bear bad fruit, nor can a bad tree bear good fruit. Every tree that does not bear good fruit is cut down and thrown into the fire. Therefore, by their fruits you will know them. Not everyone who says to Me, ‘Lord, Lord,’ shall enter the kingdom of heaven; but he who does the will of My Father in heaven shall enter the kingdom of heaven.",
+            "S. By the words of the Gospel may our sins be blotted out."
+          ]
+        },
+        "offertory": {
+          "references": [
+            "Dan 3:40"
+          ],
+          "text": "As though it were holocausts of rams and bullocks, or thousands of fat lambs, so let our sacrifice be in Your presence today, that it may please You; for those who trust in You cannot be put to shame, O Lord."
+        },
+        "secret": {
+          "text": [
+            "O God, You Who have given us in one perfect sacrifice the fulfillment of the various sacrifices made under the Old Law, accept these sacrificial gifts offered You by Your devoted servants, and make them holy as You did the gifts of Abel, so that what each one of us has offered in praise of Your majesty may profit for the salvation of all.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        },
+        "preface": {
+          "text": [
+            "Holy Trinity",
+            "It is truly meet and just, right and for our salvation, that we should at all times, and in all places, give thanks unto Thee, O holy Lord, Father almighty, everlasting God; Who, together with Thine only-begotten Son, and the Holy Ghost, art one God, one Lord: not in the oneness of a single Person, but in the Trinity of one substance. For what we believe by Thy revelation of Thy glory, the same do we believe of Thy Son, the same of the Holy Ghost, without difference or separation. So that in confessing the true and everlasting Godhead, distinction in persons, unity in essence, and equality in majesty may be adored. Which the Angels and Archangels, the Cherubim also and Seraphim do praise: who cease not daily to cry out, with one voice saying:",
+            "We pray in union with and honor the memory, especially of the glorious ever Virgin Mary, mother of our God and Lord Jesus Christ: as also of the blessed Joseph, her Spouse,"
+          ]
+        },
+        "communion": {
+          "references": [
+            "Ps 30:3"
+          ],
+          "text": "Incline Your ear to me, make haste to deliver me."
+        },
+        "postcommunion": {
+          "text": [
+            "May Your healing action, O Lord, mercifully rid us of our evil inclinations and lead us to do good.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        }
+      }
+    },
+    "tempora-pent08-0": {
+      "title": "Eighth Sunday after Pentecost",
+      "generatedFromDate": "2026-07-19",
+      "sourcePaths": [
+        "rendered by local Divinum Officium CGI: web/cgi-bin/missa/missa.pl?Propers=1"
+      ],
+      "version": "Rubrics 1960 - 1960",
+      "dioecesis": "Generale",
+      "sections": {
+        "introit": {
+          "references": [
+            "Ps 47:10-11",
+            "Ps 47:2"
+          ],
+          "text": [
+            "O God, we ponder Your kindness within Your temple. As Your name, O God, so also Your praise reaches to the ends of the earth. Of justice Your right hand is full.",
+            "Great is the Lord and wholly to be praised in the city of our God, His holy mountain.",
+            "Glory be to the Father, and to the Son, and to the Holy Ghost.",
+            "R. As it was in the beginning, is now, and ever shall be, world without end. Amen.",
+            "O God, we ponder Your kindness within Your temple. As Your name, O God, so also Your praise reaches to the ends of the earth. Of justice Your right hand is full."
+          ]
+        },
+        "collect": {
+          "text": [
+            "Ever graciously bestow upon us, we beseech You, O Lord, the spirit of thinking and doing what is right, so that we, who cannot exist without You, may have the strength to live in accordance with Your law.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        },
+        "epistle": {
+          "introduction": "Lesson from the letter of St. Paul the Apostle to the Romans",
+          "references": [
+            "Rom 8:12-17"
+          ],
+          "text": [
+            "Brethren: We are debtors, not to the flesh, that we should live according to the flesh, for if you live according to the flesh you will die; but if by the spirit you put to death the deeds of the flesh, you will live. For whoever are led by the Spirit of God, they are the sons of God. Now you have not received a spirit of bondage so as to be again in fear, but you have received a spirit of adoption as sons, by virtue of which we cry, Abba! Father! The Spirit Himself gives testimony to our spirit that we are sons of God. But if we are sons, we are heirs also: heirs indeed of God and joint heirs with Christ.",
+            "R. Thanks be to God."
+          ]
+        },
+        "gradual": {
+          "references": [
+            "Ps 30:3",
+            "Ps 70:1",
+            "Ps 47:2"
+          ],
+          "text": [
+            "Be my rock of refuge, O God, a stronghold to give me safety.",
+            "In You, O God, I take refuge; O Lord, let me never be put to shame. Alleluia, alleluia.",
+            "Great is the Lord and wholly to be praised in the city of our God, His holy mountain. Alleluia."
+          ]
+        },
+        "gospel": {
+          "introduction": "Continuation ✠ of the Holy Gospel according to Luke",
+          "references": [
+            "Luke 16:1-9"
+          ],
+          "text": [
+            "R. Glory be to Thee, O Lord.",
+            "At that time, Jesus spoke to His disciples this parable: There was a certain rich man who had a steward, who was reported to him as squandering his possessions. And he called him and said to him, ‘What is this that I hear of you? Make an accounting of your stewardship, for you can be steward no longer.’ And the steward said within himself, ‘What shall I do, seeing that my master is taking away the stewardship from me? To dig I am not able; to beg I am ashamed. I know what I shall do, that when I am removed from my stewardship they may receive me into their houses.’ And he summoned each of his master’s debtors and said to the first, ‘How much do you owe my master?’ And he said, ‘A hundred jars of oil.’ He said to him, ‘Take your bond and sit down at once and write fifty.’ Then he said to another, ‘How much do you owe?’ He said, ‘A hundred kors of wheat.’ He said to him, ‘Take your bond and write eighty.’ And the master commended the unjust steward, in that he had acted prudently; for the children of this world, in relation to their own generation, are more prudent than the children of the light. And I say to you, make friends for yourselves with the mammon of wickedness, so that when you fail they may receive you into the everlasting dwellings.",
+            "S. By the words of the Gospel may our sins be blotted out."
+          ]
+        },
+        "offertory": {
+          "references": [
+            "Ps 17:28, 32"
+          ],
+          "text": "Lowly people You save, O Lord, but haughty eyes You bring low; for who is God except You, O Lord?"
+        },
+        "secret": {
+          "text": [
+            "Accept, we beseech You, O Lord, the gifts which we bring to You out of Your own bounty, so that these most holy sacramental rites may, by the power of Your grace, sanctify us in the conduct of our present life, and lead us to everlasting joy.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        },
+        "preface": {
+          "text": [
+            "Holy Trinity",
+            "It is truly meet and just, right and for our salvation, that we should at all times, and in all places, give thanks unto Thee, O holy Lord, Father almighty, everlasting God; Who, together with Thine only-begotten Son, and the Holy Ghost, art one God, one Lord: not in the oneness of a single Person, but in the Trinity of one substance. For what we believe by Thy revelation of Thy glory, the same do we believe of Thy Son, the same of the Holy Ghost, without difference or separation. So that in confessing the true and everlasting Godhead, distinction in persons, unity in essence, and equality in majesty may be adored. Which the Angels and Archangels, the Cherubim also and Seraphim do praise: who cease not daily to cry out, with one voice saying:",
+            "We pray in union with and honor the memory, especially of the glorious ever Virgin Mary, mother of our God and Lord Jesus Christ: as also of the blessed Joseph, her Spouse,"
+          ]
+        },
+        "communion": {
+          "references": [
+            "Ps 33:9"
+          ],
+          "text": "Taste and see how good the Lord is; happy the man who takes refuge in Him."
+        },
+        "postcommunion": {
+          "text": [
+            "May the heavenly sacrament, O Lord, renew our minds and bodies, so that we may feel the benefit of the worship we perform.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        }
+      }
+    },
+    "sancti-07-20": {
+      "title": "St. Jerome Emiliani, Confessor",
+      "generatedFromDate": "2026-07-20",
+      "sourcePaths": [
+        "rendered by local Divinum Officium CGI: web/cgi-bin/missa/missa.pl?Propers=1"
+      ],
+      "version": "Rubrics 1960 - 1960",
+      "dioecesis": "Generale",
+      "sections": {
+        "introit": {
+          "references": [
+            "Lam 2:11",
+            "Ps 112:1"
+          ],
+          "text": [
+            "My gall is poured out on the ground because of the downfall of the daughter of my people, as child and infant faint away in the open spaces of the town.",
+            "Praise the Lord, you children, praise the name of the Lord.",
+            "Glory be to the Father, and to the Son, and to the Holy Ghost.",
+            "R. As it was in the beginning, is now, and ever shall be, world without end. Amen.",
+            "My gall is poured out on the ground because of the downfall of the daughter of my people, as child and infant faint away in the open spaces of the town."
+          ]
+        },
+        "collect": {
+          "text": [
+            "O God, the Father of mercies, by the merits and intercession of St. Jerome, whom You willed to be the helper and father of orphans, grant that we may faithfully guard the spirit of adoption which makes us Your sons both in name and reality.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen.",
+            "Commemoration St. Margarita, Virgin and Martyr",
+            "May blessed Margaret, Virgin and Martyr, who was ever pleasing to You by the merit of her chastity and by her trust in Your power, implore for us Your forgiveness, we beseech You, O Lord.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        },
+        "epistle": {
+          "introduction": "Lesson from the book of Isaias",
+          "references": [
+            "Isa 58:7-11"
+          ],
+          "text": [
+            "Thus says the Lord: Share your bread with the hungry, shelter the oppressed and the homeless; clothe the naked when you see them, and do not turn your back on your own. Then your light shall break forth like the dawn, and your wound shall quickly be healed; your vindication shall go before you, and the glory of the Lord shall be your rear guard. Then you shall call, and the Lord will answer, you shall cry for help, and He will say: ‘Here I am! If you remove from your midst oppression, false accusation and malicious speech; if you bestow your bread on the hungry and satisfy the afflicted; then light shall rise for you in the darkness, and the gloom shall become for you like the midday; then the Lord will guide you always and give you plenty even on the parched land. He will renew your strength, and you shall be like a watered garden, like a spring whose water never fails.",
+            "R. Thanks be to God."
+          ]
+        },
+        "gradual": {
+          "references": [
+            "Prov 5:16",
+            "Ps 111:5-6",
+            "Ps 111:9"
+          ],
+          "text": [
+            "Let your water sources be dispersed abroad, and in the streets divide your waters.",
+            "Well for the man who is gracious and lends, who conducts his affairs with justice; he shall never be moved. Alleluia, alleluia.",
+            "Lavishly he gives to the poor; his generosity shall endure forever. Alleluia."
+          ]
+        },
+        "gospel": {
+          "introduction": "Continuation ✠ of the Holy Gospel according to Matthew",
+          "references": [
+            "Matt 19:13-21"
+          ],
+          "text": [
+            "R. Glory be to Thee, O Lord.",
+            "At that time, little children were brought to Jesus, that He might lay His hands on them and pray; but the disciples rebuked them. But Jesus said to them, Let the little children be, and do not hinder them from coming to Me, for of such is the kingdom of heaven. And when He had laid His hands on them, He departed from that place. And behold, a certain man came to Him and said, Good Master, what good work shall I do to have eternal life? He said to him, Why do you ask Me about what is good? One there is Who is good, and He is God. But if you will enter into life, keep the commandments. He said to Him, Which? And Jesus said, You shall not kill. You shall not commit adultery. You shall not steal. You shall not bear false witness. Honor your father and mother. And, you shall love your neighbor as yourself. The young man said to Him, All these I have kept; what is yet wanting to me? Jesus said to him, If you will be perfect, go, sell what you have, and give to the poor, and you shall have treasure in heaven; and come, follow Me.",
+            "S. By the words of the Gospel may our sins be blotted out."
+          ]
+        },
+        "offertory": {
+          "references": [
+            "Tob 12:12"
+          ],
+          "text": "When you prayed with tears, and buried the dead, and left your dinner, and hid the dead by day in your house, and buried them by night, I offered your prayer to the Lord."
+        },
+        "secret": {
+          "text": [
+            "O most merciful God, Who in blessed Jerome graciously destroyed the old to create in him a new man in Your likeness, grant by his merits, that we, in like manner reborn, may offer You this sacrifice of atonement as a most sweet fragrance.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen.",
+            "Commemoration St. Margarita, Virgin and Martyr",
+            "Graciously accept the sacrificial gifts offered You, O Lord, through the merits of blessed Margaret, Your Virgin and Martyr, and grant they may prove an unfailing aid for us.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        },
+        "preface": {
+          "text": [
+            "Common",
+            "It is truly meet and just, and profitable unto salvation, that we should at all times, and in all places, give thanks to Thee, O Holy Lord, Father Almighty, eternal God, through Christ, our Lord. Through whom the Angels praise Thy Majesty, the Dominions adore it, the Powers are in awe. Which the heavens and the hosts of heaven together with the blessed Seraphim joyfully do magnify. And do Thou command that it be permitted us to join with them in confessing Thee, while we say with lowly praise:",
+            "We pray in union with and honor the memory, especially of the glorious ever Virgin Mary, mother of our God and Lord Jesus Christ: as also of the blessed Joseph, her Spouse,"
+          ]
+        },
+        "communion": {
+          "text": [
+            "James 1:27",
+            "Religion pure and undefiled before God the Father, is this: to give aid to orphans and widows in their tribulation, and to keep oneself unspotted from this world."
+          ]
+        },
+        "postcommunion": {
+          "text": [
+            "Refreshed with the bread of angels, we humbly pray You, O Lord, that we who joyfully celebrate the yearly feast of blessed Jerome, Your Confessor, may follow his example and be enabled to win a most abundant reward in Your kingdom.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen.",
+            "Commemoration St. Margarita, Virgin and Martyr",
+            "We who have been refreshed by the richness of Your divine sacrament beseech You, O Lord our God, that through the intercession of blessed Margaret, Your Virgin and Martyr, we may forevermore abide in its participation.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        }
+      }
+    },
+    "sancti-07-22": {
+      "title": "St. Mary Magdalene, Penitent",
+      "generatedFromDate": "2026-07-22",
+      "sourcePaths": [
+        "rendered by local Divinum Officium CGI: web/cgi-bin/missa/missa.pl?Propers=1"
+      ],
+      "version": "Rubrics 1960 - 1960",
+      "dioecesis": "Generale",
+      "sections": {
+        "introit": {
+          "references": [
+            "Ps 118:95-96",
+            "Ps 118:1"
+          ],
+          "text": [
+            "Sinners wait to destroy me, but I pay heed to Your decrees, O Lord. I see that all fulfillment has its limits; broad indeed is Your command.",
+            "Happy are they whose way is blameless, who walk in the law of the Lord.",
+            "Glory be to the Father, and to the Son, and to the Holy Ghost.",
+            "R. As it was in the beginning, is now, and ever shall be, world without end. Amen.",
+            "Sinners wait to destroy me, but I pay heed to Your decrees, O Lord. I see that all fulfillment has its limits; broad indeed is Your command."
+          ]
+        },
+        "collect": {
+          "text": [
+            "May the prayers of blessed Mary Magdalen help us, O Lord, Who were moved by her prayers and brought back alive from the grave her brother Lazarus, dead for four days.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        },
+        "epistle": {
+          "introduction": "Lesson from the book of Canticles",
+          "references": [
+            "Song 3:2-5; 8:6-7"
+          ],
+          "text": [
+            "I will rise and go about the city; in the streets and crossings I will seek Him Whom my heart loves. I sought Him but I did not find Him. The watchmen came upon me as they made their rounds of the city: Have you seen Him Whom my heart loves? I had hardly left them when I found Him Whom my heart loves. I took hold of Him and would not let Him go till I should bring Him to the home of my mother, to the room of my parent, I adjure you, daughters of Jerusalem, by the gazelles and hinds of the field, do not arouse, do not stir up love before its own time. Set me as a seal on Your heart, as a seal on Your arm; for stern as death is love, relentless as the nether world is devotion; its flames are a blazing fire. Deep waters cannot quench love, nor floods sweep it away. Were one to offer all he owns to purchase love, he would despise it as nothing.",
+            "R. Thanks be to God."
+          ]
+        },
+        "gradual": {
+          "references": [
+            "Ps 44:8",
+            "Ps 44:3"
+          ],
+          "text": [
+            "You love justice and hate wickedness.",
+            "Therefore God, your God, has anointed you with the oil of gladness.",
+            "Alleluia, alleluia.",
+            "Grace is poured out upon your lips; thus God has blessed you forever. Alleluia."
+          ]
+        },
+        "gospel": {
+          "introduction": "Continuation ✠ of the Holy Gospel according to Luke",
+          "references": [
+            "Luke 7:36-50"
+          ],
+          "text": [
+            "R. Glory be to Thee, O Lord.",
+            "At that time, one of the Pharisees asked Jesus to dine with him; so He went into the house of the Pharisee and reclined at table. And behold, a woman in the town who was a sinner, upon learning that He was at table in the Pharisee's house, brought an alabaster jar of ointment; and standing behind Him at His feet, she began to bathe His feet with her tears, and wiped them with the hair of her head, and kissed His feet, and anointed them with ointment. Now when the Pharisee, who had invited Him, saw it, he said to himself, “This man, were He a prophet, would surely know who and what manner of woman this is who is touching Him, for she is a sinner.” And Jesus answered and said to him, “Simon, I have something to say to you.” And he said, “Master, speak.” “A certain money-lender had two debtors; the one owed five hundred denarii, the other fifty. As they had no means of paying, he forgave them both. Which of them, therefore, will love him more?” Simon answered and said, “He, I suppose, to whom he forgave more.” And He said to him, “You have judged rightly.” And turning to the woman, He said to Simon, “Do you see this woman? I came into your house; you gave Me no water for My feet; but she has bathed My feet with her tears, and has wiped them with her hair. You gave Me no kiss; but she, from the moment she entered, has not ceased to kiss My feet. You did not anoint My head with oil; but she has anointed My feet with ointment. Wherefore I say to you, her sins, many as they are, shall be forgiven her, because she has loved much. But he to whom little is forgiven, loves little.” And He said to her, “Your sins are forgiven.” And they who were at table with Him began to say within themselves, “Who is this man, who even forgives sins?” But He said to the woman, “Your faith has saved you; go in peace.”",
+            "S. By the words of the Gospel may our sins be blotted out."
+          ]
+        },
+        "offertory": {
+          "references": [
+            "Ps 44:10"
+          ],
+          "text": "The daughters of kings have delighted thee in thy glory. The queen stood on thy right hand, in gilded clothing; surrounded with variety."
+        },
+        "secret": {
+          "text": [
+            "O Lord, may our gifts be acceptable to You through the glorious merits of blessed Mary Magdalen, whose offering of homage Your only-begotten Son did mercifully accept.",
+            "Who livest and reignest with God the Father, in the unity of the Holy Spirit, God, world without end.",
+            "R. Amen"
+          ]
+        },
+        "preface": {
+          "text": [
+            "Common",
+            "It is truly meet and just, and profitable unto salvation, that we should at all times, and in all places, give thanks to Thee, O Holy Lord, Father Almighty, eternal God, through Christ, our Lord. Through whom the Angels praise Thy Majesty, the Dominions adore it, the Powers are in awe. Which the heavens and the hosts of heaven together with the blessed Seraphim joyfully do magnify. And do Thou command that it be permitted us to join with them in confessing Thee, while we say with lowly praise:",
+            "We pray in union with and honor the memory, especially of the glorious ever Virgin Mary, mother of our God and Lord Jesus Christ: as also of the blessed Joseph, her Spouse,"
+          ]
+        },
+        "communion": {
+          "references": [
+            "Ps 118:121-122; 118:128"
+          ],
+          "text": "I have fulfilled just ordinances, O Lord; let not the proud oppress me. For in all Your precepts I go forward; every false way I hate."
+        },
+        "postcommunion": {
+          "text": [
+            "After receiving Your Body and precious Blood, the one and only saving remedy, we beseech You, O Lord, that, under the protection of blessed Mary Magdalen, we may be freed from all evils.",
+            "Who livest and reignest with God the Father, in the unity of the Holy Spirit, God, world without end.",
+            "R. Amen"
+          ]
+        }
+      }
+    },
+    "sancti-07-23": {
+      "title": "St. Apollinaris, Bishop and Martyr",
+      "generatedFromDate": "2026-07-23",
+      "sourcePaths": [
+        "rendered by local Divinum Officium CGI: web/cgi-bin/missa/missa.pl?Propers=1"
+      ],
+      "version": "Rubrics 1960 - 1960",
+      "dioecesis": "Generale",
+      "sections": {
+        "introit": {
+          "references": [
+            "Ps 63:11",
+            "Ps 63:2"
+          ],
+          "text": [
+            "The just man is glad in the Lord and takes refuge in Him; all the upright of heart shall be praised.",
+            "Hear, O God, my voice in my lament; from the dread enemy preserve my life.",
+            "Glory be to the Father, and to the Son, and to the Holy Ghost.",
+            "R. As it was in the beginning, is now, and ever shall be, world without end. Amen.",
+            "The just man is glad in the Lord and takes refuge in Him; all the upright of heart shall be praised."
+          ]
+        },
+        "collect": {
+          "text": [
+            "O God, the rewarder of faithful souls, grant that we may obtain pardon through the prayers of blessed Apollinaris, Your Martyr and Bishop, whose feast we are celebrating.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen.",
+            "Commemoration St. Liborius, Bishop and Confessor",
+            "Grant, we beseech thee, almighty God, that the venerable feast of Liborius thy blessed Confessor and Bishop may increase our devotion and promote our salvation.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        },
+        "epistle": {
+          "introduction": "Lesson from the first letter of St. Peter the Apostle",
+          "references": [
+            "1 Pet. 5:1-11"
+          ],
+          "text": [
+            "Beloved: I exhort the presbyters among you - I, your fellow-presbyter and witness of the sufferings of Christ, the partaker also of the glory that is to be revealed in time to come - tend the flock of God which is among you, governing not under constraint, but willingly, according to God; nor yet for the sake of base gain, but eagerly; nor yet as lording it over your charges, but becoming from the heart a pattern to the flock. And when the Prince of the shepherds appears, you will receive the unfading crown of glory. Likewise, you who are younger, be subject to the presbyters. And all of you practice humility toward one another; for, “God, resists the proud, but gives grace to the humble.” Humble yourselves, therefore, under the mighty hand of God, that He may exalt you in the time of visitation; cast all your anxiety upon Him, because He cares for you. Be sober, be watchful! For your adversary the devil, as a roaring lion, goes about seeking someone to devour. Resist him, steadfast in the faith, knowing that the same suffering befalls your brethren all over the world. But the God of all grace, Who has called us unto His eternal glory in Christ Jesus, will Himself, after we have suffered a little while, perfect, strengthen and establish us. To Him is the dominion forever and ever. Amen.",
+            "R. Thanks be to God."
+          ]
+        },
+        "gradual": {
+          "references": [
+            "Ps 88:21-23",
+            "Ps 109:4"
+          ],
+          "text": [
+            "I have found David, My servant, with My holy oil I have anointed him, that My hand may be always with him, and that My arm may make him strong.",
+            "No enemy shall deceive him, nor shall the wicked afflict him. Alleluia, alleluia.",
+            "You are a priest forever, according to the order of Melchisedec. Alleluia."
+          ]
+        },
+        "gospel": {
+          "introduction": "Continuation ✠ of the Holy Gospel according to Luke",
+          "references": [
+            "Luke 22:24-30"
+          ],
+          "text": [
+            "R. Glory be to Thee, O Lord.",
+            "At that time, there arose a dispute among the disciples, which of them was reputed to be the greatest. But Jesus said to them, The kings of the Gentiles lord it over them, and they who exercise authority over them are called Benefactors. But not so with you. On the contrary, let him who is greatest among you become as the youngest, and him who is the chief as the servant. For which is the greater, he who reclines at table, or he who serves? Is it not he who reclines? But I am in your midst as he who serves. But you are they who have continued with Me in My trials. And I appoint to you a kingdom, even as My Father has appointed to Me, that you may eat and drink at My table in My kingdom; and you shall sit upon thrones, judging the twelve tribes of Israel.",
+            "S. By the words of the Gospel may our sins be blotted out."
+          ]
+        },
+        "offertory": {
+          "references": [
+            "Ps 88:25"
+          ],
+          "text": "My faithfulness and My kindness shall be with him, and through My name shall his horn be exalted."
+        },
+        "secret": {
+          "text": [
+            "O Lord, graciously look down upon these gifts which we bring in commemoration of Your blessed Priest and Martyr Apollinaris and offer up for our offenses.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen.",
+            "Commemoration St. Liborius, Bishop and Confessor",
+            "May Your Saints, we beseech You, O Lord, everywhere make us joyful: so that, while we reflect upon their merits, we may enjoy their help.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        },
+        "preface": {
+          "text": [
+            "Common",
+            "It is truly meet and just, and profitable unto salvation, that we should at all times, and in all places, give thanks to Thee, O Holy Lord, Father Almighty, eternal God, through Christ, our Lord. Through whom the Angels praise Thy Majesty, the Dominions adore it, the Powers are in awe. Which the heavens and the hosts of heaven together with the blessed Seraphim joyfully do magnify. And do Thou command that it be permitted us to join with them in confessing Thee, while we say with lowly praise:",
+            "We pray in union with and honor the memory, especially of the glorious ever Virgin Mary, mother of our God and Lord Jesus Christ: as also of the blessed Joseph, her Spouse,"
+          ]
+        },
+        "communion": {
+          "references": [
+            "Matt 25:20-21"
+          ],
+          "text": "Master, you handed over to me five talents; behold, I have gained five others in addition. Well done, good and faithful servant; because you have been faithful over a few things, I will set you over many, enter into the joy of your master."
+        },
+        "postcommunion": {
+          "text": [
+            "Receiving Your holy sacrament, we beseech You, O Lord, that the lasting protection of St. Apollinaris may support us; for You do not cease to look favorably upon those to whom You have given such helps.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen.",
+            "Commemoration St. Liborius, Bishop and Confessor",
+            "Grant, we beseech You, almighty God, that as we thank You for the favors we have received, we may, by the intercession of blessed Liborius, Your Confessor and Bishop, obtain still greater blessings.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        }
+      }
+    },
+    "sancti-07-25": {
+      "title": "St. James the Apostle",
+      "generatedFromDate": "2026-07-25",
+      "sourcePaths": [
+        "rendered by local Divinum Officium CGI: web/cgi-bin/missa/missa.pl?Propers=1"
+      ],
+      "version": "Rubrics 1960 - 1960",
+      "dioecesis": "Generale",
+      "sections": {
+        "introit": {
+          "references": [
+            "Ps 138:17",
+            "Ps 138:1-2"
+          ],
+          "text": [
+            "To me, Your friends, O God, are made exceedingly honorable; their principality is exceedingly strengthened.",
+            "O Lord, You have probed me and You know me; You know when I sit and when I stand.",
+            "Glory be to the Father, and to the Son, and to the Holy Ghost.",
+            "R. As it was in the beginning, is now, and ever shall be, world without end. Amen.",
+            "To me, Your friends, O God, are made exceedingly honorable; their principality is exceedingly strengthened."
+          ]
+        },
+        "collect": {
+          "text": [
+            "Protect Your people and make them holy, O Lord, so that, guarded by the help of Your Apostle James, they may please You by their conduct and serve You with peace of mind.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen.",
+            "Commemoration St. Christopher, Martyr",
+            "Grant, we beseech thee, almighty God, that we who celebrate the martyrdom of blessed Christopher, through his intercession be strengthened in your love.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        },
+        "epistle": {
+          "introduction": "Lesson from the first letter of St. Paul the Apostle to the Corinthians",
+          "references": [
+            "1 Cor. 4:9-15"
+          ],
+          "text": [
+            "Brethren: I think God has set forth us the Apostles last of all, as men doomed to death, seeing that we have been made a spectacle to the world, and to angels, and to men. We are fools for Christ, but you are wise in Christ! We are weak, but you are strong! You are honored, but we are without honor! To this very hour we hunger and thirst, and we are naked and buffeted, and have no fixed abode. And we toil, working with our own hands. We are reviled and we bless, we are persecuted and we bear with it, we are maligned and we entreat, we have become as the refuse of this world, the offscouring of all, even until now! I write these things not to put you to shame, but to admonish you as my dearest children. For although you have ten thousand tutors in Christ, yet you have not many fathers. For in Christ Jesus, through the gospel, did I beget you.",
+            "R. Thanks be to God."
+          ]
+        },
+        "gradual": {
+          "references": [
+            "Ps 44:17-18",
+            "John 15:16"
+          ],
+          "text": [
+            "You shall make them princes through all the land; they shall remember Your name, O Lord.",
+            "The place of your fathers your sons shall have; therefore shall nations praise You. Alleluia, alleluia.",
+            "I have chosen you out of the world, that you should go and bear fruit, and that your fruit should remain. Alleluia."
+          ]
+        },
+        "gospel": {
+          "introduction": "Continuation ✠ of the Holy Gospel according to Matthew",
+          "references": [
+            "Matt 20:20-23"
+          ],
+          "text": [
+            "R. Glory be to Thee, O Lord.",
+            "In that time: came to him the mother of the sons of Zebedee with her sons, adoring and asking something of him. Who said to her: What wilt thou? She saith to him: Say that these my two sons may sit, the one on thy right hand, and the other on thy left, in thy kingdom. And Jesus answering, said: You know not what you ask. Can you drink the chalice that I shall drink? They say to him: We can. He saith to them: My chalice indeed you shall drink; but to sit on my right or left hand, is not mine to give to you, but to them for whom it is prepared by my Father.",
+            "S. By the words of the Gospel may our sins be blotted out."
+          ]
+        },
+        "offertory": {
+          "references": [
+            "Ps 18:5"
+          ],
+          "text": "Through all the earth their voice resounds, and to the ends of the world, their message."
+        },
+        "secret": {
+          "text": [
+            "May the holy martyrdom of blessed James, the Apostle, make acceptable the offerings of Your people; and because our own merits are insufficient, may his prayer make them pleasing to You.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen.",
+            "Commemoration St. Christopher, Martyr",
+            "As thou hast received our gifts and prayers, O Lord, cleanse us, we ask by thy heavenly mysteries, and graciously hear us.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        },
+        "preface": {
+          "text": [
+            "of Apostles",
+            "It is truly meet and just, right and for our salvation, to entreat Thee humbly, O Lord, that Thou wouldst not desert Thy flock, O everlasting Shepherd, but, through Thy blessed Apostles, wouldst keep it under Thy constant protection; that it may be governed by those same rulers, whom as vicars of Thy work, Thou didst set over it to be its pastors. And therefore with Angels and Archangels, with Thrones and Dominations, and with all the hosts of the heavenly army, we sing the hymn of Thy glory, evermore saying:",
+            "We pray in union with and honor the memory, especially of the glorious ever Virgin Mary, mother of our God and Lord Jesus Christ: as also of the blessed Joseph, her Spouse,"
+          ]
+        },
+        "communion": {
+          "references": [
+            "Matt 19:28"
+          ],
+          "text": "You who have followed Me shall sit on thrones judging the twelve tribes of Israel."
+        },
+        "postcommunion": {
+          "text": [
+            "Help us, O Lord, we beseech You, by the intercession of blessed James, Your Apostle, for whose festival we have joyfully received Your holy sacrament.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen.",
+            "Commemoration St. Christopher, Martyr",
+            "Grant, we beseech thee, O our God, that we who in time render joyful service in memory of thy saints, may be gladdened by their company in eternity.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        }
+      }
+    },
+    "tempora-pent09-0": {
+      "title": "Ninth Sunday after Pentecost",
+      "generatedFromDate": "2026-07-26",
+      "sourcePaths": [
+        "rendered by local Divinum Officium CGI: web/cgi-bin/missa/missa.pl?Propers=1"
+      ],
+      "version": "Rubrics 1960 - 1960",
+      "dioecesis": "Generale",
+      "sections": {
+        "introit": {
+          "references": [
+            "Ps 53:6-7",
+            "Ps 53:3"
+          ],
+          "text": [
+            "Behold, God is my helper, the Lord sustains my life. Turn back the evil upon my foes; in Your faithfulness destroy them, O Lord, my protector.",
+            "O God, by Your name save me, and by Your might deliver me.",
+            "Glory be to the Father, and to the Son, and to the Holy Ghost.",
+            "R. As it was in the beginning, is now, and ever shall be, world without end. Amen.",
+            "Behold, God is my helper, the Lord sustains my life. Turn back the evil upon my foes; in Your faithfulness destroy them, O Lord, my protector."
+          ]
+        },
+        "collect": {
+          "text": [
+            "May Your merciful ears be open, O Lord, to the prayers of those who humbly entreat You; grant that they may ask for what pleases You so that You may fulfill their desires.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen.",
+            "Commemoration St. Anne, Mother of the Blessed Virgin Mary",
+            "O God, Who in Your kindness gave blessed Anne the grace to be the mother of her who mothered Your only-begotten Son, graciously grant that we who keep her feast may be helped by her intercession with You.",
+            "Through the same Jesus Christ, thy Son, Our Lord, Who liveth and reigneth with thee in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        },
+        "epistle": {
+          "introduction": "Lesson from the first letter of St. Paul the Apostle to the Corinthians",
+          "references": [
+            "1 Cor. 10:6-13"
+          ],
+          "text": [
+            "Brethren: We should not lust after evil things even as they lusted. And do not become idolaters, even as some of them were, as it is written, The people sat down to eat and drink, and rose up to play. Neither let us commit fornication, even as some of them committed fornication, and there fell in one day twenty-three thousand. Neither let us tempt Christ, as some of them tempted, and perished by the serpents. Neither murmur, as some of them murmured, and perished at the hands of the destroyer. Now all these things happened to them as a type, and they were written for our correction, upon whom the final age of the world has come. Therefore let him who thinks he stands take heed lest he fall. May no temptation take hold of you but such as man is equal to. God is faithful and will not permit you to be tempted beyond your strength, but with the temptation will also give you a way out that you may be able to bear it.",
+            "R. Thanks be to God."
+          ]
+        },
+        "gradual": {
+          "references": [
+            "Ps 8:2",
+            "Ps 58:2"
+          ],
+          "text": [
+            "O Lord, our Lord, how glorious is Your name over all the earth!",
+            "You have elevated Your Majesty above the heavens.",
+            "Alleluia, alleluia.",
+            "Rescue me from my enemies, O my God; from my adversaries defend me. Alleluia."
+          ]
+        },
+        "gospel": {
+          "introduction": "Continuation ✠ of the Holy Gospel according to Luke",
+          "references": [
+            "Luke 19:41-47"
+          ],
+          "text": [
+            "R. Glory be to Thee, O Lord.",
+            "At that time, when Jesus drew near to Jerusalem and saw the city, He wept over it, saying, If you had known, in this your day, even you, the things that are for your peace! But now they are hidden from your eyes. For days will come upon you when your enemies will throw up a rampart about you, and surround you and shut you in on every side, and will dash you to the ground and your children within you, and will not leave in you one stone upon another, because you have not known the time of your visitation. And He entered the temple, and began to cast out those who were selling and buying in it, saying to them, It is written, ‘My house is a house of prayer,’ but you have made it a den of thieves. And He was teaching daily in the temple.",
+            "S. By the words of the Gospel may our sins be blotted out."
+          ]
+        },
+        "offertory": {
+          "references": [
+            "Ps 18:9-12"
+          ],
+          "text": "The precepts of the Lord are right, rejoicing the heart, and His ordinances sweeter than syrup or honey from the comb; therefore Your servant is careful of them."
+        },
+        "secret": {
+          "text": [
+            "Grant us, we beseech You, O Lord, to take part worthily and frequently in this sacramental action: for as often as this sacrifice of commemoration is offered, the work of our redemption is performed.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen.",
+            "Commemoration St. Anne, Mother of the Blessed Virgin Mary",
+            "Look with favor, O Lord, upon the offerings here before You, that, through the intercession of blessed Anne who bore the Mother of Your Son, our Lord Jesus Christ, they may help toward our holiness and our salvation.",
+            "Through the same Jesus Christ, thy Son, Our Lord, Who liveth and reigneth with thee in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        },
+        "preface": {
+          "text": [
+            "Holy Trinity",
+            "It is truly meet and just, right and for our salvation, that we should at all times, and in all places, give thanks unto Thee, O holy Lord, Father almighty, everlasting God; Who, together with Thine only-begotten Son, and the Holy Ghost, art one God, one Lord: not in the oneness of a single Person, but in the Trinity of one substance. For what we believe by Thy revelation of Thy glory, the same do we believe of Thy Son, the same of the Holy Ghost, without difference or separation. So that in confessing the true and everlasting Godhead, distinction in persons, unity in essence, and equality in majesty may be adored. Which the Angels and Archangels, the Cherubim also and Seraphim do praise: who cease not daily to cry out, with one voice saying:",
+            "We pray in union with and honor the memory, especially of the glorious ever Virgin Mary, mother of our God and Lord Jesus Christ: as also of the blessed Joseph, her Spouse,"
+          ]
+        },
+        "communion": {
+          "references": [
+            "John 6:57"
+          ],
+          "text": "He who eats My Flesh, and drinks My Blood, abides in Me, and I in him, says the Lord."
+        },
+        "postcommunion": {
+          "text": [
+            "May the partaking of Your sacrament, we beseech You, O Lord, cleanse us and unite us.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen.",
+            "Commemoration St. Anne, Mother of the Blessed Virgin Mary",
+            "Strengthened by the heavenly sacrament, we beseech You, O Lord our God, that, by the intercession of blessed Anne, whom You willed to be the mother of Your Son’s Mother, we may be found worthy of reaching eternal salvation.",
+            "Through the same Jesus Christ, thy Son, Our Lord, Who liveth and reigneth with thee in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        }
+      }
+    },
+    "sancti-07-28": {
+      "title": "Saints Nazarius and Celsus, Martyrs; St. Victor I, Pope and Martyr; and St. Innocent I, Pope and Confessor",
+      "generatedFromDate": "2026-07-28",
+      "sourcePaths": [
+        "rendered by local Divinum Officium CGI: web/cgi-bin/missa/missa.pl?Propers=1"
+      ],
+      "version": "Rubrics 1960 - 1960",
+      "dioecesis": "Generale",
+      "sections": {
+        "introit": {
+          "references": [
+            "Ps 78:11; 78:12; 78:10",
+            "Ps 78:1"
+          ],
+          "text": [
+            "Let the prisoners’ sighing come before You, O Lord; repay our neighbors sevenfold into their bosoms; avenge the shedding of Your servants’ blood.",
+            "O God, the nations have come into Your inheritance; they have defiled Your holy temple, they have made Jerusalem as a place to keep fruit.",
+            "Glory be to the Father, and to the Son, and to the Holy Ghost.",
+            "R. As it was in the beginning, is now, and ever shall be, world without end. Amen.",
+            "Let the prisoners’ sighing come before You, O Lord; repay our neighbors sevenfold into their bosoms; avenge the shedding of Your servants’ blood."
+          ]
+        },
+        "collect": {
+          "text": [
+            "May the martyrdom of Your Saints Nazarius, Celsus, Victor and Innocent, give us courage, O Lord, and may it give us a help to counter-balance our weakness.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        },
+        "epistle": {
+          "introduction": "Lesson from the book of Wisdom",
+          "references": [
+            "Wis 10:17-20"
+          ],
+          "text": [
+            "God gave the holy ones the recompense of their labors, conducted them by a wondrous road, and became a shelter for them by day and a starry flame by night. He took them across the Red Sea and brought them through the deep waters - but their enemies He drowned in the sea, and cast them up from the bottom of the depths. Therefore the just despoiled the wicked; and they sang, O Lord, Your holy name and praised in unison Your conquering hand, O Lord, our God.",
+            "R. Thanks be to God."
+          ]
+        },
+        "gradual": {
+          "references": [
+            "Sir 44:14"
+          ],
+          "text": [
+            "Ex 15:11",
+            "God is glorious in His Saints, wonderful in majesty, a worker of wonders.",
+            "Ex 15:6",
+            "Your right hand, O Lord, is magnificent in power; Your right hand has shattered the enemy. Alleluia, alleluia.",
+            "The bodies of the Saints are buried in peace, but their name lives on and on. Alleluia."
+          ]
+        },
+        "gospel": {
+          "introduction": "Continuation ✠ of the Holy Gospel according to Luke",
+          "references": [
+            "Luke 21:9-19"
+          ],
+          "text": [
+            "R. Glory be to Thee, O Lord.",
+            "At that time, Jesus said to His disciples, When you hear of wars and insurrections, do not be terrified; these things must first come to pass, but the end will not be at once. Then He said to them, Nation will rise against nation, and kingdom against kingdom; and there will be great earthquakes in various places, and pestilences and famines, and there will be terrors and great signs from heaven. But before all these things they will arrest you and persecute you, delivering you up to the synagogues and prisons, dragging you before kings and governors for My name’s sake. It shall lead to your bearing witness. Resolve therefore in your hearts not to meditate beforehand how you are to make your defense. For I Myself will give you utterance and wisdom, which all your adversaries will not be able to resist or gainsay. But you will be delivered up by your parents and brothers and relatives and friends; and some of you they will put to death. And you will be hated by all for My name’s sake; yet not a hair of your head shall perish. By your patience you will win your souls.",
+            "S. By the words of the Gospel may our sins be blotted out."
+          ]
+        },
+        "offertory": {
+          "references": [
+            "Ps 67:36"
+          ],
+          "text": "God is wonderful in His Saints; the God of Israel is He Who gives power and strength to His people. Blessed be God! Alleluia."
+        },
+        "secret": {
+          "text": [
+            "Grant, almighty God, that we may please You by these gifts which we bring in honor of Your Saints Nazarius, Celsus, Victor and Innocent, so that by offering them we may be strengthened by Your accepting them.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        },
+        "preface": {
+          "text": [
+            "Common",
+            "It is truly meet and just, and profitable unto salvation, that we should at all times, and in all places, give thanks to Thee, O Holy Lord, Father Almighty, eternal God, through Christ, our Lord. Through whom the Angels praise Thy Majesty, the Dominions adore it, the Powers are in awe. Which the heavens and the hosts of heaven together with the blessed Seraphim joyfully do magnify. And do Thou command that it be permitted us to join with them in confessing Thee, while we say with lowly praise:",
+            "We pray in union with and honor the memory, especially of the glorious ever Virgin Mary, mother of our God and Lord Jesus Christ: as also of the blessed Joseph, her Spouse,"
+          ]
+        },
+        "communion": {
+          "references": [
+            "Wis 3:4-6"
+          ],
+          "text": "For if before men they be punished, God tried them; as gold in the furnace, He proved them, and as sacrificial offerings He took them to Himself."
+        },
+        "postcommunion": {
+          "text": [
+            "Be appeased by the prayers of Your Saints Nazarius, Celsus, Victor and Innocent, O Lord, and grant, we beseech You, that the rites we perform in this life may avail for our eternal salvation.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        }
+      }
+    },
+    "sancti-07-29": {
+      "title": "St. Martha, Virgin",
+      "generatedFromDate": "2026-07-29",
+      "sourcePaths": [
+        "rendered by local Divinum Officium CGI: web/cgi-bin/missa/missa.pl?Propers=1"
+      ],
+      "version": "Rubrics 1960 - 1960",
+      "dioecesis": "Generale",
+      "sections": {
+        "introit": {
+          "references": [
+            "Ps 44:8",
+            "Ps 44:2"
+          ],
+          "text": [
+            "Thou hast loved justice, and hated iniquity: therefore God, thy God, hath anointed thee with the oil of gladness above thy fellows.",
+            "My heart hath uttered a good word I speak my works to the king.",
+            "Glory be to the Father, and to the Son, and to the Holy Ghost.",
+            "R. As it was in the beginning, is now, and ever shall be, world without end. Amen.",
+            "Thou hast loved justice, and hated iniquity: therefore God, thy God, hath anointed thee with the oil of gladness above thy fellows."
+          ]
+        },
+        "collect": {
+          "text": [
+            "Hear us, O God, our Saviour, that as we are gladdened by the festival of blessed Martha thy virgin, so we may learn from it piety and devotion.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen.",
+            "Commemoration Sts. Felix, Simplicius, Faustinus and Beatrix, Martyrs",
+            "Grant, we beseech You, O Lord, that as Christian people on earth rejoice together on the feast of Your Martyrs, Felix, Simplicius, Faustinus and Beatrice, so may they enjoy it in eternity, and may truly obtain what they honor in their prayers.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        },
+        "epistle": {
+          "introduction": "Lesson from the second letter of St. Paul the Apostle to the Corinthians",
+          "references": [
+            "2 Cor 10:17-18; 11:1-2"
+          ],
+          "text": [
+            "Brothers: He that glorieth, let him glory in the Lord. For not he who commendeth himself, is approved, but he, whom God commendeth. Would to God you could bear with some little of my folly: but do bear with me. For I am jealous of you with the jealousy of God. For I have espoused you to one husband that I may present you as a chaste virgin to Christ.",
+            "R. Thanks be to God."
+          ]
+        },
+        "gradual": {
+          "references": [
+            "Ps 44:5",
+            "Ps 44:15-16"
+          ],
+          "text": [
+            "With thy comeliness and thy beauty set out, proceed prosperously, and reign.",
+            "Because of truth and meekness and justice: and thy right hand shall conduct thee wonderfully. Alleluja, alleluja.",
+            "After her shall virgins be brought to the king: They shall be brought with gladness and rejoicing. Alleluja."
+          ]
+        },
+        "gospel": {
+          "introduction": "Continuation ✠ of the Holy Gospel according to Luke",
+          "references": [
+            "Luke 10:38-42"
+          ],
+          "text": [
+            "R. Glory be to Thee, O Lord.",
+            "At that time, Jesus entered a certain village; and a woman named Martha welcome Him to her house. And she had a sister called Mary, who also seated herself at the Lord’s feet, and listened to His word. But Martha was busy about much serving. And she came up and said, Lord, is it not concern of Yours that my sister has left me to serve alone? Tell her therefore to help me. But the Lord answered and said to her, Martha, Martha, you are anxious and troubled about many things; and yet only one thing is needful. Mary has chosen the best part, and it will not be taken away from her.",
+            "S. By the words of the Gospel may our sins be blotted out."
+          ]
+        },
+        "offertory": {
+          "references": [
+            "Ps 44:10"
+          ],
+          "text": "The daughters of kings have delighted thee in thy glory. The queen stood on thy right hand, in gilded clothing; surrounded with variety."
+        },
+        "secret": {
+          "text": [
+            "May the service of thy holy people be acceptable to Thee, O Lord, and honorable to thy saints, through whose merits we know that we have received help in trouble.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen.",
+            "Commemoration Sts. Felix, Simplicius, Faustinus and Beatrix, Martyrs",
+            "In memory of Your holy Martyrs, Felix, Simplicius, Faustinus and Beatrice, we bring these sacrificial gifts, O Lord, humbly praying that they may be helpful for us in obtaining Your forgiveness and salvation.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        },
+        "preface": {
+          "text": [
+            "Common",
+            "It is truly meet and just, and profitable unto salvation, that we should at all times, and in all places, give thanks to Thee, O Holy Lord, Father Almighty, eternal God, through Christ, our Lord. Through whom the Angels praise Thy Majesty, the Dominions adore it, the Powers are in awe. Which the heavens and the hosts of heaven together with the blessed Seraphim joyfully do magnify. And do Thou command that it be permitted us to join with them in confessing Thee, while we say with lowly praise:",
+            "We pray in union with and honor the memory, especially of the glorious ever Virgin Mary, mother of our God and Lord Jesus Christ: as also of the blessed Joseph, her Spouse,"
+          ]
+        },
+        "communion": {
+          "references": [
+            "Matt 25:4; 25:6"
+          ],
+          "text": "The five wise virgins took oil in their vessels with the lamps. And at midnight there was a cry made: Behold the bridegroom cometh, go ye forth to meet Christ the Lord."
+        },
+        "postcommunion": {
+          "text": [
+            "Thou hast fed thy servants, O Lord, with the holy gifts; comfort us ever we pray, by her intercession whose festival we celebrate.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen.",
+            "Commemoration Sts. Felix, Simplicius, Faustinus and Beatrix, Martyrs",
+            "We beseech You, almighty God, that the feast of Your holy Martyrs, Felix, Simplicius, Faustinus and Beatrice, celebrated with heavenly rites, may gain for us the mercy of Your forgiveness.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        }
+      }
+    },
+    "sancti-07-31": {
+      "title": "St. Ignatius of Loyola, Confessor",
+      "generatedFromDate": "2026-07-31",
+      "sourcePaths": [
+        "rendered by local Divinum Officium CGI: web/cgi-bin/missa/missa.pl?Propers=1"
+      ],
+      "version": "Rubrics 1960 - 1960",
+      "dioecesis": "Generale",
+      "sections": {
+        "introit": {
+          "references": [
+            "Phil. 2:10-11",
+            "Ps 5:12-13"
+          ],
+          "text": [
+            "At the name of Jesus every knee should bend of those in heaven, on earth and under the earth, and every tongue should confess that the Lord Jesus Christ is in the glory of God the Father.",
+            "All who love Your name shall glory in You, for You bless the just man.",
+            "Glory be to the Father, and to the Son, and to the Holy Ghost.",
+            "R. As it was in the beginning, is now, and ever shall be, world without end. Amen.",
+            "At the name of Jesus every knee should bend of those in heaven, on earth and under the earth, and every tongue should confess that the Lord Jesus Christ is in the glory of God the Father."
+          ]
+        },
+        "collect": {
+          "text": [
+            "O God, Who, to spread abroad the greater glory of Your name through St. Ignatius, strengthened the Church militant with new power; grant that we who are struggling on earth may, by his help and after his example, be found worthy to be crowned with him in heaven.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        },
+        "epistle": {
+          "introduction": "Lesson from the secons letter of St Paul the Apostle to Timotheus",
+          "references": [
+            "2 Tim. 2:8-10; 3:10-12"
+          ],
+          "text": [
+            "Beloved: Remember that Jesus Christ rose from the dead and was descended from David; this is my Gospel, in which I suffer even to bonds, as a criminal. But the word of God is not bound. This is why I bear all things for the sake of the elect, that they also may obtain the salvation that is in Christ Jesus, with heavenly glory. But you have closely followed my doctrine, my conduct, my purpose, my faith, my long-suffering, my love, my patience, my persecutions, my afflictions; such as befell me at Antioch, Iconium and Lystra - such persecutions as I suffered, and out of them all the Lord delivered me. And all who want to live piously in Christ Jesus will suffer persecution.",
+            "R. Thanks be to God."
+          ]
+        },
+        "gradual": {
+          "references": [
+            "Ps 91:13; 91:14",
+            "Ps 91:3"
+          ],
+          "text": [
+            "The just man shall flourish like the palm tree, like a cedar of Lebanon shall he grow in the house of the Lord.",
+            "To proclaim Your kindness at dawn and Your faithfulness throughout the night. Alleluia, alleluia.",
+            "Jas 1:12",
+            "Blessed is the man who endures temptation; for when he has been tried, he will receive the crown of life. Alleluia."
+          ]
+        },
+        "gospel": {
+          "introduction": "Continuation ✠ of the Holy Gospel according to Luke",
+          "references": [
+            "Luke 10:1-9"
+          ],
+          "text": [
+            "R. Glory be to Thee, O Lord.",
+            "At that time, the Lord appointed seventy-two others, and sent them forth two by two before Him into every town and place where He Himself was about to come. And He said to them, The harvest indeed is great, but the laborers are few. Pray therefore the Lord of the harvest to send forth laborers into His harvest. Go. Behold, I send you forth as lambs in the midst of wolves. Carry neither purse, nor wallet, nor sandals, and greet no one on the way. Whatever house you enter, first say, ‘Peace to this house!’ And if a son of peace be there, your peace will rest upon him; but if not, it will return to you. And remain in the same house, eating and drinking what they have; for the laborer deserves his wages. Do not go from house to house. And whatever town you enter, and they receive you, eat what is set before you, and cure the sick who are there, and say to them, ‘The kingdom of God is at hand for you.’",
+            "S. By the words of the Gospel may our sins be blotted out."
+          ]
+        },
+        "offertory": {
+          "references": [
+            "Ps 88:25"
+          ],
+          "text": "My faithfulness and My kindness shall be with him, and through My name shall his horn be exalted."
+        },
+        "secret": {
+          "text": [
+            "May the prayers of St. Ignatius be present with our offerings, O Lord God, that the most holy sacrament in which you placed the source of all holiness, may also make us holy in Your truth.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        },
+        "preface": {
+          "text": [
+            "Common",
+            "It is truly meet and just, and profitable unto salvation, that we should at all times, and in all places, give thanks to Thee, O Holy Lord, Father Almighty, eternal God, through Christ, our Lord. Through whom the Angels praise Thy Majesty, the Dominions adore it, the Powers are in awe. Which the heavens and the hosts of heaven together with the blessed Seraphim joyfully do magnify. And do Thou command that it be permitted us to join with them in confessing Thee, while we say with lowly praise:",
+            "We pray in union with and honor the memory, especially of the glorious ever Virgin Mary, mother of our God and Lord Jesus Christ: as also of the blessed Joseph, her Spouse,"
+          ]
+        },
+        "communion": {
+          "references": [
+            "Luke 12:49"
+          ],
+          "text": "I have come to cast fire upon the earth, and what will I but that it be kindled?"
+        },
+        "postcommunion": {
+          "text": [
+            "May the sacrifice of praise, O Lord, offered in thanksgiving in honor of St. Ignatius bring us, by his intercession, to the everlasting praise of Your majesty.",
+            "Through Jesus Christ, thy Son our Lord, Who liveth and reigneth with thee, in the unity of the Holy Ghost, God, world without end.",
+            "R. Amen."
+          ]
+        }
       }
     }
   }
