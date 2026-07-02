@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { spawn } from 'node:child_process';
 import path from 'node:path';
 
 const ROOT = process.cwd();
@@ -7,25 +8,51 @@ const SOURCE_LIST = path.join(ROOT, 'tools/missal-propers-source-list.json');
 const OUTPUT_DIR = path.join(ROOT, 'data/missal/1962');
 const DO_ROOT = process.env.DIVINUM_OFFICIUM_PATH;
 
-const SECTION_MAP = {
-  Introitus: 'introit',
-  Oratio: 'collect',
-  Lectio: 'epistle',
-  Graduale: 'gradual',
-  GradualeP: 'alleluia',
-  Tractus: 'tract',
-  Evangelium: 'gospel',
-  Offertorium: 'offertory',
-  Secreta: 'secret',
-  Communio: 'communion',
-  Postcommunio: 'postcommunion',
-};
+const DEFAULT_VERSION = 'Rubrics 1960 - 1960';
+const DEFAULT_DIOECESIS = 'Generale';
+const DEFAULT_VOTIVE = 'Hodie';
 
-const COMMEMORATION_MAP = {
-  Oratio: 'collect',
-  Secreta: 'secret',
-  Postcommunio: 'postcommunion',
-};
+const HEADING_MAP = new Map([
+  ['introitus', 'introit'],
+  ['introit', 'introit'],
+  ['oratio', 'collect'],
+  ['collect', 'collect'],
+  ['lectio', 'epistle'],
+  ['lesson', 'epistle'],
+  ['epistle', 'epistle'],
+  ['graduale', 'gradual'],
+  ['gradual', 'gradual'],
+  ['alleluia', 'alleluia'],
+  ['tractus', 'tract'],
+  ['tract', 'tract'],
+  ['evangelium', 'gospel'],
+  ['gospel', 'gospel'],
+  ['offertorium', 'offertory'],
+  ['offertory', 'offertory'],
+  ['secreta', 'secret'],
+  ['secret', 'secret'],
+  ['prefatio', 'preface'],
+  ['preface', 'preface'],
+  ['communio', 'communion'],
+  ['communion', 'communion'],
+  ['postcommunio', 'postcommunion'],
+  ['postcommunion', 'postcommunion'],
+  ['commemoratio', 'commemorations'],
+  ['commemoration', 'commemorations'],
+]);
+
+const NON_PROPER_HEADINGS = new Set([
+  'gloria',
+  'credo',
+]);
+
+const SCRIPTURE_BOOKS = [
+  'Abd', 'Agg', 'Amos', 'Apoc', 'Bar', 'Cant', 'Col', 'Cor', 'Dan', 'Deut', 'Eccli', 'Ecclus', 'Eph',
+  'Exod', 'Ezech', 'Gal', 'Gen', 'Hab', 'Heb', 'Isa', 'Jac', 'Jer', 'Joel', 'John', 'Jonas', 'Jos', 'Jude',
+  'Judg', 'Kings', 'Lam', 'Lev', 'Luke', 'Lk', 'Mach', 'Mal', 'Mark', 'Matt', 'Mich', 'Num', 'Par', 'Pet',
+  'Phil', 'Prov', 'Ps', 'Rom', 'Sir', 'Song', 'Soph', 'Thess', 'Tim', 'Titus', 'Tob', 'Wis', 'Zach', 'Zeph',
+];
+const REFERENCE_RE = new RegExp(`^(?:[1-4]\\s*)?(?:${SCRIPTURE_BOOKS.join('|')})\\.?\\s+\\d`, 'i');
 
 function requireDoRoot() {
   if (!DO_ROOT) {
@@ -33,205 +60,223 @@ function requireDoRoot() {
   }
 }
 
-function parseSections(text) {
-  const sections = {};
-  let current = null;
-  for (const line of String(text || '').replace(/\r\n/g, '\n').split('\n')) {
-    const heading = line.match(/^\[([^\]]+)\](?:\s*\(([^)]*)\))?$/);
-    if (heading) {
-      const qualifier = heading[2] || '';
-      current = qualifier && !/ad missam/i.test(qualifier) ? `${heading[1]} (${qualifier})` : heading[1];
-      sections[current] = [];
-      continue;
-    }
-    if (current) sections[current].push(line);
-  }
-  return Object.fromEntries(Object.entries(sections).map(([key, lines]) => [key, lines.join('\n').trim()]));
+function toDoDate(dateKey) {
+  const [year, month, day] = dateKey.split('-').map(Number);
+  if (!year || !month || !day) throw new Error(`Invalid date key: ${dateKey}`);
+  return `${month}-${day}-${year}`;
 }
 
-function cleanLine(line) {
+function runCommand(command, args, options = {}) {
+  return new Promise((resolve, reject) => {
+    const child = spawn(command, args, {
+      ...options,
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+    let stdout = '';
+    let stderr = '';
+    child.stdout.setEncoding('utf8');
+    child.stderr.setEncoding('utf8');
+    child.stdout.on('data', (chunk) => { stdout += chunk; });
+    child.stderr.on('data', (chunk) => { stderr += chunk; });
+    child.on('error', reject);
+    child.on('close', (code) => {
+      if (code === 0) resolve({ stdout, stderr });
+      else reject(new Error(`${command} ${args.join(' ')} exited with ${code}\n${stderr}`));
+    });
+  });
+}
+
+async function renderDivinumMissa(dateKey, item, language) {
+  const missaScript = path.join(DO_ROOT, 'web', 'cgi-bin', 'missa', 'missa.pl');
+  const date = toDoDate(dateKey);
+  const params = new URLSearchParams({
+    date,
+    date1: date,
+    command: 'praySanctaMissa',
+    version: item.version || DEFAULT_VERSION,
+    lang1: item.lang1 || language,
+    lang2: item.lang2 || language,
+    langfb: item.langfb || language,
+    dioecesis: item.dioecesis || DEFAULT_DIOECESIS,
+    votive: item.votive || DEFAULT_VOTIVE,
+    Propers: '1',
+    content: '1',
+    rubrics: '1',
+    solemn: item.solemn ? '1' : '0',
+  });
+
+  const { stdout } = await runCommand('perl', [missaScript], {
+    cwd: path.dirname(missaScript),
+    env: {
+      ...process.env,
+      REQUEST_METHOD: 'GET',
+      QUERY_STRING: params.toString(),
+      SCRIPT_NAME: '/cgi-bin/missa/missa.pl',
+      SERVER_NAME: 'localhost',
+      SERVER_PORT: '80',
+      GATEWAY_INTERFACE: 'CGI/1.1',
+      SERVER_PROTOCOL: 'HTTP/1.1',
+    },
+  });
+
+  if (!stdout.includes('<TABLE') && !stdout.includes('Sancta Missa')) {
+    throw new Error(`Divinum Officium returned unexpected output for ${dateKey}.`);
+  }
+
+  return stdout;
+}
+
+function decodeHtmlEntities(value) {
+  const named = {
+    amp: '&',
+    apos: "'",
+    ensp: ' ',
+    emsp: ' ',
+    gt: '>',
+    lt: '<',
+    nbsp: ' ',
+    quot: '"',
+  };
+
+  return String(value || '')
+    .replace(/&#x([0-9a-f]+);/gi, (_, hex) => String.fromCodePoint(parseInt(hex, 16)))
+    .replace(/&#(\d+);/g, (_, decimal) => String.fromCodePoint(parseInt(decimal, 10)))
+    .replace(/&([a-z]+);/gi, (match, name) => named[name.toLowerCase()] ?? match);
+}
+
+function htmlToLines(html) {
+  return decodeHtmlEntities(html)
+    .replace(/\r\n/g, '\n')
+    .replace(/<script\b[\s\S]*?<\/script>/gi, '\n')
+    .replace(/<style\b[\s\S]*?<\/style>/gi, '\n')
+    .replace(/<br\s*\/?\s*>/gi, '\n')
+    .replace(/<\/(p|div|h\d|tr|td|table)>/gi, '\n')
+    .replace(/<[^>]+>/g, '')
+    .split('\n')
+    .map((line) => line.replace(/\s+/g, ' ').trim())
+    .filter(Boolean)
+    .filter((line) => !/^Content-type:/i.test(line))
+    .filter((line) => !/^Set-Cookie:/i.test(line))
+    .filter((line) => !/^(Top|Next|Top Next)$/i.test(line))
+    .filter((line) => !/^\d+$/.test(line));
+}
+
+function normalizeHeading(line) {
   return String(line || '')
+    .replace(/[{}]/g, '')
+    .replace(/\s*\([^)]*\)\s*$/g, '')
+    .replace(/[:.]+$/g, '')
+    .trim()
+    .toLowerCase();
+}
+
+function renderedLineToSectionKey(line) {
+  const normalized = normalizeHeading(line);
+  if (HEADING_MAP.has(normalized)) return HEADING_MAP.get(normalized);
+  if (NON_PROPER_HEADINGS.has(normalized)) return null;
+  return undefined;
+}
+
+function cleanRenderedLine(line) {
+  return String(line || '')
+    .replace(/^℣\./, 'V.')
+    .replace(/^℟\./, 'R.')
     .replace(/^v\.\s*/i, '')
-    .replace(/^_$/g, '')
-    .replace(/^!Tractus$/g, '')
-    .replace(/^&Gloria$/g, 'Glory be to the Father, and to the Son, and to the Holy Ghost.')
-    .replace(/^\$.*$/g, '')
+    .replace(/^r\.\s*/i, 'R. ')
+    .replace(/^s\.\s*/i, 'S. ')
+    .replace(/^p\.\s*/i, 'P. ')
+    .replace(/\s+/g, ' ')
     .trim();
 }
 
-function normalizeSection(raw) {
-  if (!raw) return null;
+function shouldSkipRenderedLine(line) {
+  return /^(Sancta Missa|Sancta Missa Persoluta|Rubrics|Solemn|Compare|Divinum Officium|Options|Ordo|Kalendarium|Propers|Full)$/i.test(line)
+    || /^The Lord be with you\.?$/i.test(line)
+    || /^And with (thy|your) spirit\.?$/i.test(line)
+    || /^Let us pray\.?$/i.test(line)
+    || /^Praise be to thee,? O Christ\.?$/i.test(line)
+    || /^R\. Praise be to thee,? O Christ\.?$/i.test(line)
+    || /^Amen\.?$/i.test(line);
+}
+
+function normalizeRenderedSection(lines) {
   const references = [];
   const text = [];
   let introduction = '';
 
-  for (const line of raw.split('\n').map(cleanLine).filter(Boolean)) {
-    if (line.startsWith('!')) {
-      references.push(line.slice(1).trim().replace(/\.$/, ''));
-      continue;
-    }
-    if (!introduction && /^(Reading|A reading|Continuation|Lesson)/i.test(line)) {
+  for (const rawLine of lines) {
+    const line = cleanRenderedLine(rawLine);
+    if (!line || shouldSkipRenderedLine(line)) continue;
+
+    if (!introduction && /^(Reading|A reading|Lesson|Continuation)/i.test(line)) {
       introduction = line;
       continue;
     }
+
+    if (REFERENCE_RE.test(line) || /^(Sedulius|Tract|Alleluia)$/i.test(line)) {
+      references.push(line.replace(/\.$/, ''));
+      continue;
+    }
+
     text.push(line);
   }
 
-  return introduction || references.length || text.length
-    ? { ...(introduction ? { introduction } : {}), ...(references.length ? { references } : {}), text: text.length === 1 ? text[0] : text }
-    : null;
+  if (!introduction && !references.length && !text.length) return null;
+  return {
+    ...(introduction ? { introduction } : {}),
+    ...(references.length ? { references: Array.from(new Set(references)) } : {}),
+    text: text.length === 1 ? text[0] : text,
+  };
 }
 
-function formatSection(section) {
-  if (!section) return '';
-  if (typeof section === 'string') return section;
-  const references = Array.isArray(section.references) ? section.references.join('\n') : '';
-  const text = Array.isArray(section.text) ? section.text.join('\n') : (section.text || '');
-  return [section.introduction, references, text].filter(Boolean).join('\n');
-}
+function parseRenderedPropers(html) {
+  const lines = htmlToLines(html);
+  const rawSections = {};
+  let currentKey = null;
 
-function ensureTxt(filePath) {
-  return filePath.endsWith('.txt') ? filePath : `${filePath}.txt`;
-}
-
-function sourcePath(language, relPath, base = 'missa') {
-  return path.join(DO_ROOT, 'web', 'www', base, language, ensureTxt(relPath));
-}
-
-async function readSource(language, relPath, base = 'missa', optional = false) {
-  try {
-    return await readFile(sourcePath(language, relPath, base), 'utf8');
-  } catch (error) {
-    if (optional && error.code === 'ENOENT') return null;
-    throw error;
-  }
-}
-
-function descriptorForReference(reference) {
-  const cleaned = String(reference || '').trim();
-  if (!cleaned) return null;
-  if (/^C\d+[a-z]*$/i.test(cleaned)) return { path: `Commune/${cleaned}.txt`, base: 'horas' };
-  if (/^Commune\//i.test(cleaned)) return { path: ensureTxt(cleaned), base: 'horas' };
-  return { path: ensureTxt(cleaned), base: 'missa' };
-}
-
-function getCommuneDescriptors(parsed) {
-  const source = [parsed.Rank, parsed.Rule].filter(Boolean).join('\n');
-  const descriptors = [];
-  const seen = new Set();
-  const matcher = /(?:^|[;\s])(ex|vide)\s+((?:[a-z\s]+\/)?C\d+[a-z]*|Sancti\/[^;\s]+|Tempora\/[^;\s]+)/gim;
-  let match;
-
-  while ((match = matcher.exec(source))) {
-    const descriptor = descriptorForReference(match[2]);
-    const key = `${descriptor.base}:${descriptor.path}`;
-    if (!seen.has(key)) {
-      seen.add(key);
-      descriptors.push(descriptor);
+  for (const line of lines) {
+    const sectionKey = renderedLineToSectionKey(line);
+    if (sectionKey === null) {
+      currentKey = null;
+      continue;
     }
+    if (sectionKey) {
+      currentKey = sectionKey;
+      rawSections[currentKey] ||= [];
+      continue;
+    }
+    if (currentKey) rawSections[currentKey].push(line);
   }
 
-  return descriptors;
-}
-
-function automaticCommemorationDescriptor(itemPath) {
-  const normalized = ensureTxt(itemPath);
-  if (!/^Sancti\/\d{2}-\d{2}[a-z]*\.txt$/i.test(normalized)) return null;
-  return { path: normalized.replace(/\.txt$/i, 'cc.txt'), base: 'missa' };
-}
-
-async function parseDescriptor(language, descriptor, optional = false) {
-  const text = await readSource(language, descriptor.path, descriptor.base, optional);
-  if (!text) return null;
-  return { ...descriptor, parsed: parseSections(text), sourcePath: `web/www/${descriptor.base}/${language}/${descriptor.path}` };
-}
-
-async function resolveSection(language, sourceKey, rawSection, base = 'missa') {
-  const include = rawSection?.trim().match(/^@(.+)$/);
-  if (!include) return rawSection;
-  const descriptor = descriptorForReference(include[1]);
-  const included = await parseDescriptor(language, descriptor, true);
-  return included?.parsed?.[sourceKey] || included?.parsed?.Lectio || rawSection;
-}
-
-function mergeManualSection(sections, key, value) {
-  if (!value) return;
-  sections[key] = typeof value === 'string' ? normalizeSection(value) : value;
-}
-
-async function buildCommemoration(language, descriptor) {
-  const fetched = await parseDescriptor(language, descriptor, true);
-  if (!fetched) return null;
   const sections = {};
-
-  for (const [sourceKey, targetKey] of Object.entries(COMMEMORATION_MAP)) {
-    const raw = await resolveSection(language, sourceKey, fetched.parsed[sourceKey], fetched.base);
-    const normalized = normalizeSection(raw);
-    if (normalized) sections[targetKey] = normalized;
+  for (const [key, value] of Object.entries(rawSections)) {
+    const normalized = normalizeRenderedSection(value);
+    if (normalized) sections[key] = normalized;
   }
 
-  if (!Object.keys(sections).length) return null;
-  return { title: fetched.parsed.Officium || fetched.parsed.Rank || '', sections, sourcePath: fetched.sourcePath };
+  return sections;
 }
 
-function buildCommemorationBlock(commemorations) {
-  return commemorations.map((commemoration) => {
-    const title = String(commemoration.title || '').trim().replace(/\n+/g, ' ');
-    const lines = [];
-    if (title) lines.push(`Commemoration: ${title}`);
-    if (commemoration.sections.collect) lines.push('Oratio', formatSection(commemoration.sections.collect));
-    if (commemoration.sections.secret) lines.push('Secreta', formatSection(commemoration.sections.secret));
-    if (commemoration.sections.postcommunion) lines.push('Postcommunio', formatSection(commemoration.sections.postcommunion));
-    return lines.filter(Boolean).join('\n');
-  }).filter(Boolean).join('\n\n');
+function getPrimaryDate(item) {
+  const date = item.generateFromDate || item.mapDates?.[0];
+  if (!date) throw new Error(`Missing mapDates/generateFromDate for ${item.properId}`);
+  return date;
 }
 
 async function buildProper(language, item) {
-  const mainDescriptor = { path: ensureTxt(item.path), base: 'missa' };
-  const main = await parseDescriptor(language, mainDescriptor);
-  const sources = [];
-  const sourcePaths = [];
-  const sections = {};
+  const renderedHtml = await renderDivinumMissa(getPrimaryDate(item), item, language);
+  const sections = parseRenderedPropers(renderedHtml);
 
-  for (const descriptor of getCommuneDescriptors(main.parsed)) sources.push(descriptor);
-  sources.push(mainDescriptor);
-
-  for (const descriptor of sources) {
-    const source = descriptor.path === mainDescriptor.path && descriptor.base === mainDescriptor.base
-      ? main
-      : await parseDescriptor(language, descriptor, true);
-    if (!source) continue;
-    sourcePaths.push(source.sourcePath);
-
-    for (const [sourceKey, targetKey] of Object.entries(SECTION_MAP)) {
-      const raw = await resolveSection(language, sourceKey, source.parsed[sourceKey], source.base);
-      const normalized = normalizeSection(raw);
-      if (normalized) sections[targetKey] = normalized;
-    }
+  if (!sections.collect && !sections.gospel && !sections.epistle) {
+    throw new Error(`Could not parse rendered propers for ${item.properId}. Try running with the same DIVINUM_OFFICIUM_PATH manually and inspect the rendered HTML.`);
   }
-
-  for (const [targetKey, manualSection] of Object.entries(item.manualSections || {})) {
-    mergeManualSection(sections, targetKey, manualSection);
-  }
-
-  const commemorationDescriptors = [];
-  for (const relPath of item.commemorationSourcePaths || []) commemorationDescriptors.push(descriptorForReference(relPath));
-  const automatic = automaticCommemorationDescriptor(item.path);
-  if (automatic) commemorationDescriptors.push(automatic);
-
-  const commemorations = [];
-  for (const descriptor of commemorationDescriptors.filter(Boolean)) {
-    const commemoration = await buildCommemoration(language, descriptor);
-    if (commemoration) commemorations.push(commemoration);
-  }
-  const commemorationBlock = buildCommemorationBlock(commemorations);
-  if (commemorationBlock) sections.commemorations = commemorationBlock;
 
   return {
-    title: item.title || main.parsed.Officium || main.parsed.Rank?.split(';;')?.[0] || '',
-    sourcePaths: Array.from(new Set([...sourcePaths, ...commemorations.map((item) => item.sourcePath)])),
-    rank: main.parsed.Rank?.split(';;')?.[1] || undefined,
-    rule: main.parsed.Rule?.split('\n').filter(Boolean) || undefined,
+    title: item.title || '',
+    generatedFromDate: getPrimaryDate(item),
+    sourcePaths: ['rendered by local Divinum Officium CGI: web/cgi-bin/missa/missa.pl?Propers=1'],
+    version: item.version || DEFAULT_VERSION,
+    dioecesis: item.dioecesis || DEFAULT_DIOECESIS,
     sections,
   };
 }
@@ -252,11 +297,12 @@ async function build() {
   await writeFile(path.join(OUTPUT_DIR, 'propers-en.json'), `${JSON.stringify({
     version: '1962',
     language,
+    generatedBy: 'tools/build-missal-propers.mjs',
     source: {
       name: 'Divinum Officium',
       repository: 'https://github.com/DivinumOfficium/divinum-officium',
       license: 'MIT',
-      notice: 'Divinum Officium data files are MIT licensed. Include the permission notice when distributing substantial portions.',
+      notice: 'Generated from a local Divinum Officium checkout. Divinum Officium data files are MIT licensed. Include the permission notice when distributing substantial portions.',
     },
     propers,
   }, null, 2)}\n`);
