@@ -1,10 +1,29 @@
 # Missal Propers Generator
 
-This project should not call Divinum Officium from the deployed website. Instead, generate the Mass propers locally and commit the resulting JSON.
+This project should not call Divinum Officium from the deployed website. Instead, generate the Mass propers ahead of time and commit the resulting JSON.
 
-## Setup
+## Recommended iPhone-friendly workflow
 
-Clone Divinum Officium next to this repository or somewhere else on your machine:
+Use the GitHub Action added at:
+
+```text
+.github/workflows/generate-missal-propers.yml
+```
+
+From GitHub on your phone:
+
+1. Open the repository.
+2. Go to **Actions**.
+3. Choose **Generate Missal Propers**.
+4. Tap **Run workflow**.
+5. Select the branch you want to update, usually `feature/devotions` while developing.
+6. Run it.
+
+The workflow temporarily clones Divinum Officium inside GitHub Actions, runs the generator, and commits the generated JSON back to the selected branch. You do not need a local Divinum Officium clone on your phone or computer.
+
+## Optional local workflow
+
+If you ever do want to run it locally, clone Divinum Officium next to this repository or somewhere else on your machine:
 
 ```bash
 git clone https://github.com/DivinumOfficium/divinum-officium.git ../divinum-officium
@@ -18,7 +37,7 @@ DIVINUM_OFFICIUM_PATH=../divinum-officium npm run build:missal-propers
 
 ## What it does
 
-The generator runs the local Divinum Officium Missa CGI script with `Propers=1`, `Rubrics 1960 - 1960`, and English output. It parses the rendered proper Mass sections and writes them to:
+The generator runs the Divinum Officium Missa CGI script with `Propers=1`, `Rubrics 1960 - 1960`, and English output. It parses the rendered proper Mass sections and writes them to:
 
 ```text
 data/missal/1962/propers-en.json
