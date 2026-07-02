@@ -6,7 +6,9 @@ import path from 'node:path';
 const ROOT = process.cwd();
 const SOURCE_LIST = path.join(ROOT, 'tools/missal-propers-source-list.json');
 const OUTPUT_DIR = path.join(ROOT, 'data/missal/1962');
-const DO_ROOT = process.env.DIVINUM_OFFICIUM_PATH;
+const DO_ROOT = process.env.DIVINUM_OFFICIUM_PATH
+  ? path.resolve(process.env.DIVINUM_OFFICIUM_PATH)
+  : '';
 
 const DEFAULT_VERSION = 'Rubrics 1960 - 1960';
 const DEFAULT_DIOECESIS = 'Generale';
