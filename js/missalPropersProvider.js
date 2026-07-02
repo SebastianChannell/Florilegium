@@ -101,6 +101,21 @@ function normalizeSection(raw) {
     : null;
 }
 
+function normalizeOfficeGospel(raw) {
+  if (!raw) return null;
+  const gospelLines = [];
+
+  for (const line of raw.split('\n')) {
+    const trimmed = line.trim();
+    if (trimmed === '_' || /^Homily\b/i.test(trimmed)) break;
+    gospelLines.push(line);
+  }
+
+  const massStyleGospel = gospelLines.join('\n')
+    .replace(/^From the Holy Gospel according to (.+)$/im, 'Continuation + of the Holy Gospel according to $1');
+  return normalizeSection(massStyleGospel);
+}
+
 function formatSection(section) {
   if (!section) return '';
   if (typeof section === 'string') return section;
@@ -190,6 +205,12 @@ function getCommuneDescriptors(parsed) {
   return descriptors;
 }
 
+function getOfficeDescriptorForSourcePath(sourcePath) {
+  const path = ensureTxt(String(sourcePath || ''));
+  if (!/^Sancti\/\d{2}-\d{2}[a-z]*\.txt$/i.test(path)) return null;
+  return sourceDescriptor(path, 'horas');
+}
+
 function getAutomaticCommemorationDescriptor(sourcePath) {
   const path = ensureTxt(String(sourcePath || ''));
   if (!/^Sancti\/\d{2}-\d{2}[a-z]*\.txt$/i.test(path)) return null;
@@ -234,6 +255,19 @@ function buildCommemorationBlock(commemorations) {
     if (commemoration.sections.postcommunion) lines.push('Postcommunio', formatSection(commemoration.sections.postcommunion));
     return lines.filter(Boolean).join('\n');
   }).filter(Boolean).join('\n\n');
+}
+
+async function buildOfficeGospel(sourcePaths) {
+  for (const sourcePath of sourcePaths) {
+    const descriptor = getOfficeDescriptorForSourcePath(sourcePath);
+    if (!descriptor) continue;
+
+    const fetched = await fetchDescriptor(descriptor, { optional: true });
+    const section = normalizeOfficeGospel(fetched?.parsed?.Lectio7);
+    if (section) return { section, sourcePath: fetched.sourcePath };
+  }
+
+  return null;
 }
 
 async function buildCommemoration(descriptor) {
@@ -281,6 +315,14 @@ async function buildDynamicProper(mapping) {
       const raw = await resolveSection(sourceKey, fetched.parsed[sourceKey], fetched.base);
       const normalized = normalizeSection(raw);
       if (normalized) sections[targetKey] = normalized;
+    }
+  }
+
+  if (!fetchedMainSources.some((source) => source.parsed?.Evangelium)) {
+    const officeGospel = await buildOfficeGospel(sourcePaths);
+    if (officeGospel?.section) {
+      sections.gospel = officeGospel.section;
+      sourcePathNotes.push(officeGospel.sourcePath);
     }
   }
 
