@@ -66,6 +66,66 @@
           "text": "Admitted to the sacred banquet, O Lord, we have drawn water in joy from the Saviour’s fountain; may His Blood, we beseech You, become for us a fountain of water springing up unto life everlasting."
         }
       }
+    },
+    "sancti-07-02": {
+      "title": "The Visitation of the Blessed Virgin Mary",
+      "sourcePaths": [
+        "web/www/missa/English/Sancti/07-02.txt",
+        "web/www/horas/English/Commune/C11.txt",
+        "web/www/horas/English/Sancti/07-02.txt",
+        "web/www/missa/English/Sancti/07-02cc.txt"
+      ],
+      "rank": "Duplex II classis",
+      "rule": [
+        "Gloria",
+        "CredoDA",
+        "Prefatio=Maria=Visitation"
+      ],
+      "sections": {
+        "introit": {
+          "references": ["Sedulius", "Ps 44:2"],
+          "text": [
+            "Hail, holy Mother, who in childbirth brought forth the King Who rules heaven and earth world without end.",
+            "My heart overflows with a goodly theme; as I sing my ode to the King.",
+            "Glory be to the Father, and to the Son, and to the Holy Ghost.",
+            "Hail, holy Mother, who in childbirth brought forth the King Who rules heaven and earth world without end."
+          ]
+        },
+        "collect": {
+          "text": "Bestow upon Your servants, we beseech You, O Lord, the gift of heavenly grace, that as the child-bearing of the Blessed Virgin marked the beginning of our salvation, so may the solemn feast of her Visitation bring us an increase of peace."
+        },
+        "epistle": {
+          "introduction": "Lesson from the book of Canticles",
+          "references": ["Song 2:8-14"],
+          "text": "Hark! here He comes springing across the mountains, leaping across the hills. My lover is like a gazelle or a young stag. Here He stands behind our wall, gazing through the windows, peering through the lattices. My lover speaks: He says to me, Arise, make haste, My beloved, My dove, My beautiful one, and come! For see, the winter is past, the rains are over and gone. The flowers appear in our land, the time of pruning has come, and the voice of the turtle is heard in our land. The fig tree puts forth its figs, and the vines, in bloom, give forth fragrance. Arise, My beloved, My beautiful one, and come! O My dove in the clefts of the rock, in the secret recesses of the cliff, let Me see you, let Me hear your voice, for your voice is sweet and you are lovely."
+        },
+        "gradual": {
+          "text": [
+            "Blessed and venerable are you, O Virgin Mary, who, without spot were found the Mother of the Saviour.",
+            "V. O Virgin, Mother of God, He Whom the whole world does not contain, shut Himself within your womb, becoming Man. Alleluia, alleluia.",
+            "V. Happy are you, O holy Virgin Mary, and most worthy of all praise; for out of you has risen the sun of justice, Christ our God. Alleluia."
+          ]
+        },
+        "gospel": {
+          "introduction": "Continuation + of the Holy Gospel according to Luke",
+          "references": ["Luke 1:39-47"],
+          "text": "At that time, Mary arose in those days and went into the hill-country with haste, into a city of Judah. And entered into the house of Zacharias, and saluted Elizabeth. And it came to pass, that when Elizabeth heard the salutation of Mary, the babe leaped in her womb; and Elizabeth was filled with the Holy Ghost. And she cried out with a loud voice, and said: Blessed art thou among women, and blessed is the fruit of thy womb. And whence is this to me, that the Mother of my Lord should come to me? For behold, as soon as the voice of thy salutation sounded in mine ears, the babe in my womb leaped for joy. And blessed art thou that hast believed, because those things shall be accomplished that were spoken to thee by the Lord. And Mary said: My soul doth magnify the Lord."
+        },
+        "offertory": {
+          "references": ["Lk 1:28; 1:42"],
+          "text": "Hail, Mary, full of grace, the Lord is with you. Blessed are you among women and blessed is the fruit of your womb. (Alleluja.)"
+        },
+        "secret": {
+          "text": "May the humanity of Your only-begotten Son keep us, O Lord, for He, Who was born of a virgin did not lessen but consecrated the purity of His Mother; so, on the festival of her Visitation may Jesus Christ, our Lord, free us from our sins and make our sacrifice acceptable unto You."
+        },
+        "communion": {
+          "text": "Blessed is the womb of the Virgin Mary, which bore the Son of the eternal Father. (Alleluja.)"
+        },
+        "postcommunion": {
+          "text": "O Lord, in celebration of this yearly feast, we have partaken of the sacrament: grant, we beseech You, that it may give us help for life on earth and for life everlasting."
+        },
+        "commemorations": "Commemoration: Ss. Processus et Martinian, Martyrs\nOratio\nO God, Who surround and protect us with the glorious profession of faith of Your Martyrs Processus and Martinian, grant us to profit by imitating them and to rejoice in their intercession.\n\nSecreta\nAccept our prayers and gifts, O Lord, and, that they may be made worthy in Your sight, may Your saints help us by their prayers.\n\nPostcommunio\nFilled with the offering of Your sacred Body and Your precious Blood, we beseech You, O Lord, our God, that what we have done in holy devotion may become an assurance of our redemption."
+      }
     }
   }
 }
