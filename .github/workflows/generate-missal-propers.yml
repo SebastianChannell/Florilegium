@@ -38,16 +38,17 @@ jobs:
       - name: Generate local propers JSON
         run: |
           DIVINUM_OFFICIUM_PATH=../divinum-officium npm run build:missal-propers
+          cp data/missal/1962/proper-map-2026.generated.json data/missal/1962/proper-map-2026.json
 
       - name: Show generated diff
         run: |
-          git diff -- data/missal/1962/propers-en.json data/missal/1962/proper-map-2026.generated.json
+          git diff -- data/missal/1962/propers-en.json data/missal/1962/proper-map-2026.json data/missal/1962/proper-map-2026.generated.json
 
       - name: Commit generated propers
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/missal/1962/propers-en.json data/missal/1962/proper-map-2026.generated.json
+          git add data/missal/1962/propers-en.json data/missal/1962/proper-map-2026.json data/missal/1962/proper-map-2026.generated.json
           if git diff --staged --quiet; then
             echo "No generated propers changes to commit."
           else
