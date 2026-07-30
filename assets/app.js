@@ -109,7 +109,11 @@
   }
 
   function titleForPage(page, section) {
-    return isUsefulTitle(page?.title, section) ? displayTitle(page.title) : section?.title || "The New Roman Missal";
+    const manifestTitle = Number.isInteger(page?.leaf) ? pageMeta(page.leaf)?.title : "";
+    const candidate = page?.title || manifestTitle;
+    return isUsefulTitle(candidate, section)
+      ? displayTitle(candidate)
+      : section?.title || "The New Roman Missal";
   }
 
   function sectionById(id) {

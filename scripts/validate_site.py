@@ -44,6 +44,12 @@ def main() -> None:
     immaculate = set(read_json(DATA / "search" / "i.json")["immaculate"])
     conception = set(read_json(DATA / "search" / "c.json")["conception"])
     assert 846 in immaculate & conception, "The Immaculate Conception is not searchable."
+    saints = next(section for section in manifest["sections"] if section["id"] == "proper-saints")
+    immaculate_anchor = next(
+        anchor for anchor in saints["anchors"] if anchor["title"] == "DEC. 8—IMMACULATE CONCEPTION"
+    )
+    assert immaculate_anchor["leaf"] == 847, "The feast must open on its first text-bearing page."
+    assert manifest["pages"][847]["title"], "The feast title must carry into its first text-bearing page."
 
     devotions = next(section for section in manifest["sections"] if section["id"] == "general-devotions")
     devotion_titles = {anchor["title"] for anchor in devotions["anchors"]}

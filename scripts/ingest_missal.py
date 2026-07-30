@@ -525,7 +525,7 @@ def main() -> None:
     previous_title: dict[str, str] = {}
     previous_anchor: dict[str, tuple[str, int]] = {}
     page_meta = []
-    for page in pages:
+    for page_index, page in enumerate(pages):
         section = section_lookup.get(page["section"])
         title = page["title"]
         page_meta.append(
@@ -549,11 +549,32 @@ def main() -> None:
             and title != previous_title.get(section["id"])
             and not near_duplicate
         ):
+            anchor_page = page
+            if (
+                len(page["text"]) < 120
+                and page_index + 1 < len(pages)
+                and pages[page_index + 1]["section"] == page["section"]
+            ):
+                anchor_page = pages[page_index + 1]
             section["anchors"].append(
-                {"leaf": page["leaf"], "printed": page["printed"], "title": title}
+                {
+                    "leaf": anchor_page["leaf"],
+                    "printed": anchor_page["printed"],
+                    "title": title,
+                }
             )
             previous_title[section["id"]] = title
-            previous_anchor[section["id"]] = (title_key(title), page["leaf"])
+            previous_anchor[section["id"]] = (title_key(title), anchor_page["leaf"])
+
+    for page_index, page in enumerate(pages[:-1]):
+        following = pages[page_index + 1]
+        if (
+            page["title"]
+            and len(page["text"]) < 120
+            and following["section"] == page["section"]
+            and not page_meta[page_index + 1]["title"]
+        ):
+            page_meta[page_index + 1]["title"] = page["title"]
 
     for section_id, anchors in CURATED_ANCHORS.items():
         section = section_lookup[section_id]
