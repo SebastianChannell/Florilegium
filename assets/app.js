@@ -8,7 +8,7 @@
   const nextPage = document.querySelector("#nextPage");
   const pagePosition = document.querySelector("#pagePosition");
   const siteBar = document.querySelector("#siteBar");
-  const DATA_VERSION = "20260729-5";
+  const DATA_VERSION = "20260729-6";
 
   const state = {
     manifest: null,
@@ -606,10 +606,18 @@
     results.innerHTML = pages
       .map((page) => {
         const section = sectionById(page.section);
+        const followingMeta = pageMeta(page.leaf + 1);
+        const readerLeaf = (
+          page.text.trim().length < 120
+          && followingMeta?.section === page.section
+        )
+          ? page.leaf + 1
+          : page.leaf;
+        const resultMeta = pageMeta(readerLeaf) || page;
         return listRow({
-          href: `#/read/${page.leaf}`,
+          href: `#/read/${readerLeaf}`,
           title: titleForPage(page, section),
-          note: `${section?.title || "The New Roman Missal"} · ${pageLabel(page)}`,
+          note: `${section?.title || "The New Roman Missal"} · ${pageLabel(resultMeta)}`,
         }).replace(
           "</span>\n          <span class=\"chevron\"",
           `<span class="result-snippet">${highlightedSnippet(page.text, query)}</span></span>
