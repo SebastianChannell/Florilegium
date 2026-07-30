@@ -8,6 +8,7 @@
   const nextPage = document.querySelector("#nextPage");
   const pagePosition = document.querySelector("#pagePosition");
   const siteBar = document.querySelector("#siteBar");
+  const DATA_VERSION = "20260729-5";
 
   const state = {
     manifest: null,
@@ -78,6 +79,10 @@
       .replace(/[^a-z0-9\s]/g, " ")
       .replace(/\s+/g, " ")
       .trim();
+  }
+
+  function dataUrl(path) {
+    return `${path}?v=${DATA_VERSION}`;
   }
 
   function displayTitle(value = "") {
@@ -397,7 +402,7 @@
   async function getPage(leaf) {
     const chunkNumber = Math.floor(leaf / state.manifest.book.chunkSize);
     if (!state.chunks.has(chunkNumber)) {
-      const response = await fetch(`data/pages/${String(chunkNumber).padStart(3, "0")}.json`);
+      const response = await fetch(dataUrl(`data/pages/${String(chunkNumber).padStart(3, "0")}.json`));
       if (!response.ok) {
         throw new Error(`The page could not be opened (${response.status}).`);
       }
@@ -504,7 +509,7 @@
     if (leaf < 0 || leaf >= state.manifest.book.leafCount) return;
     const chunkNumber = Math.floor(leaf / state.manifest.book.chunkSize);
     if (state.chunks.has(chunkNumber)) return;
-    fetch(`data/pages/${String(chunkNumber).padStart(3, "0")}.json`)
+    fetch(dataUrl(`data/pages/${String(chunkNumber).padStart(3, "0")}.json`))
       .then((response) => (response.ok ? response.json() : null))
       .then((chunk) => {
         if (chunk) state.chunks.set(chunkNumber, chunk);
@@ -526,7 +531,7 @@
 
   async function loadSearchShard(key) {
     if (!state.searchShards.has(key)) {
-      const response = await fetch(`data/search/${key}.json`);
+      const response = await fetch(dataUrl(`data/search/${key}.json`));
       state.searchShards.set(key, response.ok ? await response.json() : {});
     }
     return state.searchShards.get(key);
@@ -718,7 +723,7 @@
 
   async function start() {
     try {
-      const response = await fetch("data/manifest.json");
+      const response = await fetch(dataUrl("data/manifest.json"));
       if (!response.ok) throw new Error(`Book data returned ${response.status}.`);
       state.manifest = await response.json();
       await route();
