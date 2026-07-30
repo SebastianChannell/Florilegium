@@ -80,6 +80,38 @@
       .trim();
   }
 
+  function displayTitle(value = "") {
+    return value
+      .replace(/[Б568B]T(?=[.,\s—-])/g, "ST")
+      .replace(/\b(?:PEB|PER|FER|FED)\b/g, "FEB")
+      .replace(/\bViGYL\b/gi, "VIGIL")
+      .replace(/^\)\s*/, "")
+      .replace(/\s+(?:EE\]|[a-z]{1,2})$/, "")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function isUsefulTitle(title, section) {
+    const cleaned = displayTitle(title);
+    const key = normalize(cleaned);
+    if (!cleaned || key.length < 5) return false;
+
+    if (section?.id === "proper-saints") {
+      return /^(vigil|jan|feb|mar|march|apr|may|june|july|aug|sept|oct|nov|dec)\b/.test(key);
+    }
+
+    if (section?.id === "proper-season") {
+      return /^(jan|feb|mar|march|apr|may|june|july|aug|sept|oct|nov|dec)\b/.test(key)
+        || /(sunday|advent|ember|christmas|circumcision|holy name|epiphany|septuagesima|sexagesima|quinquagesima|ash wednesday|lent|passion|palm|holy thursday|good friday|holy saturday|easter|rogation|ascension|pentecost|trinity|corpus christi|sacred heart|christ the king|mass)\b/.test(key);
+    }
+
+    return true;
+  }
+
+  function titleForPage(page, section) {
+    return isUsefulTitle(page?.title, section) ? displayTitle(page.title) : section?.title || "The New Roman Missal";
+  }
+
   function sectionById(id) {
     return state.manifest.sections.find((section) => section.id === id);
   }
@@ -265,9 +297,17 @@
       "the new roman missal",
     ]);
 
-    return section.anchors.filter((anchor) => {
+    return section.anchors.map((anchor) => ({
+      ...anchor,
+      title: displayTitle(anchor.title),
+    })).filter((anchor) => {
       const title = normalize(anchor.title);
-      if (title.length < 5 || generic.has(title) || seen.has(`${title}:${anchor.printed}`)) {
+      if (
+        title.length < 5
+        || generic.has(title)
+        || !isUsefulTitle(anchor.title, section)
+        || seen.has(`${title}:${anchor.printed}`)
+      ) {
         return false;
       }
       seen.add(`${title}:${anchor.printed}`);
@@ -386,7 +426,7 @@
     state.currentLeaf = parsedLeaf;
     const meta = pageMeta(parsedLeaf);
     const section = sectionById(meta?.section);
-    setTitle(meta?.title || section?.title || "Reading");
+    setTitle(titleForPage(meta, section));
     app.innerHTML = `
       <div class="loading-state">
         <span class="small-cross" aria-hidden="true">✠</span>
@@ -397,7 +437,7 @@
 
     try {
       const page = await getPage(parsedLeaf);
-      const pageTitle = page.title || section?.title || "The New Roman Missal";
+      const pageTitle = titleForPage(page, section);
       const parallel = page.mode === "parallel";
       app.innerHTML = `
         <article class="reader" aria-labelledby="readerTitle">
@@ -559,7 +599,7 @@
         const section = sectionById(page.section);
         return listRow({
           href: `#/read/${page.leaf}`,
-          title: page.title || section?.title || pageLabel(page),
+          title: titleForPage(page, section),
           note: `${section?.title || "The New Roman Missal"} · ${pageLabel(page)}`,
         }).replace(
           "</span>\n          <span class=\"chevron\"",
@@ -700,4 +740,3 @@
 
   start();
 })();
-
