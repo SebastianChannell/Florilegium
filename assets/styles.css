@@ -17,6 +17,10 @@
   box-sizing: border-box;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 html {
   min-height: 100%;
   background: var(--paper);
@@ -635,4 +639,3 @@ body.reader-open #app {
     scroll-behavior: auto;
   }
 }
-
