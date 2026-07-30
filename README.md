@@ -1,56 +1,39 @@
-# Florilegium
+# Sacrum Florilegium — The New Roman Missal
 
-Florilegium is a quiet, dark-themed personal quote library for Catholic passages drawn from Holy Scripture, saints, Church Fathers, and devotional writers.
+A quiet, mobile-first website for private study of *The New Roman Missal in
+Latin and English* by Rev. F. X. Lasance.
 
-## Files
+The interface deliberately keeps one task on screen at a time:
 
-- `index.html` — the page structure and content.
-- `styles.css` — the warm, ink-dark visual design.
-- `app.js` — the client-side search and filter behavior.
-- `quotes.json` — the collection of quote entries.
-- `README.md` — this guide.
+- Mass propers and the Ordinary in parallel Latin and English columns
+- devotions and spiritual reading in a calm single-column reader
+- the complete original table of contents
+- the complete glossary, calendars, and indices
+- full-text search and printed-page lookup
 
-## How to use
+The site is static and requires no framework, database, or server-side code.
 
-Open the site locally with a simple static server:
+## Local preview
 
-```bash
-python3 -m http.server 3000
+```sh
+npm run serve
 ```
 
-Then visit `http://localhost:3000` in your browser.
+Then open `http://localhost:4173`.
 
-## Adding quotes
+## Rebuild the book data
 
-Edit `quotes.json` and add a new object to the array. Each entry should use this structure:
+The generated `data/` directory comes from the hOCR and page-number derivatives
+of the source scan:
 
-```json
-{
-  "text": "Your quote here.",
-  "author": "Author Name",
-  "source": "Book, letter, or phrase",
-  "page": "",
-  "tags": ["Tag1", "Tag2"]
-}
+```sh
+python3 scripts/ingest_missal.py \
+  --hocr "/path/to/New Roman Missal Lasance25_hocr.html" \
+  --page-numbers "/path/to/New Roman Missal Lasance25_page_numbers.json" \
+  --out data
 ```
 
-- `text` is the quote itself.
-- `author` is the speaker or source.
-- `source` is the work, translation, or context.
-- `page` is optional and may be left empty.
-- `tags` should be an array of descriptive keywords.
+The parser preserves the printed page layout. Within Mass sections, the left
+column is presented as Latin and the right as English. OCR is never a substitute
+for the original printed page and may contain transcription errors.
 
-After saving `quotes.json`, refresh the page to load the updated quotes.
-
-## Deploying to Netlify
-
-1. Push the repository to a Git host such as GitHub.
-2. In Netlify, create a new site and connect it to the repository.
-3. Use the default deploy settings.
-4. Since this is a static site with no build step, Netlify will serve the files directly.
-
-No build command is needed.
-
-## Notes
-
-The site is intentionally mobile-first, warm-toned, and meant to feel like a small devotional treasury rather than a bright, modern interface.

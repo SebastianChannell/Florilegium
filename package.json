@@ -1,7 +1,10 @@
 {
+  "name": "sacrum-florilegium-missal",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A quiet, mobile-first reader for Father Lasance's New Roman Missal.",
   "scripts": {
-    "build:miniature-lives": "node scripts/build-miniature-lives.js",
-    "test:miniature-lives": "node scripts/test-miniature-lives.js",
-    "build": "npm run build:miniature-lives"
+    "check": "node --check assets/app.js && python3 -m py_compile scripts/ingest_missal.py scripts/validate_site.py && python3 scripts/validate_site.py",
+    "serve": "python3 -m http.server 4173"
   }
 }

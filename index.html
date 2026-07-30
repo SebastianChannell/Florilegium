@@ -1,40 +1,61 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Florilegium</title>
-  <link rel="stylesheet" href="css/styles.css" />
-  <link rel="stylesheet" href="css/dashboard-tuning.css" />
-</head>
-<body>
-  <nav class="side-menu" aria-label="Main navigation">
-    <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="siteMenu"><span class="menu-toggle__bar"></span><span class="menu-toggle__bar"></span><span class="menu-toggle__bar"></span></button>
-    <div class="menu-panel" id="siteMenu" aria-hidden="true">
-      <div class="menu-panel__header"><p class="menu-panel__eyebrow">Navigation</p><button class="menu-close" type="button" aria-label="Close navigation menu">&times;</button></div>
-      <details class="menu-group" open><summary class="menu-summary">Hodie</summary><div class="menu-submenu"><a href="pages/readings/" class="menu-link menu-link--sub">Propers</a><a href="pages/ordo/" class="menu-link menu-link--sub">Ordo</a></div></details>
-      <details class="menu-group" open><summary class="menu-summary">Citationes</summary><div class="menu-submenu"><a href="pages/quotes/#search" class="menu-link menu-link--sub">Search Quote</a><a href="pages/quotes/#quotesGrid" class="menu-link menu-link--sub">All Quotes</a></div></details>
-      <details class="menu-group" open><summary class="menu-summary">Supplementa</summary><div class="menu-submenu"><a href="pages/miniature-lives/" class="menu-link menu-link--sub">Fr. Bowden’s Saints Lives</a></div></details>
-      <a href="https://github.com/SebastianChannell/Florilegium" class="menu-link">Project source</a>
-    </div>
-    <button class="menu-backdrop" type="button" tabindex="-1" aria-label="Close navigation menu"></button>
-  </nav>
-  <div class="page-shell page-shell--dashboard">
-    <header class="site-header">
-      <div class="brand-row"><a class="brand-mark" href="./" aria-label="Florilegium home"><img src="assests/florilegium-logo.svg" alt="" /></a><p class="eyebrow">SACRUM FLORILEGIUM</p></div>
-      <div class="heading-copy"><h1>Florilegium</h1><p class="subtitle">Gathered flowers from Scripture, saints, and sacred writers.</p></div>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#070606" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <title>The New Roman Missal · Sacrum Florilegium</title>
+    <meta
+      name="description"
+      content="A quiet Latin and English reader for Father Lasance's New Roman Missal."
+    />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#app">Skip to the book</a>
+
+    <header class="site-bar" id="siteBar">
+      <button class="back-button" id="backButton" type="button" hidden aria-label="Go back">
+        <span aria-hidden="true">←</span>
+        <span>Back</span>
+      </button>
+      <a class="wordmark" href="#/" aria-label="Sacrum Florilegium home">
+        <span class="wordmark-cross" aria-hidden="true">✠</span>
+        <span>Sacrum Florilegium</span>
+      </a>
+      <span class="bar-balance" aria-hidden="true"></span>
     </header>
-    <main>
-      <section class="liturgical-dashboard" id="liturgicalDashboard" aria-label="Today's liturgical dashboard">
-        <article class="sf-card today-card" aria-label="Today"><div class="today-card__body"><p class="sf-label">Hodie</p><h2><span id="latinDate">Loading…</span> <small id="romanYear"></small></h2><p class="sf-muted" id="todayTitle"></p><div class="today-stats" style="grid-template-columns:repeat(2,minmax(0,1fr));text-align:center;"><div><span>Class</span><strong id="todayClass"></strong></div><div><span>Color</span><strong id="todayColor"></strong></div></div></div></article>
-        <div class="mini-card-grid">
-          <a class="sf-card mini-card" href="pages/readings/" style="align-items:flex-start;"><div style="min-width:0;flex:1;"><p class="sf-label">Propers</p><p class="sf-muted" id="readingsRefs"></p></div><span class="chevron" aria-hidden="true" style="align-self:center;">›</span></a>
-          <a class="sf-card mini-card" href="pages/ordo/" style="align-items:flex-start;"><div style="min-width:0;flex:1;"><p class="sf-label">Ordo</p><p class="sf-muted ordo-lines" id="ordoSummary" style="color:var(--text-muted);"></p></div><span class="chevron" aria-hidden="true" style="align-self:center;">›</span></a>
-        </div>
-        <article class="sf-card featured-quote" id="featuredQuote" aria-label="Featured quote"><div class="quote-mark" aria-hidden="true">“</div><p class="sf-muted">Loading featured quote…</p></article>
-      </section>
+
+    <main id="app" tabindex="-1">
+      <div class="loading-state">
+        <span class="small-cross" aria-hidden="true">✠</span>
+        <p>Opening the missal…</p>
+      </div>
     </main>
-  </div>
-  <script type="module" src="js/dashboard.js"></script>
-</body>
+
+    <nav class="page-nav" id="pageNav" aria-label="Book pages" hidden>
+      <button type="button" id="previousPage">
+        <span aria-hidden="true">←</span>
+        <span>Previous</span>
+      </button>
+      <p id="pagePosition" aria-live="polite"></p>
+      <button type="button" id="nextPage">
+        <span>Next</span>
+        <span aria-hidden="true">→</span>
+      </button>
+    </nav>
+
+    <noscript>
+      <main class="error-state">
+        <h1>JavaScript is required</h1>
+        <p>This reader uses JavaScript to open the book’s pages and search its text.</p>
+      </main>
+    </noscript>
+
+    <script src="assets/app.js" defer></script>
+  </body>
 </html>
+
