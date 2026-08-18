@@ -17,8 +17,8 @@ Edit [`projects.json`](./projects.json). Each destination is one object:
 }
 ```
 
-The objects appear on Domus in the same order in which they appear in the file.
-No HTML, CSS, or JavaScript changes are needed when another project is added.
+Domus sorts every project alphabetically by title, so a new object may be added
+anywhere in the array. No HTML, CSS, or JavaScript changes are needed.
 
 ## Local preview
 

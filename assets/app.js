@@ -4,6 +4,11 @@ const resultCount = requiredElement("result-count");
 const statusMessage = requiredElement("status-message");
 const projectList = requiredElement("project-list");
 
+const titleCollator = new Intl.Collator("en", {
+  numeric: true,
+  sensitivity: "base",
+});
+
 const state = {
   projects: [],
   query: new URLSearchParams(window.location.search).get("q")?.trim() ?? "",
@@ -52,13 +57,15 @@ async function loadProjects() {
 
 function renderProjects() {
   const query = normalizeSearchValue(state.query);
-  const visibleProjects = state.projects.filter((project) => {
-    if (!query) {
-      return true;
-    }
+  const visibleProjects = state.projects
+    .filter((project) => {
+      if (!query) {
+        return true;
+      }
 
-    return normalizeSearchValue(`${project.title} ${project.label}`).includes(query);
-  });
+      return normalizeSearchValue(`${project.title} ${project.label}`).includes(query);
+    })
+    .sort((left, right) => titleCollator.compare(left.title, right.title));
 
   projectList.replaceChildren();
   const fragment = document.createDocumentFragment();

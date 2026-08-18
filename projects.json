@@ -1,10 +1,10 @@
 {
   "projects": [
     {
-      "id": "orarium",
-      "title": "Orarium",
-      "label": "Prayers & Hymns",
-      "url": "https://orarium.sacrumflorilegium.com/"
+      "id": "biblia",
+      "title": "Biblia",
+      "label": "Douay-Rheims Bible",
+      "url": "https://biblia.sacrumflorilegium.com/"
     },
     {
       "id": "librarium",
@@ -13,16 +13,16 @@
       "url": "https://librarium.sacrumflorilegium.com/"
     },
     {
+      "id": "orarium",
+      "title": "Orarium",
+      "label": "Prayers & Hymns",
+      "url": "https://orarium.sacrumflorilegium.com/"
+    },
+    {
       "id": "propria",
       "title": "Propria",
       "label": "Daily Mass Propers",
       "url": "https://propria.sacrumflorilegium.com/"
-    },
-    {
-      "id": "biblia",
-      "title": "Biblia",
-      "label": "Douay-Rheims Bible",
-      "url": "https://biblia.sacrumflorilegium.com/"
     }
   ]
 }
