@@ -1,17 +1,24 @@
-# Sacrum Florilegium — The New Roman Missal
+# Domus — Sacrum Florilegium
 
-A quiet, mobile-first website for private study of *The New Roman Missal in
-Latin and English* by Rev. F. X. Lasance.
+A quiet, mobile-first home for the Sacrum Florilegium projects. The interface
+follows the compact list, typography, and palette of Librarium while keeping the
+individual destinations in one small data file.
 
-The interface deliberately keeps one task on screen at a time:
+## Add or change a project
 
-- Mass propers and the Ordinary in parallel Latin and English columns
-- devotions and spiritual reading in a calm single-column reader
-- the complete original table of contents
-- the complete glossary, calendars, and indices
-- full-text search and printed-page lookup
+Edit [`projects.json`](./projects.json). Each destination is one object:
 
-The site is static and requires no framework, database, or server-side code.
+```json
+{
+  "id": "new-project",
+  "title": "New Project",
+  "label": "Short Description",
+  "url": "https://new-project.sacrumflorilegium.com/"
+}
+```
+
+The objects appear on Domus in the same order in which they appear in the file.
+No HTML, CSS, or JavaScript changes are needed when another project is added.
 
 ## Local preview
 
@@ -21,19 +28,11 @@ npm run serve
 
 Then open `http://localhost:4173`.
 
-## Rebuild the book data
-
-The generated `data/` directory comes from the hOCR and page-number derivatives
-of the source scan:
+## Validation
 
 ```sh
-python3 scripts/ingest_missal.py \
-  --hocr "/path/to/New Roman Missal Lasance25_hocr.html" \
-  --page-numbers "/path/to/New Roman Missal Lasance25_page_numbers.json" \
-  --out data
+npm run check
 ```
 
-The parser preserves the printed page layout. Within Mass sections, the left
-column is presented as Latin and the right as English. OCR is never a substitute
-for the original printed page and may contain transcription errors.
-
+The check verifies the browser JavaScript and every required project field,
+identifier, and HTTPS link.

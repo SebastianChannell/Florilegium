@@ -1,60 +1,73 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#070606" />
-    <meta name="color-scheme" content="dark" />
-    <meta name="robots" content="noindex, nofollow, noarchive" />
-    <title>The New Roman Missal · Sacrum Florilegium</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#070606">
+    <meta name="color-scheme" content="dark">
     <meta
       name="description"
-      content="A quiet Latin and English reader for Father Lasance's New Roman Missal."
-    />
-    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="assets/styles.css?v=20260729-6" />
+      content="Domus is the quiet home of the Sacrum Florilegium projects."
+    >
+    <title>Domus · Sacrum Florilegium</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./assets/styles.css">
+    <script type="module" src="./assets/app.js"></script>
   </head>
   <body>
-    <a class="skip-link" href="#app">Skip to the book</a>
+    <a class="skip-link" href="#project-list">Skip to projects</a>
 
-    <header class="site-bar" id="siteBar">
-      <button class="back-button" id="backButton" type="button" hidden aria-label="Go back">
-        <span aria-hidden="true">←</span>
-        <span>Back</span>
-      </button>
-      <a class="wordmark" href="#/" aria-label="Sacrum Florilegium home">
-        <span class="wordmark-cross" aria-hidden="true">✠</span>
-        <span>Sacrum Florilegium</span>
-      </a>
-      <span class="bar-balance" aria-hidden="true"></span>
-    </header>
+    <div class="site-shell">
+      <header class="site-header">
+        <a class="wordmark" href="./" aria-label="Domus home">
+          <span>Sacrum Florilegium</span>
+          <strong>Domus</strong>
+        </a>
+        <p class="subtitle">A quiet house for prayer, study, and sacred reading.</p>
+      </header>
 
-    <main id="app" tabindex="-1">
-      <div class="loading-state">
-        <span class="small-cross" aria-hidden="true">✠</span>
-        <p>Opening the missal…</p>
-      </div>
-    </main>
+      <main>
+        <section aria-labelledby="projects-heading">
+          <h1 id="projects-heading" class="visually-hidden">Sacrum Florilegium projects</h1>
 
-    <nav class="page-nav" id="pageNav" aria-label="Book pages" hidden>
-      <button type="button" id="previousPage">
-        <span aria-hidden="true">←</span>
-        <span>Previous</span>
-      </button>
-      <p id="pagePosition" aria-live="polite"></p>
-      <button type="button" id="nextPage">
-        <span>Next</span>
-        <span aria-hidden="true">→</span>
-      </button>
-    </nav>
+          <form id="search-form" class="search" role="search">
+            <label class="visually-hidden" for="search-input">Search the house</label>
+            <svg class="search-icon" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20">
+              <circle cx="11" cy="11" r="6.5"></circle>
+              <path d="m16 16 4 4"></path>
+            </svg>
+            <input
+              id="search-input"
+              name="q"
+              type="search"
+              inputmode="search"
+              autocomplete="off"
+              spellcheck="false"
+              placeholder="Search the house"
+            >
+          </form>
+
+          <div class="browse-tools">
+            <p id="result-count" class="result-count" aria-live="polite">Loading projects…</p>
+          </div>
+
+          <div id="status-message" class="status-message" role="status" aria-live="polite">
+            <span class="loading-mark" aria-hidden="true"></span>
+            <span>Opening the house…</span>
+          </div>
+
+          <ol id="project-list" class="project-list" aria-label="Projects" hidden></ol>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <span aria-hidden="true">✠</span>
+        <span>T.A.D.M.N.</span>
+      </footer>
+    </div>
 
     <noscript>
-      <main class="error-state">
-        <h1>JavaScript is required</h1>
-        <p>This reader uses JavaScript to open the book’s pages and search its text.</p>
-      </main>
+      <p class="noscript">JavaScript is required to open the project directory.</p>
     </noscript>
-
-    <script src="assets/app.js?v=20260729-6" defer></script>
   </body>
 </html>
