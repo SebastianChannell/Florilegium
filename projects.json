@@ -13,6 +13,12 @@
       "url": "https://librarium.sacrumflorilegium.com/"
     },
     {
+      "id": "officium",
+      "title": "Officium",
+      "label": "Divine Office",
+      "url": "https://officium.sacrumflorilegium.com/"
+    },
+    {
       "id": "orarium",
       "title": "Orarium",
       "label": "Prayers & Hymns",
