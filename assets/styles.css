@@ -96,6 +96,62 @@ a {
   font-style: italic;
 }
 
+.florilegium-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.15rem clamp(0.45rem, 2.6vw, 0.95rem);
+  width: 100%;
+  margin: 1rem auto 0;
+  color: var(--muted);
+  font-size: 0.64rem;
+  font-weight: 650;
+  letter-spacing: 0.075em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.florilegium-nav a {
+  position: relative;
+  padding: 0.28rem 0.02rem 0.34rem;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color 140ms ease;
+}
+
+.florilegium-nav a::after {
+  position: absolute;
+  right: 0;
+  bottom: 0.08rem;
+  left: 0;
+  height: 1px;
+  background: var(--accent);
+  content: "";
+  opacity: 0;
+  transform: scaleX(0.35);
+  transition: opacity 140ms ease, transform 140ms ease;
+}
+
+.florilegium-nav a:hover,
+.florilegium-nav a:focus-visible,
+.florilegium-nav a[aria-current="page"] {
+  color: var(--text);
+}
+
+.florilegium-nav a:hover::after,
+.florilegium-nav a:focus-visible::after,
+.florilegium-nav a[aria-current="page"]::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.florilegium-nav a:focus-visible {
+  border-radius: 0.1rem;
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
 main {
   flex: 1 0 auto;
 }
