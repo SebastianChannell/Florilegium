@@ -7,6 +7,12 @@
       "url": "https://biblia.sacrumflorilegium.com/"
     },
     {
+      "id": "census",
+      "title": "Census",
+      "label": "Library metadata",
+      "url": "https://florilegium-census.sebastianchannell99.workers.dev/"
+    },
+    {
       "id": "librarium",
       "title": "Librarium",
       "label": "Sacred Books",

@@ -5,17 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#070606">
     <meta name="color-scheme" content="dark">
-    <meta
-      name="description"
-      content="Domus is the quiet home of the Sacrum Florilegium projects."
-    >
+    <meta name="description" content="Domus is the quiet home of the Sacrum Florilegium projects, daily liturgical readings, and the Lives of the Saints.">
     <title>Domus · Sacrum Florilegium</title>
     <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="./assets/styles.css?v=2">
-    <script type="module" src="./assets/app.js"></script>
+    <link rel="stylesheet" href="./assets/styles.css?v=3">
+    <script type="module" src="./assets/app.js?v=3"></script>
   </head>
   <body>
-    <a class="skip-link" href="#project-list">Skip to projects</a>
+    <a class="skip-link" href="#site-grid">Skip to sites</a>
 
     <div class="site-shell">
       <header class="site-header">
@@ -43,36 +40,21 @@
       </header>
 
       <main>
-        <section aria-labelledby="projects-heading">
-          <h1 id="projects-heading" class="visually-hidden">Sacrum Florilegium projects</h1>
+        <section class="liturgical-day" aria-label="Today's liturgical day" aria-live="polite">
+          <p class="liturgical-feast" id="liturgical-feast">Reading today's Office…</p>
+          <p class="liturgical-temporal" id="liturgical-temporal"></p>
+          <p class="liturgical-fallback" id="liturgical-fallback" hidden>
+            <a id="officium-day-link" href="https://officium.sacrumflorilegium.com/">See today's Office in Officium →</a>
+          </p>
+        </section>
 
-          <form id="search-form" class="search" role="search">
-            <label class="visually-hidden" for="search-input">Search the house</label>
-            <svg class="search-icon" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20">
-              <circle cx="11" cy="11" r="6.5"></circle>
-              <path d="m16 16 4 4"></path>
-            </svg>
-            <input
-              id="search-input"
-              name="q"
-              type="search"
-              inputmode="search"
-              autocomplete="off"
-              spellcheck="false"
-              placeholder="Search the house"
-            >
-          </form>
+        <nav class="site-grid" id="site-grid" aria-label="Sacrum Florilegium sites"></nav>
 
-          <div class="browse-tools">
-            <p id="result-count" class="result-count" aria-live="polite">Loading projects…</p>
-          </div>
-
-          <div id="status-message" class="status-message" role="status" aria-live="polite">
-            <span class="loading-mark" aria-hidden="true"></span>
-            <span>Opening the house…</span>
-          </div>
-
-          <ol id="project-list" class="project-list" aria-label="Projects" hidden></ol>
+        <section class="saints" aria-labelledby="saints-title">
+          <h1 id="saints-title">Lives of the Saints</h1>
+          <nav class="saints-months" id="saints-months" aria-label="Select a month"></nav>
+          <div class="saints-days" id="saints-days" aria-label="Select a day"></div>
+          <p class="saints-note">Dates open the corresponding search in <i>Little Pictorial Lives of the Saints</i>. Exact PDF page numbers have not yet been verified.</p>
         </section>
       </main>
 
@@ -83,7 +65,7 @@
     </div>
 
     <noscript>
-      <p class="noscript">JavaScript is required to open the project directory.</p>
+      <p class="noscript">JavaScript is required for the daily liturgical heading and date selectors.</p>
     </noscript>
   </body>
 </html>
