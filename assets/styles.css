@@ -43,7 +43,8 @@ a { color: inherit; }
 
 main { flex: 1 0 auto; }
 .liturgical-day { margin: 0 auto 2.15rem; padding: .45rem 0 2rem; border-bottom: 1px solid var(--line); text-align: center; }
-.liturgical-feast { margin: 0; color: var(--rubric); font-family: var(--serif); font-size: clamp(1.18rem,4vw,1.6rem); line-height: 1.4; overflow-wrap: anywhere; }
+.liturgical-feast { margin: 0; color: var(--text); font-family: var(--serif); font-size: clamp(1.18rem,4vw,1.6rem); line-height: 1.4; overflow-wrap: anywhere; }
+.liturgical-feast.is-rubric { color: var(--rubric); }
 .liturgical-temporal { max-width: 42rem; margin: .62rem auto 0; font-family: var(--serif); font-style: italic; font-size: clamp(.92rem,2.7vw,1.05rem); line-height: 1.5; }
 .temporal-label { color: var(--rubric); }
 .temporal-value { color: var(--temporal); }
