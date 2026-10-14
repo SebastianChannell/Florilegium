@@ -42,16 +42,22 @@ export function parseHeading(html) {
   const firstParagraph = html.match(/<p\b[^>]*>([\s\S]*?)<\/p>/i)?.[1] || "";
   // In Divinum Officium, the sanctoral title is rubric red, Tempora maroon,
   // and the temporal day is green. Return text only; render with Domus CSS.
-  const feast = extract(firstParagraph, /<font\b[^>]*\bcolor\s*=\s*["']?red["']?[^>]*>([\s\S]*?)<\/font>/i);
+  const titleFont = firstParagraph.match(/<font\b([^>]*)>([\s\S]*?)<\/font>/i);
+  const feast = titleFont ? cleanText(titleFont[2]) : "";
+  const feastColor = titleFont && /\bcolor\s*=\s*["']?red\b/i.test(titleFont[1]) ? "rubric" : "normal";
   const temporaLabel = extract(firstParagraph, /<span\b[^>]*\bstyle\s*=\s*["'][^"']*color\s*:\s*maroon[^"']*["'][^>]*>([\s\S]*?)<\/span>/i);
   const temporal = extract(firstParagraph, /<font\b[^>]*\bcolor\s*=\s*["']?green["']?[^>]*>([\s\S]*?)<\/font>/i);
-  return { feast, temporaLabel, temporal };
+  return { feast, feastColor, temporaLabel, temporal };
 }
 
 function extract(html, expression) {
   const match = html.match(expression);
   if (!match) return "";
-  return match[1]
+  return cleanText(match[1]);
+}
+
+function cleanText(value) {
+  return value
     .replace(/<[^>]*>/g, " ")
     .replace(/&nbsp;|&#160;/gi, " ")
     .replace(/&amp;/gi, "&")
