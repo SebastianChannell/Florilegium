@@ -88,7 +88,9 @@ async function loadLiturgicalDay() {
     if (!data || data.date !== date || typeof data.feast !== "string" || !data.feast.trim()) {
       throw new Error("Unrecognized Office heading");
     }
-    requiredElement("liturgical-feast").textContent = data.feast;
+    const feast = requiredElement("liturgical-feast");
+    feast.textContent = data.feast;
+    feast.classList.toggle("is-rubric", data.feastColor === "rubric");
     const temporal = requiredElement("liturgical-temporal");
     temporal.replaceChildren();
     if (data.temporal) {
@@ -106,7 +108,9 @@ async function loadLiturgicalDay() {
     fallback.hidden = true;
   } catch (error) {
     console.warn("Could not retrieve the Divino Afflatu heading", error);
-    requiredElement("liturgical-feast").textContent = "Today's liturgical day";
+    const feast = requiredElement("liturgical-feast");
+    feast.textContent = "Today's liturgical day";
+    feast.classList.remove("is-rubric");
     requiredElement("liturgical-temporal").textContent = "1954 · Divino Afflatu";
     fallback.hidden = false;
   }
