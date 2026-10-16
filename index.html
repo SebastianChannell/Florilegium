@@ -8,8 +8,8 @@
     <meta name="description" content="Domus is the quiet home of the Sacrum Florilegium projects, daily liturgical readings, and the Lives of the Saints.">
     <title>Domus · Sacrum Florilegium</title>
     <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="./assets/styles.css?v=3">
-    <script type="module" src="./assets/app.js?v=3"></script>
+    <link rel="stylesheet" href="./assets/styles.css?v=4">
+    <script type="module" src="./assets/app.js?v=4"></script>
   </head>
   <body>
     <a class="skip-link" href="#site-grid">Skip to sites</a>
@@ -52,9 +52,48 @@
 
         <section class="saints" aria-labelledby="saints-title">
           <h1 id="saints-title">Lives of the Saints</h1>
+          <div class="saints-selection">
+            <p class="saints-selected-date" id="saints-selected-date" aria-live="polite"></p>
+            <button class="saints-today" id="saints-today" type="button">Today</button>
+          </div>
           <nav class="saints-months" id="saints-months" aria-label="Select a month"></nav>
-          <div class="saints-days" id="saints-days" aria-label="Select a day"></div>
-          <p class="saints-note">Dates open the corresponding search in <i>Little Pictorial Lives of the Saints</i>. Exact PDF page numbers have not yet been verified.</p>
+          <div class="saints-days" id="saints-days" role="group" aria-label="Select a day"></div>
+          <div class="saints-books">
+            <details class="saints-book" data-saints-book="pictorial">
+              <summary>
+                <span class="saints-book-heading">
+                  <span class="saints-book-title">Little Pictorial Lives of the Saints</span>
+                  <span class="saints-book-author">John Gilmary Shea</span>
+                </span>
+                <span class="saints-book-chevron" aria-hidden="true"></span>
+              </summary>
+              <div class="saints-book-body">
+                <div class="saints-book-bar">
+                  <span class="saints-book-date"></span>
+                  <a class="saints-book-link" href="https://reader.sacrumflorilegium.com/web/viewer.html?file=https%3A%2F%2Fassets.sacrumflorilegium.com%2Fpdfs%2Flittle-pictorial-lives-of-the-saints.pdf" target="_blank" rel="noopener noreferrer">Open full reader ↗</a>
+                </div>
+                <div class="saints-book-embed"></div>
+                <p class="saints-book-notice">The reader searches this edition for the chosen date. If the scan does not find the entry, use the full reader to browse the pages.</p>
+              </div>
+            </details>
+            <details class="saints-book" data-saints-book="miniature">
+              <summary>
+                <span class="saints-book-heading">
+                  <span class="saints-book-title">Miniature Lives of the Saints</span>
+                  <span class="saints-book-author" id="saints-miniature-volume">Fr. Henry Sebastian Bowden</span>
+                </span>
+                <span class="saints-book-chevron" aria-hidden="true"></span>
+              </summary>
+              <div class="saints-book-body">
+                <div class="saints-book-bar">
+                  <span class="saints-book-date"></span>
+                  <a class="saints-book-link" href="https://librarium.sacrumflorilegium.com/" target="_blank" rel="noopener noreferrer">Open full reader ↗</a>
+                </div>
+                <div class="saints-book-embed"></div>
+                <p class="saints-book-notice">Some dates or searchable text are missing from this historical edition. If the entry does not appear, you can browse the full volume or use <i>Little Pictorial Lives</i> above.</p>
+              </div>
+            </details>
+          </div>
         </section>
       </main>
 
