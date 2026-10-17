@@ -24,11 +24,11 @@ let selectedDate = { ...today };
 let matinsLanguage = "English";
 let matinsReadings = null;
 let matinsRequest = 0;
+let liturgicalDayRequest = 0;
 
 initHodie();
 renderSites(DEFAULT_PROJECTS);
 void loadProjects();
-void loadLiturgicalDay();
 
 function requiredElement(id) {
   const element = document.getElementById(id);
@@ -76,7 +76,8 @@ function isoDate(date) {
 }
 
 async function loadLiturgicalDay() {
-  const date = isoDate(today);
+  const date = selectedIsoDate();
+  const requestId = ++liturgicalDayRequest;
   const fallback = requiredElement("liturgical-fallback");
   const link = requiredElement("officium-day-link");
   const target = new URL("https://officium.sacrumflorilegium.com/");
@@ -91,6 +92,7 @@ async function loadLiturgicalDay() {
     });
     if (!response.ok) throw new Error("Office information unavailable (" + response.status + ")");
     const data = await response.json();
+    if (requestId !== liturgicalDayRequest) return;
     if (!data || data.date !== date || typeof data.feast !== "string" || !data.feast.trim()) {
       throw new Error("Unrecognized Office heading");
     }
@@ -113,9 +115,10 @@ async function loadLiturgicalDay() {
     }
     fallback.hidden = true;
   } catch (error) {
+    if (requestId !== liturgicalDayRequest) return;
     console.warn("Could not retrieve the Divino Afflatu heading", error);
     const feast = requiredElement("liturgical-feast");
-    feast.textContent = "Today's liturgical day";
+    feast.textContent = "Liturgical day unavailable";
     feast.classList.remove("is-rubric");
     requiredElement("liturgical-temporal").textContent = "1954 · Divino Afflatu";
     fallback.hidden = false;
@@ -186,6 +189,7 @@ function initHodie() {
 }
 
 function updateHodie() {
+  void loadLiturgicalDay();
   const date = selectedLocalDate();
   const display = new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric" }).format(date);
   requiredElement("hodie-weekday").textContent =

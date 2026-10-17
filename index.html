@@ -8,8 +8,8 @@
     <meta name="description" content="Domus is the quiet home of the Sacrum Florilegium projects, daily liturgical readings, and Hodie.">
     <title>Domus · Sacrum Florilegium</title>
     <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="./assets/styles.css?v=5">
-    <script type="module" src="./assets/app.js?v=5"></script>
+    <link rel="stylesheet" href="./assets/styles.css?v=6">
+    <script type="module" src="./assets/app.js?v=6"></script>
   </head>
   <body>
     <a class="skip-link" href="#site-grid">Skip to sites</a>
@@ -40,18 +40,17 @@
       </header>
 
       <main>
-        <section class="liturgical-day" aria-label="Today's liturgical day" aria-live="polite">
-          <p class="liturgical-feast" id="liturgical-feast">Reading today's Office…</p>
-          <p class="liturgical-temporal" id="liturgical-temporal"></p>
-          <p class="liturgical-fallback" id="liturgical-fallback" hidden>
-            <a id="officium-day-link" href="https://officium.sacrumflorilegium.com/">See today's Office in Officium →</a>
-          </p>
-        </section>
-
         <nav class="site-grid" id="site-grid" aria-label="Sacrum Florilegium sites"></nav>
 
         <section class="saints" aria-labelledby="saints-title">
           <h1 id="saints-title">Hodie</h1>
+          <section class="liturgical-day" aria-label="Selected liturgical day" aria-live="polite">
+            <p class="liturgical-feast" id="liturgical-feast">Reading the selected Office…</p>
+            <p class="liturgical-temporal" id="liturgical-temporal"></p>
+            <p class="liturgical-fallback" id="liturgical-fallback" hidden>
+              <a id="officium-day-link" href="https://officium.sacrumflorilegium.com/">See this Office in Officium →</a>
+            </p>
+          </section>
           <div class="hodie-date-nav" aria-label="Choose a date">
             <button id="hodie-prev" class="hodie-arrow" type="button" aria-label="Previous day">‹</button>
             <button id="hodie-date-button" class="hodie-date-button" type="button" aria-expanded="false" aria-controls="hodie-date-controls">
