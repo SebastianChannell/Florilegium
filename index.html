@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#070606">
     <meta name="color-scheme" content="dark">
-    <meta name="description" content="Domus is the quiet home of the Sacrum Florilegium projects, daily liturgical readings, and the Lives of the Saints.">
+    <meta name="description" content="Domus is the quiet home of the Sacrum Florilegium projects, daily liturgical readings, and Hodie.">
     <title>Domus · Sacrum Florilegium</title>
     <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="./assets/styles.css?v=3">
-    <script type="module" src="./assets/app.js?v=3"></script>
+    <link rel="stylesheet" href="./assets/styles.css?v=5">
+    <script type="module" src="./assets/app.js?v=5"></script>
   </head>
   <body>
     <a class="skip-link" href="#site-grid">Skip to sites</a>
@@ -51,10 +51,79 @@
         <nav class="site-grid" id="site-grid" aria-label="Sacrum Florilegium sites"></nav>
 
         <section class="saints" aria-labelledby="saints-title">
-          <h1 id="saints-title">Lives of the Saints</h1>
-          <nav class="saints-months" id="saints-months" aria-label="Select a month"></nav>
-          <div class="saints-days" id="saints-days" aria-label="Select a day"></div>
-          <p class="saints-note">Dates open the corresponding search in <i>Little Pictorial Lives of the Saints</i>. Exact PDF page numbers have not yet been verified.</p>
+          <h1 id="saints-title">Hodie</h1>
+          <div class="hodie-date-nav" aria-label="Choose a date">
+            <button id="hodie-prev" class="hodie-arrow" type="button" aria-label="Previous day">‹</button>
+            <button id="hodie-date-button" class="hodie-date-button" type="button" aria-expanded="false" aria-controls="hodie-date-controls">
+              <span id="hodie-weekday"></span>
+              <strong id="hodie-date-label"></strong>
+              <span class="hodie-date-chevron" aria-hidden="true"></span>
+            </button>
+            <button id="hodie-next" class="hodie-arrow" type="button" aria-label="Next day">›</button>
+          </div>
+          <div id="hodie-date-controls" class="hodie-date-controls" hidden>
+            <label for="hodie-date-picker">Choose date</label>
+            <input id="hodie-date-picker" type="date" aria-label="Choose date">
+            <button id="hodie-today" type="button">Today</button>
+          </div>
+          <div class="saints-books">
+            <details class="saints-book" id="hodie-matins" open>
+              <summary>
+                <span class="saints-book-heading">
+                  <span class="saints-book-title">Lectiones Matutini</span>
+                  <span class="saints-book-author" id="hodie-matins-summary">Divino Afflatu · 1954</span>
+                </span>
+                <span class="saints-book-chevron" aria-hidden="true"></span>
+              </summary>
+              <div class="saints-book-body">
+                <div class="matins-toolbar">
+                  <span class="matins-source">Ex Officio Matutino · 1954</span>
+                  <div class="matins-languages" role="group" aria-label="Reading language">
+                    <button type="button" data-matins-lang="English" aria-pressed="true">English</button>
+                    <button type="button" data-matins-lang="Latin" aria-pressed="false">Latin</button>
+                  </div>
+                </div>
+                <p class="matins-feast" id="hodie-matins-feast"></p>
+                <p class="matins-status" id="hodie-matins-status" role="status">Loading appointed lessons…</p>
+                <div class="matins-lessons" id="hodie-matins-lessons" aria-live="polite"></div>
+                <a id="hodie-matins-link" class="saints-book-link matins-external" href="https://officium.sacrumflorilegium.com/" target="_blank" rel="noopener noreferrer">Open Matins in Officium ↗</a>
+              </div>
+            </details>
+            <details class="saints-book" data-saints-book="pictorial">
+              <summary>
+                <span class="saints-book-heading">
+                  <span class="saints-book-title">Little Pictorial Lives of the Saints</span>
+                  <span class="saints-book-author">John Gilmary Shea</span>
+                </span>
+                <span class="saints-book-chevron" aria-hidden="true"></span>
+              </summary>
+              <div class="saints-book-body">
+                <div class="saints-book-bar">
+                  <span class="saints-book-date"></span>
+                  <a class="saints-book-link" href="https://librarium.sacrumflorilegium.com/" target="_blank" rel="noopener noreferrer">Open full reader ↗</a>
+                </div>
+                <div class="saints-book-embed"></div>
+                <p class="saints-book-notice">The reader searches the chosen date. If the scan cannot find it, use the full reader to browse.</p>
+              </div>
+            </details>
+            <details class="saints-book" data-saints-book="miniature">
+              <summary>
+                <span class="saints-book-heading">
+                  <span class="saints-book-title">Miniature Lives of the Saints</span>
+                  <span class="saints-book-author" id="saints-miniature-volume">Fr. Henry Sebastian Bowden</span>
+                </span>
+                <span class="saints-book-chevron" aria-hidden="true"></span>
+              </summary>
+              <div class="saints-book-body">
+                <div class="saints-book-bar">
+                  <span class="saints-book-date"></span>
+                  <a class="saints-book-link" href="https://librarium.sacrumflorilegium.com/" target="_blank" rel="noopener noreferrer">Open full reader ↗</a>
+                </div>
+                <div class="saints-book-embed"></div>
+                <p class="saints-book-notice">Some dates or searchable text are missing in this edition. If the entry is unavailable, browse the full volume or try Little Pictorial Lives.</p>
+              </div>
+            </details>
+          </div>
         </section>
       </main>
 

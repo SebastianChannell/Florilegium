@@ -4,7 +4,11 @@ const MONTHS = [
   ["July", "Jul", 31], ["August", "Aug", 31], ["September", "Sep", 30],
   ["October", "Oct", 31], ["November", "Nov", 30], ["December", "Dec", 31],
 ];
-const PDF_URL = "https://assets.sacrumflorilegium.com/pdfs/little-pictorial-lives-of-the-saints.pdf?v=da52bc45c82ad021c23cbde561db46f5";
+const SAINT_PDFS = {
+  pictorial: "https://assets.sacrumflorilegium.com/pdfs/little-pictorial-lives-of-the-saints.pdf?v=da52bc45c82ad021c23cbde561db46f5",
+  miniature1: "https://assets.sacrumflorilegium.com/pdfs/miniature-lives-of-the-saints-vol-1.pdf?v=4b827501c9cc24499ab8ca5831b8a795",
+  miniature2: "https://assets.sacrumflorilegium.com/pdfs/miniature-lives-of-the-saints-vol-2.pdf?v=854791019c97f2e86db17165dc965113",
+};
 const READER_URL = "https://reader.sacrumflorilegium.com/web/viewer.html";
 const DEFAULT_PROJECTS = [
   { id: "biblia", title: "Biblia", url: "https://biblia.sacrumflorilegium.com/" },
@@ -16,10 +20,12 @@ const DEFAULT_PROJECTS = [
 ];
 const now = new Date();
 const today = { year: now.getFullYear(), month: now.getMonth(), day: now.getDate() };
-let selectedMonth = today.month;
+let selectedDate = { ...today };
+let matinsLanguage = "English";
+let matinsReadings = null;
+let matinsRequest = 0;
 
-renderMonths();
-renderDays();
+initHodie();
 renderSites(DEFAULT_PROJECTS);
 void loadProjects();
 void loadLiturgicalDay();
@@ -116,63 +122,233 @@ async function loadLiturgicalDay() {
   }
 }
 
-function monthLength(index) {
-  return index === 1 && isLeapYear(today.year) ? 29 : MONTHS[index][2];
+
+function selectedIsoDate() {
+  return isoDate(selectedDate);
 }
 
-function isLeapYear(year) {
-  return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+function selectedLocalDate() {
+  return new Date(selectedDate.year, selectedDate.month, selectedDate.day, 12);
 }
 
-function renderMonths() {
-  const months = requiredElement("saints-months");
-  const fragment = document.createDocumentFragment();
-  MONTHS.forEach(([fullName, label], index) => {
-    const button = document.createElement("button");
-    button.className = "saints-month";
-    button.type = "button";
-    button.textContent = label;
-    button.title = fullName;
-    button.setAttribute("aria-label", "Show " + fullName);
-    button.setAttribute("aria-pressed", String(index === selectedMonth));
+function isValidDate(value) {
+  if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(value || "")) return false;
+  const [year, month, day] = value.split("-").map(Number);
+  if (year < 1900 || year > 2100) return false;
+  const local = new Date(year, month - 1, day, 12);
+  return local.getFullYear() === year && local.getMonth() === month - 1 && local.getDate() === day;
+}
+
+function setHodieDate(date) {
+  if (!isValidDate(date)) return;
+  const [year, month, day] = date.split("-").map(Number);
+  selectedDate = { year, month: month - 1, day };
+  updateHodie();
+}
+
+function shiftHodieDate(days) {
+  const date = selectedLocalDate();
+  date.setDate(date.getDate() + days);
+  setHodieDate(isoDate({ year: date.getFullYear(), month: date.getMonth(), day: date.getDate() }));
+}
+
+function initHodie() {
+  requiredElement("hodie-prev").addEventListener("click", () => shiftHodieDate(-1));
+  requiredElement("hodie-next").addEventListener("click", () => shiftHodieDate(1));
+  const dateButton = requiredElement("hodie-date-button");
+  const controls = requiredElement("hodie-date-controls");
+  dateButton.addEventListener("click", () => {
+    controls.hidden = !controls.hidden;
+    dateButton.setAttribute("aria-expanded", String(!controls.hidden));
+  });
+  requiredElement("hodie-date-picker").addEventListener("change", (event) => setHodieDate(event.target.value));
+  requiredElement("hodie-today").addEventListener("click", () => setHodieDate(isoDate(today)));
+  requiredElement("hodie-matins").addEventListener("toggle", (event) => {
+    if (event.target.open) void loadHodieMatins();
+    else matinsRequest++;
+  });
+  for (const button of document.querySelectorAll("[data-matins-lang]")) {
     button.addEventListener("click", () => {
-      selectedMonth = index;
-      renderMonths();
-      renderDays();
+      matinsLanguage = button.dataset.matinsLang;
+      for (const option of document.querySelectorAll("[data-matins-lang]")) {
+        option.setAttribute("aria-pressed", String(option === button));
+      }
+      renderMatinsReadings();
     });
-    fragment.append(button);
-  });
-  months.replaceChildren(fragment);
+  }
+  for (const book of document.querySelectorAll("[data-saints-book]")) {
+    book.addEventListener("toggle", () => {
+      if (book.open) mountSaintReader(book);
+      else unmountSaintReader(book);
+    });
+  }
+  updateHodie();
 }
 
-function readerLink(month, day) {
+function updateHodie() {
+  const date = selectedLocalDate();
+  const display = new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric" }).format(date);
+  requiredElement("hodie-weekday").textContent =
+    new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(date);
+  requiredElement("hodie-date-label").textContent = display;
+  requiredElement("hodie-date-picker").value = selectedIsoDate();
+  const url = new URL("https://officium.sacrumflorilegium.com/");
+  url.searchParams.set("date", selectedIsoDate());
+  url.searchParams.set("version", "1954");
+  url.searchParams.set("hour", "Matutinum");
+  url.searchParams.set("lang", "English");
+  url.searchParams.set("view", "lessons");
+  requiredElement("hodie-matins-link").href = url.toString();
+  renderSaintReaders();
+  matinsReadings = null;
+  requiredElement("hodie-matins-lessons").replaceChildren();
+  requiredElement("hodie-matins-feast").textContent = "";
+  requiredElement("hodie-matins-summary").textContent = "Divino Afflatu · 1954";
+  if (requiredElement("hodie-matins").open) void loadHodieMatins();
+}
+
+function saintReaderLink(book) {
+  const pdf = book === "pictorial"
+    ? SAINT_PDFS.pictorial
+    : SAINT_PDFS[selectedDate.month < 6 ? "miniature1" : "miniature2"];
   const url = new URL(READER_URL);
-  url.searchParams.set("file", PDF_URL);
-  const searchDay = month === 1 && day === 29 ? 28 : day;
-  const hash = new URLSearchParams({
-    search: MONTHS[month][0] + " " + searchDay,
-    phrase: "true",
-  });
-  url.hash = hash.toString().replace(/\+/g, "%20");
+  url.searchParams.set("file", pdf);
+  const day = selectedDate.month === 1 && selectedDate.day === 29 ? 28 : selectedDate.day;
+  url.hash = "search=" + encodeURIComponent(MONTHS[selectedDate.month][0] + " " + day) + "&phrase=true";
   return url.toString();
 }
 
-function renderDays() {
-  const grid = requiredElement("saints-days");
-  const fragment = document.createDocumentFragment();
-  for (let day = 1; day <= monthLength(selectedMonth); day++) {
-    const month = MONTHS[selectedMonth][0];
-    const anchor = document.createElement("a");
-    anchor.className = "saints-day";
-    anchor.href = readerLink(selectedMonth, day);
-    anchor.textContent = String(day);
-    anchor.setAttribute("aria-label", "Read " + month + " " + day + " in Little Pictorial Lives of the Saints");
-    anchor.title = month + " " + day + (selectedMonth === 1 && day === 29 ? " · uses February 28" : "");
-    if (selectedMonth === today.month && day === today.day) {
-      anchor.classList.add("is-today");
-      anchor.setAttribute("aria-current", "date");
-    }
-    fragment.append(anchor);
+function unmountSaintReader(book) {
+  const frame = book.querySelector(".saints-book-embed");
+  frame.replaceChildren();
+  delete frame.dataset.readerUrl;
+}
+
+function mountSaintReader(book) {
+  if (!book.open) return;
+  const kind = book.dataset.saintsBook;
+  const url = saintReaderLink(kind);
+  const frame = book.querySelector(".saints-book-embed");
+  if (frame.dataset.readerUrl === url && frame.querySelector("iframe")) return;
+  const iframe = document.createElement("iframe");
+  iframe.title = (kind === "pictorial" ? "Little Pictorial Lives" : "Miniature Lives") +
+    " — " + MONTHS[selectedDate.month][0] + " " + selectedDate.day;
+  iframe.loading = "lazy";
+  iframe.src = url;
+  frame.replaceChildren(iframe);
+  frame.dataset.readerUrl = url;
+}
+
+function renderSaintReaders() {
+  const date = MONTHS[selectedDate.month][0] + " " + selectedDate.day;
+  requiredElement("saints-miniature-volume").textContent =
+    "Fr. Henry Sebastian Bowden · Volume " + (selectedDate.month < 6 ? "I" : "II");
+  for (const book of document.querySelectorAll("[data-saints-book]")) {
+    book.querySelector(".saints-book-link").href = saintReaderLink(book.dataset.saintsBook);
+    book.querySelector(".saints-book-date").textContent =
+      selectedDate.month === 1 && selectedDate.day === 29 ? date + " · searching February 28" : date;
+    if (book.open) mountSaintReader(book);
   }
-  grid.replaceChildren(fragment);
+}
+
+// Matins is read from Officium's existing saved 1954 Office; never copy or maintain a saint calendar.
+async function loadHodieMatins() {
+  const requestId = ++matinsRequest;
+  const selected = selectedIsoDate();
+  const status = requiredElement("hodie-matins-status");
+  status.textContent = "Loading appointed lessons…";
+  status.hidden = false;
+  try {
+    const response = await fetch("./api/matins?date=" + encodeURIComponent(selected), {
+      headers: { Accept: "application/json" },
+    });
+    if (!response.ok) throw new Error("Matins unavailable (" + response.status + ")");
+    const data = await response.json();
+    if (data.date !== selected || typeof data.html !== "string") throw new Error("Invalid Matins response");
+    if (requestId !== matinsRequest || !requiredElement("hodie-matins").open) return;
+    matinsReadings = selectMatinsLessons(data.html, selected);
+    renderMatinsReadings();
+  } catch (error) {
+    if (requestId !== matinsRequest) return;
+    status.textContent = "The 1954 Matins lessons are unavailable for this date. You can still open Officium.";
+    requiredElement("hodie-matins-summary").textContent = "Divino Afflatu · 1954";
+    console.warn("Could not retrieve Matins lessons", error);
+  }
+}
+
+function selectMatinsLessons(html, iso) {
+  // Each Divinum Officium Matins row contains the corresponding Latin and English readings.
+  const doc = new DOMParser().parseFromString(html, "text/html");
+  const feast = (doc.querySelector("p font")?.textContent || "").trim();
+  const found = new Map();
+  for (const row of doc.querySelectorAll("tr")) {
+    const cells = Array.from(row.children).filter(cell => cell.tagName === "TD");
+    if (cells.length < 2) continue;
+    const latin = findLesson(cells[0], "Lectio");
+    const english = findLesson(cells[1], "Reading");
+    if (latin && english && latin.number === english.number) {
+      found.set(latin.number, { number: latin.number, Latin: latin.text, English: english.text });
+    }
+  }
+  const selectedDate = new Date(iso + "T12:00:00");
+  const sunday = selectedDate.getDay() === 0;
+  const feria = /^(?:Feria|Sabbato|Sabbatum)\\b/i.test(feast);
+  const saintFeast = /^(?:S\\.|Ss\\.|B\\.|Bb\\.|Sanct)/i.test(feast);
+  let numbers = [];
+  if ([4, 5, 6].every(number => found.has(number)) && !feria) {
+    numbers = [4, 5, 6];
+  } else if (found.has(3) && saintFeast && !sunday) {
+    numbers = [3];
+  }
+  return { feast, numbers, readings: numbers.map(number => found.get(number)) };
+}
+
+function findLesson(cell, language) {
+  const marker = Array.from(cell.querySelectorAll("b i")).find(node =>
+    new RegExp("^" + language + "\\s+([1-9])$", "i").test(node.textContent.trim()));
+  if (!marker) return null;
+  const number = Number(marker.textContent.trim().match(/([1-9])$/)?.[1]);
+  const heading = marker.closest("font");
+  if (!heading) return null;
+  const parts = [];
+  for (let node = heading.nextSibling; node; node = node.nextSibling) {
+    if (node.nodeType === 1 && node.tagName === "FONT" &&
+        node.querySelector("i")?.textContent.trim() === "℣.") break;
+    if (node.nodeType === 1 && node.tagName === "BR") parts.push("\n");
+    else parts.push(node.textContent || "");
+  }
+  const content = parts.join("").replace(/\\r/g, "").replace(/[ \\t]+\\n/g, "\n")
+    .replace(/\\n{3,}/g, "\n\n").trim();
+  return content ? { number, text: content } : null;
+}
+
+function renderMatinsReadings() {
+  if (!matinsReadings) return;
+  const { feast, numbers, readings } = matinsReadings;
+  const summary = requiredElement("hodie-matins-summary");
+  const status = requiredElement("hodie-matins-status");
+  const container = requiredElement("hodie-matins-lessons");
+  requiredElement("hodie-matins-feast").textContent = feast;
+  container.replaceChildren();
+  if (!numbers.length) {
+    summary.textContent = "No additional reading selected";
+    status.hidden = false;
+    status.textContent = "No separate historical reading is selected for this Office. Continue the Little Office as usual.";
+    return;
+  }
+  const romans = { 3: "III", 4: "IV", 5: "V", 6: "VI" };
+  summary.textContent = numbers.length === 1 ? "Lectio III · Divino Afflatu 1954" :
+    "Lectiones IV–VI · Divino Afflatu 1954";
+  status.hidden = true;
+  for (const reading of readings) {
+    const section = document.createElement("section");
+    section.className = "matins-lesson";
+    const heading = document.createElement("h2");
+    heading.textContent = "Lectio " + romans[reading.number];
+    const paragraph = document.createElement("p");
+    paragraph.className = "matins-lesson-text";
+    paragraph.textContent = reading[matinsLanguage];
+    section.append(heading, paragraph);
+    container.append(section);
+  }
 }
