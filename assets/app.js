@@ -23,6 +23,7 @@ const today = { year: now.getFullYear(), month: now.getMonth(), day: now.getDate
 let selectedDate = { ...today };
 let matinsLanguage = "English";
 let matinsReadings = null;
+let matinsLoadedLanguage = null;
 let matinsRequest = 0;
 let liturgicalDayRequest = 0;
 
@@ -176,7 +177,10 @@ function initHodie() {
       for (const option of document.querySelectorAll("[data-matins-lang]")) {
         option.setAttribute("aria-pressed", String(option === button));
       }
-      renderMatinsReadings();
+      updateMatinsLink();
+      const sourceLanguage = matinsLanguage === "Spanish" ? "Espanol" : "English";
+      if (!matinsReadings || matinsLoadedLanguage !== sourceLanguage) void loadHodieMatins();
+      else renderMatinsReadings();
     });
   }
   for (const book of document.querySelectorAll("[data-saints-book]")) {
@@ -196,19 +200,24 @@ function updateHodie() {
     new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(date);
   requiredElement("hodie-date-label").textContent = display;
   requiredElement("hodie-date-picker").value = selectedIsoDate();
-  const url = new URL("https://officium.sacrumflorilegium.com/");
-  url.searchParams.set("date", selectedIsoDate());
-  url.searchParams.set("version", "1954");
-  url.searchParams.set("hour", "Matutinum");
-  url.searchParams.set("lang", "English");
-  url.searchParams.set("view", "lessons");
-  requiredElement("hodie-matins-link").href = url.toString();
+  updateMatinsLink();
   renderSaintReaders();
   matinsReadings = null;
+  matinsLoadedLanguage = null;
   requiredElement("hodie-matins-lessons").replaceChildren();
   requiredElement("hodie-matins-feast").textContent = "";
   requiredElement("hodie-matins-summary").textContent = "Divino Afflatu · 1954";
   if (requiredElement("hodie-matins").open) void loadHodieMatins();
+}
+
+function updateMatinsLink() {
+  const url = new URL("https://officium.sacrumflorilegium.com/");
+  url.searchParams.set("date", selectedIsoDate());
+  url.searchParams.set("version", "1954");
+  url.searchParams.set("hour", "Matutinum");
+  url.searchParams.set("lang", matinsLanguage === "Spanish" ? "Espanol" : "English");
+  url.searchParams.set("view", "lessons");
+  requiredElement("hodie-matins-link").href = url.toString();
 }
 
 function saintReaderLink(book) {
@@ -259,18 +268,24 @@ function renderSaintReaders() {
 async function loadHodieMatins() {
   const requestId = ++matinsRequest;
   const selected = selectedIsoDate();
+  const sourceLanguage = matinsLanguage === "Spanish" ? "Espanol" : "English";
+  matinsReadings = null;
+  matinsLoadedLanguage = null;
+  requiredElement("hodie-matins-lessons").replaceChildren();
   const status = requiredElement("hodie-matins-status");
   status.textContent = "Loading appointed lessons…";
   status.hidden = false;
   try {
-    const response = await fetch("./api/matins?date=" + encodeURIComponent(selected), {
+    const response = await fetch("./api/matins?date=" + encodeURIComponent(selected) +
+      "&lang=" + encodeURIComponent(sourceLanguage), {
       headers: { Accept: "application/json" },
     });
     if (!response.ok) throw new Error("Matins unavailable (" + response.status + ")");
     const data = await response.json();
     if (data.date !== selected || typeof data.html !== "string") throw new Error("Invalid Matins response");
     if (requestId !== matinsRequest || !requiredElement("hodie-matins").open) return;
-    matinsReadings = selectMatinsLessons(data.html, selected);
+    matinsReadings = selectMatinsLessons(data.html, selected, sourceLanguage);
+    matinsLoadedLanguage = sourceLanguage;
     renderMatinsReadings();
   } catch (error) {
     if (requestId !== matinsRequest) return;
@@ -280,8 +295,10 @@ async function loadHodieMatins() {
   }
 }
 
-function selectMatinsLessons(html, iso) {
-  // Each Divinum Officium Matins row contains the corresponding Latin and English readings.
+function selectMatinsLessons(html, iso, sourceLanguage) {
+  // Each saved Officium Matins row has Latin and the chosen translation.
+  const translationKey = sourceLanguage === "Espanol" ? "Spanish" : "English";
+  const translationHeading = sourceLanguage === "Espanol" ? "Lectura" : "Reading";
   const doc = new DOMParser().parseFromString(html, "text/html");
   const feast = (doc.querySelector("p font")?.textContent || "").trim();
   const found = new Map();
@@ -289,9 +306,9 @@ function selectMatinsLessons(html, iso) {
     const cells = Array.from(row.children).filter(cell => cell.tagName === "TD");
     if (cells.length < 2) continue;
     const latin = findLesson(cells[0], "Lectio");
-    const english = findLesson(cells[1], "Reading");
-    if (latin && english && latin.number === english.number) {
-      found.set(latin.number, { number: latin.number, Latin: latin.text, English: english.text });
+    const translated = findLesson(cells[1], translationHeading);
+    if (latin && translated && latin.number === translated.number) {
+      found.set(latin.number, { number: latin.number, Latin: latin.text, [translationKey]: translated.text });
     }
   }
   const selectedDate = new Date(iso + "T12:00:00");
@@ -348,7 +365,7 @@ function renderMatinsReadings() {
     const section = document.createElement("section");
     section.className = "matins-lesson";
     const heading = document.createElement("h2");
-    heading.textContent = "Lectio " + romans[reading.number];
+    heading.textContent = (matinsLanguage === "Spanish" ? "Lectura " : "Lectio ") + romans[reading.number];
     const paragraph = document.createElement("p");
     paragraph.className = "matins-lesson-text";
     paragraph.textContent = reading[matinsLanguage];
