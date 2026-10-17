@@ -132,7 +132,7 @@ function selectedLocalDate() {
 }
 
 function isValidDate(value) {
-  if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(value || "")) return false;
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value || "")) return false;
   const [year, month, day] = value.split("-").map(Number);
   if (year < 1900 || year > 2100) return false;
   const local = new Date(year, month - 1, day, 12);
@@ -292,8 +292,8 @@ function selectMatinsLessons(html, iso) {
   }
   const selectedDate = new Date(iso + "T12:00:00");
   const sunday = selectedDate.getDay() === 0;
-  const feria = /^(?:Feria|Sabbato|Sabbatum)\\b/i.test(feast);
-  const saintFeast = /^(?:S\\.|Ss\\.|B\\.|Bb\\.|Sanct)/i.test(feast);
+  const feria = /^(?:Feria|Sabbato|Sabbatum)\b/i.test(feast);
+  const saintFeast = /^(?:S\.|Ss\.|B\.|Bb\.|Sanct)/i.test(feast);
   let numbers = [];
   if ([4, 5, 6].every(number => found.has(number)) && !feria) {
     numbers = [4, 5, 6];
@@ -317,8 +317,8 @@ function findLesson(cell, language) {
     if (node.nodeType === 1 && node.tagName === "BR") parts.push("\n");
     else parts.push(node.textContent || "");
   }
-  const content = parts.join("").replace(/\\r/g, "").replace(/[ \\t]+\\n/g, "\n")
-    .replace(/\\n{3,}/g, "\n\n").trim();
+  const content = parts.join("").replace(/\r/g, "").replace(/[ \t]+\n/g, "\n")
+    .replace(/\n{3,}/g, "\n\n").trim();
   return content ? { number, text: content } : null;
 }
 
